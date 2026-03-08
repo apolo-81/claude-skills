@@ -13,13 +13,14 @@ SKILLS_DIR="$HOME/.claude/skills"
 # ─── Definición de grupos ──────────────────────────────────────────────────
 unset GROUPS
 declare -A GROUPS
+GROUPS[my]="dev-backend dev-frontend dev-ops dev-tools"
 GROUPS[seo]="seo-core seo-content-onpage seo-international seo-strategy seo-assets"
 GROUPS[market]="market market-ads market-audit market-brand market-competitors market-copy market-emails market-funnel market-landing market-launch market-proposal market-report market-report-pdf market-seo market-social"
 GROUPS[dev]="form-handling performance-next error-monitoring testing-patterns deployment-vercel supabase-stack saas-boilerplate webhook-integration"
 GROUPS[ai]="chatbot-widget n8n-ai-agents n8n-to-api"
 GROUPS[design]="ui-designer web-animations landing-page-builder data-viz-dashboard email-templates-builder"
 GROUPS[web]="cms-integration pwa-patterns"
-GROUPS[all]="${GROUPS[seo]} ${GROUPS[market]} ${GROUPS[dev]} ${GROUPS[ai]} ${GROUPS[design]} ${GROUPS[web]}"
+GROUPS[all]="${GROUPS[my]} ${GROUPS[seo]} ${GROUPS[market]} ${GROUPS[dev]} ${GROUPS[ai]} ${GROUPS[design]} ${GROUPS[web]}"
 
 # ─── Colores ────────────────────────────────────────────────────────────────
 GREEN='\033[0;32m'
@@ -37,6 +38,7 @@ show_help() {
     echo "      skill-toggle status"
     echo ""
     echo "Grupos disponibles:"
+    echo "  my       — 4 skills custom (backend, frontend, ops, tools)"
     echo "  seo      — 5 skills de SEO"
     echo "  market   — 15 skills de Marketing"
     echo "  dev      — 8 skills de Desarrollo"
@@ -103,14 +105,14 @@ case "${1:-help}" in
         ;;
     list)
         echo "Grupos disponibles:"
-        for group in seo market dev ai design web; do
+        for group in my seo market dev ai design web; do
             count=$(echo "${GROUPS[$group]}" | wc -w)
             echo "  $group ($count skills)"
         done
         ;;
     status)
         if [ -z "$2" ]; then
-            for group in seo market dev ai design web; do
+            for group in my seo market dev ai design web; do
                 show_status "$group"
             done
         else
