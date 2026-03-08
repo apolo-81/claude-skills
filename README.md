@@ -21,9 +21,6 @@ bash install.sh
 | `seo-strategy` | Planificacion estrategica, SEO programatico |
 | `seo-assets` | Schema.org, sitemaps XML, SEO de imagenes |
 
-### SEO Legacy (13 skills originales, desactivadas por defecto)
-`seo`, `seo-audit`, `seo-competitor-pages`, `seo-content`, `seo-geo`, `seo-hreflang`, `seo-images`, `seo-page`, `seo-plan`, `seo-programmatic`, `seo-schema`, `seo-sitemap`, `seo-technical`
-
 ### Marketing (15 skills)
 | Skill | Descripcion |
 |-------|-------------|
@@ -72,13 +69,13 @@ skill-toggle list            # Listar grupos
 
 | Grupo | Skills | Descripcion |
 |-------|--------|-------------|
-| `seo` | 13 | SEO legacy (las originales) |
+| `seo` | 5 | SEO consolidado |
 | `market` | 15 | Marketing digital |
 | `dev` | 8 | Desarrollo web |
 | `ai` | 3 | IA y chatbots |
 | `design` | 5 | Diseno y UI |
 | `web` | 2 | CMS y PWA |
-| `all` | 46 | Todas las skills |
+| `all` | 38 | Todas las skills |
 
 ## Estructura de archivos
 
@@ -93,5 +90,5 @@ skill-name/
 ## Tips de optimizacion de tokens
 
 - Desactiva grupos que no uses con `skill-toggle <grupo> off`
-- Las 5 skills SEO consolidadas reemplazan las 13 originales ahorrando ~5,000 tokens
-- Las descriptions cortas (<90 chars) ahorran ~8,000 tokens vs las originales
+- Descriptions cortas (<90 chars) minimizan el costo de contexto base
+- Desactiva lo que no uses para reducir tokens por conversacion

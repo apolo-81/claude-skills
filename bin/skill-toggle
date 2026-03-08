@@ -13,7 +13,7 @@ SKILLS_DIR="$HOME/.claude/skills"
 # ─── Definición de grupos ──────────────────────────────────────────────────
 unset GROUPS
 declare -A GROUPS
-GROUPS[seo]="seo seo-audit seo-competitor-pages seo-content seo-geo seo-hreflang seo-images seo-page seo-plan seo-programmatic seo-schema seo-sitemap seo-technical"
+GROUPS[seo]="seo-core seo-content-onpage seo-international seo-strategy seo-assets"
 GROUPS[market]="market market-ads market-audit market-brand market-competitors market-copy market-emails market-funnel market-landing market-launch market-proposal market-report market-report-pdf market-seo market-social"
 GROUPS[dev]="form-handling performance-next error-monitoring testing-patterns deployment-vercel supabase-stack saas-boilerplate webhook-integration"
 GROUPS[ai]="chatbot-widget n8n-ai-agents n8n-to-api"
@@ -37,7 +37,7 @@ show_help() {
     echo "      skill-toggle status"
     echo ""
     echo "Grupos disponibles:"
-    echo "  seo      — 13 skills de SEO"
+    echo "  seo      — 5 skills de SEO"
     echo "  market   — 15 skills de Marketing"
     echo "  dev      — 8 skills de Desarrollo"
     echo "  ai       — 3 skills de IA/Chatbot"
