@@ -69,13 +69,14 @@ skill-toggle list            # Listar grupos
 
 | Grupo | Skills | Descripcion |
 |-------|--------|-------------|
+| `my` | 4 | Skills custom (backend, frontend, ops, tools) |
 | `seo` | 5 | SEO consolidado |
 | `market` | 15 | Marketing digital |
 | `dev` | 8 | Desarrollo web |
 | `ai` | 3 | IA y chatbots |
 | `design` | 5 | Diseno y UI |
 | `web` | 2 | CMS y PWA |
-| `all` | 38 | Todas las skills |
+| `all` | 42 | Todas las skills |
 
 ## Estructura de archivos
 
@@ -92,3 +93,42 @@ skill-name/
 - Desactiva grupos que no uses con `skill-toggle <grupo> off`
 - Descriptions cortas (<90 chars) minimizan el costo de contexto base
 - Desactiva lo que no uses para reducir tokens por conversacion
+
+## Backup & Restore
+
+Captura el estado de plugins y MCPs instalados para reproducirlo en otra maquina.
+
+### Capturar estado actual
+
+```bash
+python3 bin/backup.py           # actualiza backup/plugins.json y mcp-servers.json
+python3 bin/backup.py --commit  # lo mismo + git commit + push automatico
+```
+
+### Restaurar en nueva maquina
+
+```bash
+git clone https://github.com/apolo-81/claude-skills.git
+cd claude-skills
+
+# 1. Instalar skills custom
+bash install.sh
+
+# 2. Configurar tokens (ver backup/env.example)
+cp backup/env.example ~/.env
+nano ~/.env
+
+# 3. Instalar plugins y configurar MCPs
+python3 bin/restore.py
+
+# 4. Preview sin instalar nada
+python3 bin/restore.py --dry-run
+```
+
+### Archivos de backup
+
+| Archivo | Descripcion |
+|---------|-------------|
+| `backup/plugins.json` | Lista de plugins con marketplace de origen |
+| `backup/mcp-servers.json` | Configuracion de MCPs (tokens redactados con $VAR) |
+| `backup/env.example` | Plantilla de variables de entorno requeridas |
