@@ -27,7 +27,11 @@ def load_installed_plugins():
         print("ERROR: ~/.claude/plugins/installed_plugins.json no encontrado")
         sys.exit(1)
     with open(INSTALLED_PLUGINS) as f:
-        data = json.load(f)
+        try:
+            data = json.load(f)
+        except json.JSONDecodeError as e:
+            print(f"ERROR: ~/.claude/plugins/installed_plugins.json tiene JSON inválido: {e}")
+            sys.exit(1)
     return data.get("plugins", {})
 
 
@@ -35,7 +39,10 @@ def deduplicate_plugins(plugins_dict):
     """Un plugin instalado desde múltiples marketplaces → elige el primero alfabéticamente."""
     seen = {}
     for key in sorted(plugins_dict.keys()):
-        name, marketplace = key.split("@", 1)
+        parts = key.split("@", 1)
+        if len(parts) != 2:
+            continue  # ignorar claves con formato inesperado
+        name, marketplace = parts
         if name not in seen:
             seen[name] = marketplace
     return [{"name": n, "marketplace": m} for n, m in sorted(seen.items())]
@@ -45,7 +52,11 @@ def load_mcp_servers():
     if not CLAUDE_JSON.exists():
         return {}
     with open(CLAUDE_JSON) as f:
-        data = json.load(f)
+        try:
+            data = json.load(f)
+        except json.JSONDecodeError as e:
+            print(f"ADVERTENCIA: ~/.claude.json tiene JSON inválido: {e}")
+            return {}
     return data.get("mcpServers", {})
 
 
@@ -66,8 +77,11 @@ def redact_secrets(mcp_servers):
 def write_plugins_json(plugins):
     current = {}
     if PLUGINS_FILE.exists():
-        with open(PLUGINS_FILE) as f:
-            current = json.load(f)
+        try:
+            with open(PLUGINS_FILE) as f:
+                current = json.load(f)
+        except json.JSONDecodeError:
+            current = {}  # archivo corrupto → sobreescribir
 
     new_data = {
         "generated": str(date.today()),
@@ -90,8 +104,11 @@ def write_mcp_json(mcp_servers):
     redacted = redact_secrets(mcp_servers)
     current = {}
     if MCP_FILE.exists():
-        with open(MCP_FILE) as f:
-            current = json.load(f)
+        try:
+            with open(MCP_FILE) as f:
+                current = json.load(f)
+        except json.JSONDecodeError:
+            current = {}
 
     new_data = {
         "generated": str(date.today()),
@@ -125,13 +142,17 @@ def git_commit():
         cwd=REPO_ROOT,
         check=True,
     )
-    subprocess.run(["git", "push"], cwd=REPO_ROOT, check=True)
-    print(f"  {GREEN}Commit y push exitoso{NC}")
+    try:
+        subprocess.run(["git", "push"], cwd=REPO_ROOT, check=True)
+        print(f"  {GREEN}Commit y push exitoso{NC}")
+    except subprocess.CalledProcessError:
+        print(f"  {YELLOW}Commit exitoso, pero push falló (verifica la conexión){NC}")
 
 
 def main():
     do_commit = "--commit" in sys.argv
 
+    BACKUP_DIR.mkdir(parents=True, exist_ok=True)
     print("Generando backup de Claude Code...")
     print()
 
