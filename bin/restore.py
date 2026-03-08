@@ -5,6 +5,7 @@ Uso: python3 bin/restore.py [--dry-run]
 """
 import json
 import os
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -32,7 +33,11 @@ def get_installed_plugins():
     except json.JSONDecodeError:
         return set()
     plugins = data.get("plugins", {})
-    return {key.split("@")[0] for key in plugins.keys() if "@" in key}
+    names = set()
+    for key in plugins.keys():
+        parts = key.split("@", 1)
+        names.add(parts[0])  # funciona con o sin @marketplace
+    return names
 
 
 def load_backup_plugins():
@@ -65,7 +70,12 @@ def load_env_vars():
     env_file = Path.home() / ".env"
     env_vars = {}
     if env_file.exists():
-        with open(env_file) as f:
+        try:
+            f = open(env_file)
+        except PermissionError:
+            print(f"{YELLOW}ADVERTENCIA:{NC} No se puede leer ~/.env (permisos)")
+            return env_vars
+        with f:
             for line in f:
                 line = line.strip()
                 if line and not line.startswith("#") and "=" in line:
@@ -96,6 +106,9 @@ def resolve_env_vars(mcp_servers, env_vars):
 
 
 def install_plugin(name, marketplace, dry_run=False):
+    if not re.match(r'^[\w\-\.]+$', name) or not re.match(r'^[\w\-\.]+$', marketplace):
+        print(f"  {RED}✗{NC} Nombre inválido: {name}@{marketplace}")
+        return False
     if dry_run:
         print(f"  {BLUE}DRY-RUN{NC}  claude plugin install {name}@{marketplace}")
         return True
@@ -144,9 +157,12 @@ def configure_mcps(mcp_servers, dry_run=False):
 
     if added and not dry_run:
         current["mcpServers"] = current_mcps
-        with open(CLAUDE_JSON, "w") as f:
-            json.dump(current, f, indent=2)
-            f.write("\n")
+        try:
+            with open(CLAUDE_JSON, "w") as f:
+                json.dump(current, f, indent=2)
+                f.write("\n")
+        except OSError as e:
+            print(f"  {RED}ERROR:{NC} No se pudo escribir ~/.claude.json: {e}")
 
 
 def print_summary(installed_count, already_count, errors):
@@ -190,7 +206,7 @@ def main():
             if not ok:
                 errors.append(plugin["name"])
 
-        print_summary(len(to_install) - len(errors), len(already_installed), errors)
+    print_summary(len(to_install) - len(errors), len(already_installed), errors)
 
     resolved_mcps = resolve_env_vars(backup_mcps, env_vars)
     configure_mcps(resolved_mcps, dry_run)
