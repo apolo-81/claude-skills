@@ -23,6 +23,8 @@ for dir in "$SCRIPT_DIR"/*/; do
     skill=$(basename "$dir")
     # Saltar directorios que no son skills
     [[ "$skill" == "bin" ]] && continue
+    [[ "$skill" == "backup" ]] && continue
+    [[ "$skill" == "docs" ]] && continue
     [[ "$skill" == ".git" ]] && continue
 
     if [ -d "$SKILLS_DIR/$skill" ]; then

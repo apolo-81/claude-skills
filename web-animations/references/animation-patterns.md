@@ -838,3 +838,133 @@ Before shipping any animation:
 - [ ] Springs have appropriate `damping` — no infinite oscillation
 - [ ] Animations do not block user interaction (no long transitions on inputs/buttons)
 - [ ] Tested on mobile — touch targets remain accessible during animation
+
+---
+
+## Extended Anti-Patterns Reference
+
+### Anti-pattern: Animating Layout Properties
+
+```css
+/* ❌ WRONG — triggers layout reflow on every frame */
+.card:hover {
+  width: 220px;       /* layout */
+  height: 160px;      /* layout */
+  top: -10px;         /* layout */
+  margin-top: -5px;   /* layout */
+}
+
+/* ✅ CORRECT — only transform + opacity, compositor thread */
+.card:hover {
+  transform: scale(1.05) translateY(-10px);
+  opacity: 0.95;
+}
+```
+
+### Anti-pattern: Missing AnimatePresence for Exit
+
+```tsx
+/* ❌ WRONG — exit animation never plays, component removed instantly */
+function Modal({ show }) {
+  return show ? (
+    <motion.div exit={{ opacity: 0 }}>...</motion.div>
+  ) : null;
+}
+
+/* ✅ CORRECT — AnimatePresence detects unmount and plays exit */
+function Modal({ show }) {
+  return (
+    <AnimatePresence>
+      {show && (
+        <motion.div
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+        >...</motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+```
+
+### Anti-pattern: Abusing will-change
+
+```css
+/* ❌ WRONG — promotes every element, exhausts GPU memory */
+* { will-change: transform; }
+
+/* ✅ CORRECT — add only just before animation, remove after */
+.will-animate { will-change: transform, opacity; }
+.animation-done { will-change: auto; } /* remove when done */
+```
+
+### Anti-pattern: JS Scroll Handlers for Animations
+
+```js
+/* ❌ WRONG — fires on main thread, blocks 60fps, causes jank */
+window.addEventListener("scroll", () => {
+  const progress = window.scrollY / document.body.scrollHeight;
+  element.style.opacity = progress;
+});
+
+/* ✅ CORRECT — CSS scroll-driven, compositor thread */
+/* .progress-bar { animation: grow linear; animation-timeline: scroll(); } */
+```
+
+### Anti-pattern: Animating Background-Color Heavily
+
+```css
+/* ❌ AVOID for long/looping animations — triggers paint each frame */
+@keyframes pulse-bg {
+  0% { background-color: hsl(220 90% 60%); }
+  100% { background-color: hsl(220 90% 40%); }
+}
+
+/* ✅ PREFER — animate opacity of a pseudo-element overlay instead */
+.card::after {
+  content: "";
+  background: hsl(220 90% 40%);
+  opacity: 0;
+  transition: opacity 200ms ease-out;
+}
+.card:hover::after { opacity: 0.15; }
+```
+
+### Anti-pattern: Linear Easing for UI Interactions
+
+```css
+/* ❌ WRONG — feels mechanical, robotic */
+.button { transition: transform 300ms linear; }
+
+/* ✅ CORRECT — ease-out for entrances, ease-in for exits */
+.button:hover { transform: scale(1.05); transition: transform 150ms ease-out; }
+```
+
+### Anti-pattern: Missing Memory Cleanup for WAAPI
+
+```js
+/* ❌ WRONG — animation object never released */
+function animateIn(el) {
+  el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, fill: "forwards" });
+}
+
+/* ✅ CORRECT — keep reference and cancel when done or on unmount */
+function animateIn(el) {
+  const anim = el.animate(
+    [{ opacity: 0 }, { opacity: 1 }],
+    { duration: 300, fill: "forwards" }
+  );
+  anim.onfinish = () => anim.cancel(); // release fill
+  return anim; // return so caller can cancel on unmount
+}
+```
+
+### Anti-pattern: Animations > 700ms for UI
+
+```tsx
+/* ❌ WRONG — feels sluggish, user thinks UI is broken */
+<motion.div transition={{ duration: 1.2 }}>...</motion.div>
+
+/* ✅ CORRECT — 300-400ms for entrances, 200-300ms for exits */
+<motion.div transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}>
+  ...
+</motion.div>
+```

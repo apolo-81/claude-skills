@@ -12,42 +12,23 @@ description: >
 
 # Supabase Stack — Next.js App Router
 
-## 1. Overview
-
-Supabase is a PostgreSQL-backed BaaS (Backend-as-a-Service) that provides Auth, Database (Postgres + RLS), Storage, Realtime, and Edge Functions through a single hosted platform.
-
-**Choose Supabase when:**
-- You need Auth + database + storage without managing servers
-- You want SQL power (joins, RLS, triggers, full-text search)
-- Your app needs real-time updates
-- You prefer open-source and can self-host later
-
-**Choose something else when:**
-- Firebase: you need native mobile SDKs with offline-first sync as the primary concern
-- PlanetScale/Neon: you only need a database (no auth/storage)
-- Custom backend: you need complex business logic, microservices, or non-HTTP protocols
+**Target stack:** Next.js 15 App Router + TypeScript + Tailwind + Supabase v2
 
 **Decision tree:**
 ```
-Need login + DB + storage? → Supabase
-Need only a database?      → Neon or PlanetScale
-Need ML/vector search?     → Supabase pgvector (still Supabase)
-Need serverless functions? → API Routes + Supabase client (skip Edge Functions unless latency critical)
+Need login + DB + storage? -> Supabase
+Need only a database?      -> Neon or PlanetScale
+Need ML/vector search?     -> Supabase pgvector
+Need serverless functions?  -> API Routes + Supabase client (Edge Functions only if latency critical)
 ```
-
-**Target stack:** Next.js 15 App Router + TypeScript + Tailwind + Supabase v2
 
 ---
 
-## 2. Setup & Configuration
-
-### Install
+## 1. Setup
 
 ```bash
 npm install @supabase/supabase-js @supabase/ssr
 ```
-
-### Environment Variables
 
 ```bash
 # .env.local
@@ -56,252 +37,95 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...          # safe to expose — enforced by R
 SUPABASE_SERVICE_ROLE_KEY=eyJ...              # NEVER expose client-side
 ```
 
-The `anon` key is intentionally public — Row Level Security is the enforcement layer. The `service_role` key bypasses RLS entirely; keep it server-only.
+The `anon` key is intentionally public — RLS is the enforcement layer. The `service_role` key bypasses RLS; keep it server-only.
 
-### Browser Client — `lib/supabase/client.ts`
+Ver `references/client-setup.md` para browser client, server client, and auth middleware code.
 
-```typescript
-import { createBrowserClient } from '@supabase/ssr'
-import type { Database } from '@/types/supabase'
-
-export function createClient() {
-  return createBrowserClient<Database>(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  )
-}
-```
-
-### Server Client — `lib/supabase/server.ts`
-
-```typescript
-import { createServerClient } from '@supabase/ssr'
-import { cookies } from 'next/headers'
-import type { Database } from '@/types/supabase'
-
-export async function createClient() {
-  const cookieStore = await cookies()
-  return createServerClient<Database>(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll() { return cookieStore.getAll() },
-        setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) =>
-            cookieStore.set(name, value, options)
-          )
-        },
-      },
-    }
-  )
-}
-```
-
-Use `createClient` from `server.ts` in Server Components, Server Actions, and Route Handlers. Use `client.ts` only inside Client Components.
+Use server client in Server Components, Server Actions, Route Handlers. Browser client only in Client Components.
 
 ---
 
-## 3. Authentication
+## 2. Authentication
 
-See `references/auth-patterns.md` for complete flows. Core pattern:
+Ver `references/auth-patterns.md` para complete signup, login, OAuth, password reset flows.
 
-### Middleware — `middleware.ts` (root of project)
-
+**Get user in Server Component:**
 ```typescript
-import { createServerClient } from '@supabase/ssr'
-import { NextResponse, type NextRequest } from 'next/server'
-
-export async function middleware(request: NextRequest) {
-  let supabaseResponse = NextResponse.next({ request })
-
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll() { return request.cookies.getAll() },
-        setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value))
-          supabaseResponse = NextResponse.next({ request })
-          cookiesToSet.forEach(({ name, value, options }) =>
-            supabaseResponse.cookies.set(name, value, options)
-          )
-        },
-      },
-    }
-  )
-
-  const { data: { user } } = await supabase.auth.getUser()
-
-  // Redirect unauthenticated users away from protected routes
-  if (!user && request.nextUrl.pathname.startsWith('/dashboard')) {
-    return NextResponse.redirect(new URL('/login', request.url))
-  }
-
-  return supabaseResponse
-}
-
-export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
-}
+const supabase = await createClient()
+const { data: { user } } = await supabase.auth.getUser()
+if (!user) redirect('/login')
 ```
 
-### Get user in Server Component
-
-```typescript
-// app/dashboard/page.tsx
-import { createClient } from '@/lib/supabase/server'
-import { redirect } from 'next/navigation'
-
-export default async function DashboardPage() {
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-
-  if (!user) redirect('/login')
-
-  return <div>Welcome {user.email}</div>
-}
-```
+**Key rule:** Use `supabase.auth.getUser()` (network call, verifies JWT) not `getSession()` in Server Components.
 
 ---
 
-## 4. Database (PostgreSQL)
+## 3. Database (PostgreSQL)
 
-### Generate TypeScript types
+### Generate TypeScript Types
 
 ```bash
 npx supabase gen types typescript --project-id YOUR_PROJECT_ID > types/supabase.ts
 ```
 
-Run this after every schema change.
+Run after every schema change.
 
 ### Core CRUD
 
 ```typescript
-const supabase = await createClient()
-
-// SELECT with filter
+// SELECT with join + pagination
 const { data, error } = await supabase
   .from('posts')
   .select('id, title, created_at, profiles(username)')
   .eq('user_id', user.id)
   .order('created_at', { ascending: false })
-  .range(0, 9) // pagination: first 10 items
+  .range(0, 9)
 
 // INSERT
 const { data, error } = await supabase
-  .from('posts')
-  .insert({ title: 'Hello', user_id: user.id })
-  .select()
-  .single()
+  .from('posts').insert({ title: 'Hello', user_id: user.id }).select().single()
 
-// UPDATE
+// UPDATE — always scope to owner
 const { error } = await supabase
-  .from('posts')
-  .update({ title: 'Updated' })
-  .eq('id', postId)
-  .eq('user_id', user.id) // always scope updates to the owner
+  .from('posts').update({ title: 'Updated' }).eq('id', postId).eq('user_id', user.id)
 
 // DELETE
-const { error } = await supabase
-  .from('posts')
-  .delete()
-  .eq('id', postId)
+const { error } = await supabase.from('posts').delete().eq('id', postId)
 ```
 
-### Row Level Security — why it is critical
+### Row Level Security
 
-RLS is your server-side authorization layer. Without it, anyone with your anon key can read all data from all users. **Always enable RLS on every table containing user data.**
-
-See `references/rls-patterns.md` for complete SQL policies.
-
-Quick enable + common policy:
+**Always enable RLS on every table with user data.** Without it, anyone with the anon key can read all data.
 
 ```sql
--- Enable RLS
 ALTER TABLE posts ENABLE ROW LEVEL SECURITY;
-
--- Users see only their own rows
-CREATE POLICY "own_posts" ON posts
-  FOR ALL USING (auth.uid() = user_id);
+CREATE POLICY "own_posts" ON posts FOR ALL USING (auth.uid() = user_id);
 ```
 
-### Real-time subscriptions (Client Component)
+Ver `references/rls-patterns.md` para complete SQL policies.
 
-```typescript
-'use client'
-import { useEffect, useState } from 'react'
-import { createClient } from '@/lib/supabase/client'
+### Real-time Subscriptions
 
-export function LivePosts() {
-  const [posts, setPosts] = useState<Post[]>([])
-  const supabase = createClient()
-
-  useEffect(() => {
-    const channel = supabase
-      .channel('posts-changes')
-      .on('postgres_changes',
-        { event: '*', schema: 'public', table: 'posts' },
-        (payload) => {
-          if (payload.eventType === 'INSERT')
-            setPosts(prev => [payload.new as Post, ...prev])
-        }
-      )
-      .subscribe()
-
-    return () => { supabase.removeChannel(channel) }
-  }, [])
-
-  return <ul>{posts.map(p => <li key={p.id}>{p.title}</li>)}</ul>
-}
-```
+Ver `references/client-setup.md` para LivePosts component example.
 
 ---
 
-## 5. Storage
+## 4. Storage
 
-```typescript
-const supabase = createClient() // browser client for uploads
+Ver `references/client-setup.md` para upload, public URL, signed URL, and file upload + DB record pattern.
 
-// Upload (with progress via XMLHttpRequest if needed)
-const { data, error } = await supabase.storage
-  .from('avatars')
-  .upload(`${user.id}/avatar.png`, file, {
-    cacheControl: '3600',
-    upsert: true,
-  })
-
-// Public URL (for public buckets)
-const { data: { publicUrl } } = supabase.storage
-  .from('avatars')
-  .getPublicUrl(`${user.id}/avatar.png`)
-
-// Signed URL (for private buckets, expires in 60s)
-const { data, error } = await supabase.storage
-  .from('documents')
-  .createSignedUrl(`${user.id}/report.pdf`, 60)
-```
-
-**Bucket types:** Public buckets serve files without auth (good for avatars, public assets). Private buckets require signed URLs or service_role access (good for user documents, invoices).
-
-See `references/schema-patterns.md` for the complete avatar upload + DB record pattern.
+**Bucket types:** Public (avatars, public assets — no auth). Private (documents, invoices — signed URLs or service_role).
 
 ---
 
-## 6. Edge Functions
+## 5. Edge Functions
 
-Use Edge Functions when you need server-side logic that runs close to the user, handles webhooks (Stripe, n8n), or requires the `service_role` key without exposing it via API Routes.
-
-For most cases, **Next.js Route Handlers are sufficient**. Prefer them for simplicity.
+Prefer Next.js Route Handlers for most cases. Use Edge Functions for:
+- Stripe webhooks (raw body + secret verification)
+- Scheduled jobs via Supabase cron
+- Logic called from outside Next.js (e.g., n8n)
 
 ```typescript
-// When to use Edge Functions:
-// - Stripe webhooks (need raw body + secret verification)
-// - Scheduled jobs via Supabase cron
-// - Logic that must run outside Next.js (e.g., called from n8n)
-
-// Invoke from client:
 const { data, error } = await supabase.functions.invoke('send-email', {
   body: { to: 'user@example.com', subject: 'Welcome' },
 })
@@ -309,50 +133,13 @@ const { data, error } = await supabase.functions.invoke('send-email', {
 
 ---
 
-## 7. Common Patterns
-
-### User Profiles (synced with auth.users)
-
-Create a `profiles` table that mirrors `auth.users` via a database trigger. This keeps user data in your public schema where you can join it freely.
-
-See `references/schema-patterns.md` → "Profiles pattern" for the complete SQL.
-
-### File Upload + DB Record (atomic-ish)
-
-```typescript
-async function uploadDocument(file: File, userId: string) {
-  const supabase = createClient()
-  const path = `${userId}/${Date.now()}-${file.name}`
-
-  // 1. Upload file
-  const { error: uploadError } = await supabase.storage
-    .from('documents').upload(path, file)
-  if (uploadError) throw uploadError
-
-  // 2. Record in database
-  const { data, error: dbError } = await supabase
-    .from('documents')
-    .insert({ user_id: userId, storage_path: path, name: file.name })
-    .select().single()
-  if (dbError) {
-    // Rollback: delete the uploaded file
-    await supabase.storage.from('documents').remove([path])
-    throw dbError
-  }
-
-  return data
-}
-```
-
-### Error Handling
+## 6. Error Handling
 
 ```typescript
 const { data, error } = await supabase.from('posts').select()
-
 if (error) {
-  // error.code: Postgres error code (e.g., '23505' = unique violation)
+  // error.code: Postgres code (e.g., '23505' = unique violation)
   // error.message: human-readable
-  // error.details: additional context
   console.error(`[Supabase] ${error.code}: ${error.message}`)
   throw new Error(error.message)
 }
@@ -360,21 +147,22 @@ if (error) {
 
 ---
 
-## 8. Security Checklist
+## 7. Security Checklist
 
-- Never import or use `SUPABASE_SERVICE_ROLE_KEY` in Client Components or any file with `'use client'`
-- Enable RLS on every table before adding data — not after
-- Add `USING` clauses that reference `auth.uid()` — never trust client-supplied user IDs
-- Validate data in Server Actions / Route Handlers even when RLS is enabled (defense in depth)
-- Set bucket policies in addition to storage RLS for fine-grained control
-- Use `supabase.auth.getUser()` (makes a network call to verify JWT) — not `getSession()` — in Server Components for auth checks
+- Never use `SUPABASE_SERVICE_ROLE_KEY` in Client Components or `'use client'` files
+- Enable RLS on every table **before** adding data
+- `USING` clauses must reference `auth.uid()` — never trust client-supplied user IDs
+- Validate data in Server Actions/Route Handlers even with RLS (defense in depth)
+- Set bucket policies in addition to storage RLS
+- Use `getUser()` not `getSession()` in Server Components
 
 ---
 
-## 9. References
+## 8. References
 
 | File | Content |
 |------|---------|
-| `references/auth-patterns.md` | Signup, login, OAuth, password reset, protected routes middleware |
-| `references/rls-patterns.md` | Common RLS policies with full SQL and explanations |
+| `references/auth-patterns.md` | Signup, login, OAuth, password reset, protected routes |
+| `references/rls-patterns.md` | Common RLS policies with full SQL |
 | `references/schema-patterns.md` | Table schemas: profiles, posts, files, notifications, multi-tenant |
+| `references/client-setup.md` | Browser/server clients, middleware, real-time, storage, file upload |

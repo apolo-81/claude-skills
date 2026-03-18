@@ -1,6 +1,6 @@
 # Claude Skills Collection
 
-Skills personalizadas para Claude Code organizadas por categorias.
+Skills personalizadas y optimizadas para Claude Code organizadas por categorias.
 
 ## Instalacion rapida
 
@@ -10,9 +10,11 @@ cd claude-skills
 bash install.sh
 ```
 
-## Skills incluidas
+## Skills incluidas (36 total)
 
-### SEO (5 skills consolidadas)
+> Todas las skills fueron optimizadas (~45% reduccion de tokens) moviendo codigo y templates a `references/` y eliminando prosa redundante.
+
+### SEO (5 skills)
 | Skill | Descripcion |
 |-------|-------------|
 | `seo-core` | Auditorias completas, SEO tecnico, Core Web Vitals |
@@ -21,7 +23,7 @@ bash install.sh
 | `seo-strategy` | Planificacion estrategica, SEO programatico |
 | `seo-assets` | Schema.org, sitemaps XML, SEO de imagenes |
 
-### Marketing (15 skills)
+### Marketing (14 skills)
 | Skill | Descripcion |
 |-------|-------------|
 | `market` | Orquestador principal del suite de marketing |
@@ -37,20 +39,40 @@ bash install.sh
 | `market-proposal` | Propuestas de servicios de marketing |
 | `market-report` | Reporte Markdown (uso interno) |
 | `market-report-pdf` | Reporte PDF con charts y gauges |
-| `market-seo` | Analisis SEO dentro del suite de marketing |
 | `market-social` | Calendario 30 dias para redes sociales |
 
-### Desarrollo (8 skills)
-`form-handling`, `performance-next`, `error-monitoring`, `testing-patterns`, `deployment-vercel`, `supabase-stack`, `saas-boilerplate`, `webhook-integration`
+### Desarrollo (7 skills)
+| Skill | Descripcion |
+|-------|-------------|
+| `form-handling` | Formularios con validacion y uploads |
+| `performance-next` | Optimizacion de rendimiento Next.js |
+| `error-monitoring` | Monitoreo de errores con Sentry |
+| `testing-patterns` | Testing con Vitest y Playwright |
+| `supabase-stack` | Backend con Supabase (auth, DB, storage) |
+| `saas-boilerplate` | Boilerplate SaaS con Stripe y auth |
+| `webhook-integration` | Integraciones con webhooks |
 
 ### IA/Chatbot (3 skills)
-`chatbot-widget`, `n8n-ai-agents`, `n8n-to-api`
+| Skill | Descripcion |
+|-------|-------------|
+| `chatbot-widget` | Widget de chatbot con IA |
+| `n8n-ai-agents` | Agentes de IA en n8n |
+| `n8n-to-api` | Exponer workflows n8n como API |
 
 ### Diseno/UI (5 skills)
-`ui-designer`, `web-animations`, `landing-page-builder`, `data-viz-dashboard`, `email-templates-builder`
+| Skill | Descripcion |
+|-------|-------------|
+| `ui-designer` | Extraccion de design systems y generacion de UI |
+| `web-animations` | Animaciones web (CSS, Framer Motion) |
+| `landing-page-builder` | Constructor de landing pages |
+| `data-viz-dashboard` | Dashboards y visualizacion de datos |
+| `email-templates-builder` | Templates de email HTML responsivos |
 
 ### Web (2 skills)
-`cms-integration`, `pwa-patterns`
+| Skill | Descripcion |
+|-------|-------------|
+| `cms-integration` | Integracion de CMS headless |
+| `pwa-patterns` | Progressive Web Apps |
 
 ## skill-toggle
 
@@ -69,30 +91,32 @@ skill-toggle list            # Listar grupos
 
 | Grupo | Skills | Descripcion |
 |-------|--------|-------------|
-| `my` | 4 | Skills custom (backend, frontend, ops, tools) |
 | `seo` | 5 | SEO consolidado |
-| `market` | 15 | Marketing digital |
-| `dev` | 8 | Desarrollo web |
+| `market` | 14 | Marketing digital |
+| `dev` | 7 | Desarrollo web |
 | `ai` | 3 | IA y chatbots |
 | `design` | 5 | Diseno y UI |
 | `web` | 2 | CMS y PWA |
-| `all` | 42 | Todas las skills |
+| `all` | 36 | Todas las skills |
 
 ## Estructura de archivos
 
 ```
 skill-name/
-  SKILL.md          # Definicion principal de la skill
-  references/       # Archivos de referencia (cargados bajo demanda)
+  SKILL.md          # Definicion principal (optimizada, solo logica de decision)
+  references/       # Codigo, templates, output formats (cargados bajo demanda)
   assets/           # Templates y recursos
   scripts/          # Scripts auxiliares
 ```
 
-## Tips de optimizacion de tokens
+## Optimizacion de tokens
 
+Las skills fueron optimizadas siguiendo estos principios:
+
+- **SKILL.md compacto**: solo arboles de decision, tablas rapidas y checklists
+- **references/**: codigo, templates de output y frameworks detallados movidos aqui
+- **Sin prosa redundante**: eliminadas secciones "por que importa" y conocimiento generico
 - Desactiva grupos que no uses con `skill-toggle <grupo> off`
-- Descriptions cortas (<90 chars) minimizan el costo de contexto base
-- Desactiva lo que no uses para reducir tokens por conversacion
 
 ## Backup & Restore
 

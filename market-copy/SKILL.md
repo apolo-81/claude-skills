@@ -10,7 +10,11 @@ description: >
 
 # Copywriting Analysis & Generation
 
-You are the copywriting engine for `/market copy <url>`. Fetch the target page(s), analyze the existing copy, score it, and produce both terminal output and a detailed `COPY-SUGGESTIONS.md` file. Every recommendation is grounded in proven copywriting frameworks and tailored to the detected business type.
+Fetch target page(s), analyze existing copy, score it, produce terminal output and `COPY-SUGGESTIONS.md`.
+
+## Invocation
+
+Run as `/market copy <url>`. Fetch the target URL for analysis.
 
 ---
 
@@ -18,45 +22,26 @@ You are the copywriting engine for `/market copy <url>`. Fetch the target page(s
 
 ### 1.1 Fetch and Parse
 
-Use `WebFetch` to retrieve the target URL. Extract:
-- Primary headline (H1)
-- Subheadline / supporting headline
-- Hero section copy
-- All section headlines (H2, H3)
-- Body copy paragraphs
-- CTA button text (every instance)
-- Navigation labels
-- Footer copy
-- Meta title and meta description
-- Social proof elements (testimonials, stats, logos)
+Extract: H1, subheadline, hero copy, all H2/H3, body paragraphs, CTA button text (every instance), navigation labels, footer copy, meta title/description, social proof elements.
 
 ### 1.2 Detect Page Type
 
-Each page type has different copy priorities — generating homepage copy with the same rules as a pricing page leads to misaligned recommendations.
-
 | Page Type | Primary Goal | Copy Priority |
 |-----------|-------------|---------------|
-| **Homepage** | Communicate value prop, route visitors | Headline clarity, navigation clarity, CTA hierarchy |
+| **Homepage** | Communicate value prop, route visitors | Headline clarity, navigation, CTA hierarchy |
 | **Landing Page** | Single conversion action | Headline-CTA alignment, objection handling, urgency |
 | **Pricing Page** | Drive plan selection | Plan naming, feature framing, anchoring, FAQ |
-| **About Page** | Build trust and connection | Story, mission, team credibility, values |
-| **Product Page** | Demonstrate value of specific product | Feature-to-benefit translation, social proof, specifications |
-| **Feature Page** | Explain a specific capability | Problem-solution framing, use cases, comparison |
+| **About Page** | Build trust and connection | Story, mission, team credibility |
+| **Product Page** | Demonstrate value | Feature-to-benefit translation, social proof |
+| **Feature Page** | Explain capability | Problem-solution framing, use cases |
 | **Blog Post** | Educate and capture leads | Headline hook, intro engagement, CTA placement |
-| **Contact/Demo Page** | Capture lead information | Form headline, friction reduction, trust signals |
+| **Contact/Demo** | Capture lead info | Form headline, friction reduction, trust signals |
 
 ### 1.3 Voice and Tone Analysis
 
-Analyze the existing voice before generating any new copy. Generated copy that doesn't match the brand's voice sounds inauthentic and undermines trust — even if the words are technically better.
+Rate each 1-5: **Formality** (Casual-Formal), **Emotion** (Neutral-Passionate), **Complexity** (Simple-Technical), **Humor** (Serious-Playful), **Authority** (Peer-Expert).
 
-**Voice Dimensions (rate each 1-5):**
-- **Formality:** Casual ←→ Formal
-- **Emotion:** Neutral ←→ Passionate
-- **Complexity:** Simple ←→ Technical
-- **Humor:** Serious ←→ Playful
-- **Authority:** Peer ←→ Expert
-
-Document this voice profile and use it to calibrate all generated copy. If the existing tone is clearly ineffective (e.g., overly corporate for a consumer app), flag it and propose an alternative direction.
+Document voice profile and calibrate all generated copy to match. Flag if tone is clearly ineffective.
 
 ---
 
@@ -64,74 +49,27 @@ Document this voice profile and use it to calibrate all generated copy. If the e
 
 ### 2.1 Headline Analysis
 
-Evaluate the primary headline against these criteria:
+**5-Second Test:** Would a new visitor understand what this company does and who it serves within 5 seconds?
 
-**The 5-Second Test:** Would a new visitor understand what this company does and who it serves within 5 seconds of reading the headline?
+**Headline Scoring (0-10 each):** Clarity, Specificity, Relevance, Differentiation, Emotion.
 
-**Headline Scoring (0-10 each):**
-- **Clarity:** Is the meaning immediately obvious? No jargon, no ambiguity.
-- **Specificity:** Does it include concrete details — numbers, outcomes, timeframes?
-- **Relevance:** Does it speak to the target audience's primary pain point or desire?
-- **Differentiation:** Does it set this business apart from competitors?
-- **Emotion:** Does it trigger curiosity, desire, FOMO, or recognition?
+### 2.2 Headline Generation
 
-### 2.2 Headline Generation Frameworks
-
-Use these proven frameworks to generate alternative headlines. Each framework captures a different psychological angle — which is why generating multiple variations matters rather than finding the single "right" headline.
-
-**PAS (Problem-Agitate-Solve):**
-```
-Problem: [State the pain point]
-Agitate: [Make the pain feel urgent]
-Solve: [Present the product as the solution]
-Template: "Stop [pain]. Start [desired outcome] — with [product]."
-```
-
-**AIDA (Attention-Interest-Desire-Action):**
-```
-Attention: [Surprising fact or bold claim]
-Interest: [Why this matters to the reader]
-Desire: [What life looks like after using this]
-Action: [What to do next]
-Template: "[Bold claim] — [specific outcome] in [timeframe]."
-```
-
-**Before-After-Bridge:**
-```
-Before: [Current painful state]
-After: [Desired future state]
-Bridge: [The product connects the two]
-Template: "From [before state] to [after state] — [product] makes it happen."
-```
-
-**4U Framework:**
-```
-Useful: [What benefit does it provide?]
-Ultra-specific: [Can you add numbers, timeframes, percentages?]
-Unique: [What angle hasn't been tried?]
-Urgent: [Why act now?]
-Template: "[Specific number] [audience] use [product] to [specific outcome] — [urgency element]."
-```
-
-Generate 5-10 headline alternatives using these frameworks. Rank them by estimated effectiveness.
+Generate 5-10 alternatives using PAS, AIDA, Before-After-Bridge, and 4U (Useful, Ultra-specific, Unique, Urgent) frameworks. Rank by estimated effectiveness.
 
 ### 2.3 Full Copy Scoring Rubric
 
-Score the entire page copy across 5 dimensions:
-
 | Dimension | Score | What It Measures |
 |-----------|-------|------------------|
-| **Clarity** | 0-10 | Can a 12-year-old understand what you do? No jargon, no fluff. |
-| **Persuasion** | 0-10 | Does the copy move the reader toward action? Does it handle objections? |
-| **Specificity** | 0-10 | Concrete numbers, outcomes, timeframes vs vague claims. |
-| **Emotion** | 0-10 | Does it connect with the reader's pain, desires, identity, or aspirations? |
-| **Action** | 0-10 | Are CTAs clear, compelling, and strategically placed? Low friction? |
+| **Clarity** | 0-10 | Can a 12-year-old understand what you do? |
+| **Persuasion** | 0-10 | Does copy move reader toward action? Handles objections? |
+| **Specificity** | 0-10 | Concrete numbers, outcomes, timeframes vs vague claims |
+| **Emotion** | 0-10 | Connects with pain, desires, identity, aspirations? |
+| **Action** | 0-10 | CTAs clear, compelling, strategically placed? |
 
-**Total Copy Score: X/50** (multiply by 2 for a 0-100 scale)
+**Total Copy Score: X/50** (multiply by 2 for 0-100 scale)
 
 ### 2.4 Value Proposition Canvas
-
-Analyze and document the value proposition. If any element is weak or missing, it's the highest-priority copy fix — visitors who don't understand the value proposition won't read anything else.
 
 ```
 TARGET CUSTOMER: [Who specifically is this for?]
@@ -142,120 +80,43 @@ KEY BENEFIT: [What is the #1 outcome the customer gets?]
 PROOF: [What evidence supports the claims?]
 ```
 
+If any element is weak or missing, it is the highest-priority copy fix.
+
 ---
 
 ## Phase 3: Copy Generation
 
 ### 3.1 Page-Specific Copy Structure
 
-Use the appropriate structure based on the detected page type:
-
-**Homepage:**
-1. Hero: Headline (what you do + for whom) + Subhead (how you do it) + Primary CTA
-2. Social proof bar: Logos, user count, or key metric
-3. Problem section: Articulate the pain the audience feels
-4. Solution section: How the product solves it (3 key benefits)
-5. How it works: 3-step process or visual walkthrough
-6. Features/benefits: 3-6 key features with benefit-oriented descriptions
-7. Testimonials: 2-3 customer stories with specific results
-8. Final CTA: Repeat the primary call to action with urgency or guarantee
-
-**Landing Page:**
-1. Headline: Single clear promise
-2. Subhead: Supporting evidence or context
-3. Hero CTA: Above the fold, high contrast
-4. Problem: 2-3 sentences of pain amplification
-5. Solution: How this offer fixes the problem
-6. Benefits: 3-5 bullet points (outcomes, not features)
-7. Social proof: Testimonials, results, logos
-8. Objection handling: FAQ or guarantee section
-9. Final CTA: Urgency-driven repeat of the offer
-
-**Pricing Page:**
-1. Headline: Frame the investment, not the cost ("Choose your growth plan")
-2. Plan names: Aspirational or audience-based, not "Basic/Pro/Enterprise"
-3. Recommended plan: Visually highlighted, labeled "Most Popular" or "Best Value"
-4. Feature descriptions: Benefit-oriented, not feature lists
-5. Anchoring: Show the most expensive plan first or use annual/monthly toggle
-6. FAQ: Address pricing objections (refund policy, what's included, switching)
-7. Guarantee: Risk reversal (free trial, money-back, cancel anytime)
-
-**About Page:**
-1. Mission statement: Why this company exists (not what it does)
-2. Origin story: The founder's journey from problem to solution
-3. Values: 3-5 values with real examples, not generic platitudes
-4. Team: Photos with personality, relevant credentials, approachability
-5. Social proof: Press mentions, awards, milestones
-6. CTA: Connect the mission to the reader's journey
-
-**Product Page (E-commerce):**
-1. Product title: Descriptive and benefit-oriented
-2. Price: Clear, with any savings highlighted
-3. Key benefit: One-sentence value proposition for this specific product
-4. Description: 3-5 benefit-driven paragraphs
-5. Specifications: Clean, scannable table
-6. Reviews: Star rating + written reviews with photos
-7. Cross-sells: "Frequently bought together" or "You might also like"
-
-**Feature Page (SaaS):**
-1. Feature name: Clear and descriptive
-2. Problem it solves: Start with the pain point, not the feature
-3. How it works: Visual + 2-3 step explanation
-4. Use cases: 2-3 specific scenarios where this feature shines
-5. Comparison: How this is different from alternatives
-6. CTA: "Try [feature] free" or "See it in action"
+Use structure from `references/page-structures.md` based on detected page type.
 
 ### 3.2 CTA Optimization
 
-Analyze every CTA on the page. CTAs are the most testable copy element — small changes in text routinely produce 10-30% conversion lifts.
-
-**CTA Button Text Best Practices:**
-- Use first person: "Start My Free Trial" not "Start Your Free Trial"
-- Include the value: "Get My Report" not "Submit"
+Analyze every CTA. Best practices:
+- First person: "Start My Free Trial" not "Start Your Free Trial"
+- Include value: "Get My Report" not "Submit"
 - Reduce risk: "Try Free for 14 Days" not "Buy Now"
 - Be specific: "Download the 2026 Marketing Guide" not "Download"
-- Add urgency when appropriate: "Claim My Spot (12 Left)" not "Register"
 
 **CTA Placement Audit:**
-- Is there a CTA above the fold? (Required)
-- Is there a CTA after each major content section? (Recommended)
-- Is there a sticky/floating CTA on long pages? (Recommended for long-form)
-- Is the CTA repeated at the bottom? (Required)
-
-**CTA Color Psychology:**
-- Green: Growth, positive action (good for free trials)
-- Orange: Urgency, enthusiasm (good for limited offers)
-- Blue: Trust, security, calm (good for financial/enterprise)
-- Red: Urgency, excitement (use sparingly)
-- The CTA color must contrast with the page background and surrounding elements
+- [ ] CTA above the fold (required)
+- [ ] CTA after each major content section (recommended)
+- [ ] Sticky/floating CTA on long pages (recommended for long-form)
+- [ ] CTA repeated at bottom (required)
 
 ### 3.3 Before/After Examples
 
-For every recommendation, provide a concrete before/after. Abstract advice doesn't get implemented — specific examples do.
-
-```
-BEFORE (Current):
-  "We provide innovative solutions for businesses."
-
-AFTER (Recommended):
-  "Cut your customer support tickets by 40% — AI-powered responses
-   that resolve issues in under 2 minutes."
-
-WHY: The "before" is vague and generic. The "after" is specific (40%),
-outcome-driven (cut tickets), and includes a proof point (under 2 minutes).
-```
-
-Generate at least 5 before/after pairs covering:
+For every recommendation, provide concrete before/after. Generate at least 5 pairs covering:
 1. Primary headline
 2. Subheadline
 3. Primary CTA
 4. One body copy paragraph
 5. Meta description
 
-### 3.4 Swipe File Generation
+### 3.4 Swipe File
 
-Create a swipe file section with ready-to-use alternatives:
-- 10 headline alternatives ranked by estimated effectiveness
+Generate ready-to-use alternatives:
+- 10 headline alternatives ranked by effectiveness
 - 5 subheadline alternatives
 - 5 CTA button text alternatives
 - 3 meta description alternatives
@@ -266,75 +127,13 @@ Create a swipe file section with ready-to-use alternatives:
 
 ## Output Format
 
-### Terminal Output
-
-```
-=== COPY ANALYSIS: [URL] ===
-
-Page Type: [type]
-Voice Profile: [casual/formal], [neutral/passionate], [simple/technical]
-
-Copy Score: X/50 (X/100)
-  Clarity:     X/10 ████████░░
-  Persuasion:  X/10 ██████░░░░
-  Specificity: X/10 ███████░░░
-  Emotion:     X/10 █████░░░░░
-  Action:      X/10 ████████░░
-
-Top 3 Copy Fixes:
-  1. [fix with before/after]
-  2. [fix with before/after]
-  3. [fix with before/after]
-
-Full report saved to: COPY-SUGGESTIONS.md
-```
-
-### COPY-SUGGESTIONS.md
-
-Write the full report with this structure:
-
-```markdown
-# Copy Analysis & Suggestions: [URL]
-**Date:** [current date]
-**Page Type:** [type]
-**Copy Score:** X/100
-
-## Executive Summary
-[2-3 paragraphs summarizing copy quality, key strengths, and priority fixes]
-
-## Voice & Tone Profile
-[Voice analysis results with recommendations]
-
-## Score Breakdown
-[Full scoring rubric with justifications for each dimension]
-
-## Value Proposition Analysis
-[Value proposition canvas with gaps identified]
-
-## Headline Recommendations
-[Current headline, 10 alternatives with framework used, ranked by effectiveness]
-
-## Section-by-Section Copy Suggestions
-[For each major section: current copy, issues, recommended copy, rationale]
-
-## CTA Optimization
-[Every CTA analyzed with before/after recommendations]
-
-## Before/After Examples
-[At least 5 before/after pairs with WHY explanations]
-
-## Swipe File
-[All headline, subheadline, CTA, and meta alternatives]
-
-## Implementation Priority
-[Ranked list of changes by impact, from highest to lowest]
-```
+Formato de salida: ver `references/output-template.md`.
 
 ---
 
 ## Cross-Skill Integration
 
-- If `BRAND-VOICE.md` exists in the working directory, use its voice guidelines to calibrate all generated copy
-- If `MARKETING-AUDIT.md` exists, reference the Content & Messaging score and incorporate any relevant findings
-- If `COMPETITOR-REPORT.md` exists, use competitor messaging to sharpen differentiation angles
-- Suggest follow-up commands at the end: `/market landing` for conversion-focused analysis, `/market brand` to establish formal voice guidelines
+- If `BRAND-VOICE.md` exists, use voice guidelines to calibrate all generated copy
+- If `MARKETING-AUDIT.md` exists, reference Content & Messaging score
+- If `COMPETITOR-REPORT.md` exists, use competitor messaging to sharpen differentiation
+- Suggest follow-up: `/market landing` for conversion-focused analysis, `/market brand` for formal voice guidelines

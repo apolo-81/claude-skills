@@ -7,146 +7,120 @@ description: Use when implementing animations, transitions, or any motion effect
 
 ## FIRST PRINCIPLE: prefers-reduced-motion
 
-Before implementing any animation, always provide a fallback for users with vestibular disorders or motion sensitivity. This is non-negotiable and must be applied to every animation.
+Non-negotiable. Every animation must have a reduced-motion fallback.
 
-**Framer Motion (automatic):**
+**Framer Motion:** `useReducedMotion()` — set `duration: 0` or remove movement.
+**CSS:** `@media (prefers-reduced-motion: reduce)` — disable or instant.
+
 ```tsx
-// Framer Motion respects prefers-reduced-motion by default.
-// Customize the reduced version with useReducedMotion:
-import { useReducedMotion } from "framer-motion";
-
-function Component() {
-  const reduce = useReducedMotion();
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: reduce ? 0 : 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: reduce ? 0 : 0.4 }}
-    />
-  );
-}
+const reduce = useReducedMotion();
+<motion.div
+  initial={{ opacity: reduce ? 1 : 0, y: reduce ? 0 : 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: reduce ? 0 : 0.4 }}
+/>
 ```
 
-**CSS (manual):**
-```css
-/* Per-element — preferred */
-@media (prefers-reduced-motion: no-preference) {
-  .reveal { animation: slide-up 0.4s ease-out both; }
-}
+### Reduced-Motion Fallback Map
 
-/* Global nuclear option */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-```
+| Pattern | Reduced Fallback |
+|---------|-----------------|
+| Hover scale/shadow | Keep color change, remove transform |
+| Spinner/pulse | Static "Loading..." text or `aria-busy` |
+| Skeleton shimmer | Static gray placeholder |
+| Entrance fade/slide | Show immediately (`opacity: 1; transform: none`) |
+| Exit animation | Remove instantly |
+| Page transition | Instant swap (`duration: 0`) |
+| Scroll reveal | Content visible by default |
+| Drag/swipe | Keep functional, disable visual effects |
+| Layout animation | Instant reflow |
+| Animated counter | Show final number immediately |
+| Parallax | Static positioning |
+
+---
+
+## Accessibility
+
+- `aria-live="polite"` on containers with dynamic animated content (toasts, counters)
+- `aria-busy={isLoading}` on skeleton/spinner containers
+- Keyboard fallbacks on all draggable/interactive animated elements
+- `aria-expanded` on accordion triggers
+
+Ver `references/accessibility-code.md` para complete ARIA patterns, TypeScript types, error boundary, and ESLint config.
 
 ---
 
 ## Decision Tree
 
-Use this tree to pick the right technology before writing any code.
-
 ```
 What are you animating?
-│
-├── Hover / focus / active state?
-│   └── CSS transition  ← zero JS, GPU-composited, simplest
-│
-├── Looping effect (spinner, pulse, shimmer)?
-│   └── CSS @keyframes  ← declarative, no runtime cost
-│
-├── Page or route transition?
-│   └── View Transitions API  ← native browser, shared elements, Next.js support
-│       └── Fallback: Framer Motion AnimatePresence + PageWrapper
-│
-├── Tied to scroll position?
-│   └── CSS scroll-driven animations (animation-timeline)  ← compositor thread, 60fps
-│       └── Fallback: Framer Motion useInView (once: true)
-│
-├── React component mount / unmount?
-│   └── Framer Motion + AnimatePresence  ← only reliable unmount animation in React
-│
-├── Layout shift (reorder, resize, expand)?
-│   └── Framer Motion layout prop (FLIP)  ← automatic, no position math needed
-│
-├── Gesture (drag, swipe, pinch)?
-│   └── Framer Motion drag gestures  ← physics-based, touch-optimized
-│
-├── Complex orchestrated sequence?
-│   └── Framer Motion variants + staggerChildren  ← declarative orchestration
-│       └── Alternative: GSAP timeline (for very complex multi-step sequences)
-│
-└── Imperative / programmatic animation?
-    └── Web Animations API (WAAPI) or Framer Motion useAnimation
+|
++-- Hover / focus / active?         -> CSS transition
++-- Looping (spinner, pulse)?       -> CSS @keyframes
++-- Page/route transition?          -> View Transitions API (fallback: AnimatePresence)
++-- Tied to scroll?                 -> CSS animation-timeline: scroll()/view()
++-- React mount/unmount?            -> Framer Motion AnimatePresence
++-- Layout shift (reorder, resize)? -> Framer Motion layout prop (FLIP)
++-- Gesture (drag, swipe)?          -> Framer Motion drag
++-- Orchestrated sequence (5+)?     -> GSAP timeline
++-- Imperative/programmatic?        -> WAAPI or useAnimation
 ```
+
+### Quick-Resolution Table
+
+| Situation | Solution |
+|-----------|----------|
+| CSS `:hover`, `:focus`, `:active` | CSS transition |
+| `@keyframes` loop (spinner, shimmer) | CSS @keyframes |
+| React `useState` toggle mount/unmount | AnimatePresence |
+| `<ul>` items enter one by one | variants + staggerChildren |
+| SPA route change | View Transitions API |
+| `window.scrollY` percentage tied | `animation-timeline: scroll()` |
+| Element enters viewport once | `animation-timeline: view()` |
+| User drags a card | `motion.div drag="x"` |
+| Reorder list / accordion expand | `layout` prop + AnimatePresence |
+| Same element on two routes | `layoutId` shared element |
+| Complex 5-step narrative intro | GSAP `timeline()` |
+| No library, imperative | `element.animate()` (WAAPI) |
 
 ---
 
-## Quick Reference Table
+## Anti-Patterns
 
-| Scenario | Technology | File |
-|----------|-----------|------|
-| Hover scale, shadow | CSS `transition` | [css-animations.md](references/css-animations.md) |
-| Spinner, shimmer, pulse | CSS `@keyframes` | [css-animations.md](references/css-animations.md) |
-| Fade-in, slide-up on mount | Framer Motion `motion.div` | [framer-motion.md](references/framer-motion.md) |
-| Exit / dismiss animation | Framer Motion `AnimatePresence` | [framer-motion.md](references/framer-motion.md) |
-| Layout shift (reorder, resize) | Framer Motion `layout` prop | [framer-motion.md](references/framer-motion.md) |
-| Page/route transition | View Transitions API | [css-animations.md](references/css-animations.md) |
-| Shared element hero transition | View Transitions API | [css-animations.md](references/css-animations.md) |
-| Scroll reveal | CSS `animation-timeline: view()` | [css-animations.md](references/css-animations.md) |
-| Scroll progress bar | CSS `animation-timeline: scroll()` | [css-animations.md](references/css-animations.md) |
-| Drag, swipe to dismiss | Framer Motion `drag` | [framer-motion.md](references/framer-motion.md) |
-| Staggered list / grid | Framer Motion `staggerChildren` | [framer-motion.md](references/framer-motion.md) |
-| Animated counter | Framer Motion `useMotionValue` | [framer-motion.md](references/framer-motion.md) |
-| Tab indicator, toggle | Framer Motion `layoutId` | [animation-patterns.md](references/animation-patterns.md) |
-| Parallax section | CSS scroll-driven or `useScroll` | [animation-patterns.md](references/animation-patterns.md) |
-| Text word-by-word reveal | Framer Motion variants | [animation-patterns.md](references/animation-patterns.md) |
+| Anti-pattern | Fix | Impact |
+|-------------|-----|--------|
+| Animate `width`, `height`, `top`, `left` | Use `transform: translate/scale` | Layout reflow every frame |
+| `will-change: transform` on all elements | Apply only before animation, remove after | GPU memory exhaustion |
+| Exit without `AnimatePresence` | Wrap in `<AnimatePresence>` | Exit never plays |
+| `transition: all` | List specific properties | Unintended animations |
+| JS `onScroll` + `style.X` | `animation-timeline: scroll()` | Main thread blocked |
+| `animation-duration > 700ms` for UI | Keep 150-400ms | Feels sluggish |
+| `linear` easing for UI | `ease-out` entrance, `ease-in` exit | Feels mechanical |
+| No `prefers-reduced-motion` fallback | Always provide | Accessibility violation |
+| `background-color` keyframe animation | Animate `opacity` of overlay | Paint every frame |
+| WAAPI `fill: "forwards"` no cleanup | `anim.cancel()` on finish/unmount | Memory leak |
+| Animating LCP element from `opacity: 0` | `visibility: hidden` or delay | Delays LCP metric |
+| Missing `aria-live` on animated content | Add `aria-live="polite"` | Screen readers miss updates |
+
+> See `references/animation-patterns.md` for extended anti-patterns with code examples.
 
 ---
 
-## Core Principles
+## Core Principles — 60fps
 
-### 60fps Target
+**Animate only:** `transform` (translate, scale, rotate, skew) and `opacity`
+**Never animate:** `width`, `height`, `top`, `left`, `margin`, `padding`, `font-size`
+**Verify:** Chrome DevTools > Rendering > Paint Flashing. Green = repainting.
 
-Achieve 60fps by only animating GPU-composited properties:
+### Framer Motion vs CSS vs WAAPI
 
-- **Animate**: `transform` (translate, scale, rotate, skew) and `opacity`
-- **Never animate**: `width`, `height`, `top`, `left`, `margin`, `padding`, `font-size`
-- **Avoid if possible**: `background-color`, `box-shadow`, `border-color` (trigger paint, not layout — acceptable for short durations)
-
-To verify: open Chrome DevTools > Rendering > Paint Flashing. Green overlays = repainting. Animated elements should show minimal or no green.
-
-### Why Framer Motion vs CSS
-
-**Use Framer Motion when:**
-- React component mounts or unmounts (CSS cannot animate unmount — the element is removed before the animation ends)
-- Multiple elements need coordinated/staggered animations (variants system)
-- Physics-based spring animations are needed (natural feel for interactive elements)
-- Layout changes need automatic FLIP calculation
-- Gesture tracking (drag, swipe) is required
-
-**Use CSS when:**
-- Hover, focus, or active state changes (purely declarative, no JS needed)
-- Looping animations (spinners, skeletons) — no React lifecycle involved
-- Scroll-driven animations (compositor thread, no JS at all)
-- Page transitions via View Transitions API
-- Maximum performance is critical (no JS overhead)
-
-**Use Web Animations API (WAAPI) when:**
-- You need imperative control without a library (no Framer Motion installed)
-- Animating from JS values not tied to React state
-- Building a low-level animation utility or hook
-
-```js
-// WAAPI example — imperative, no library
-element.animate(
-  [{ transform: "translateY(20px)", opacity: 0 }, { transform: "translateY(0)", opacity: 1 }],
-  { duration: 400, easing: "cubic-bezier(0.25, 0.46, 0.45, 0.94)", fill: "forwards" }
-);
-```
+| Use Framer Motion | Use CSS | Use WAAPI |
+|---|---|---|
+| React mount/unmount | Hover, focus, active states | Imperative without library |
+| Coordinated/staggered animations | Looping (spinners, skeletons) | JS values not tied to React state |
+| Spring physics animations | Scroll-driven animations | Low-level animation utility |
+| Layout FLIP calculation | View Transitions API | |
+| Gesture tracking (drag, swipe) | Max performance (no JS) | |
 
 ---
 
@@ -162,21 +136,65 @@ element.animate(
 | Spring (snappy) | Auto | `{ type: "spring", stiffness: 700, damping: 30 }` |
 | Spring (smooth) | Auto | `{ type: "spring", stiffness: 200, damping: 30 }` |
 
-**Never exceed 700ms for UI animations.** Users perceive it as sluggish. For loading states, loops are acceptable.
-
----
+Never exceed 700ms for UI animations.
 
 ## Easing Tokens
 
-Define once, use everywhere:
-
 ```css
 :root {
-  --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);   /* entrances */
-  --ease-in: cubic-bezier(0.55, 0.085, 0.68, 0.53);    /* exits */
-  --ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1); /* page transitions */
-  --ease-snappy: cubic-bezier(0.2, 0, 0, 1);           /* UI interactions */
+  --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-in: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  --ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+  --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
 }
+```
+
+---
+
+## Quick-Start Cheatsheet
+
+**CSS hover:** `.card { transition: transform 150ms ease-out; } .card:hover { transform: scale(1.03); }`
+
+**Fade-in on mount:**
+```tsx
+<motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }} />
+```
+
+**AnimatePresence exit:**
+```tsx
+<AnimatePresence>
+  {visible && <motion.div exit={{ opacity: 0, y: -8 }}>...</motion.div>}
+</AnimatePresence>
+```
+
+**CSS spinner:**
+```css
+@keyframes spin { to { transform: rotate(360deg); } }
+.spinner { width: 24px; height: 24px; border: 3px solid currentColor;
+  border-top-color: transparent; border-radius: 50%;
+  animation: spin 0.7s linear infinite; }
+```
+
+**Scroll progress:** `animation: grow linear both; animation-timeline: scroll(root);`
+
+**staggerChildren:**
+```tsx
+const list = { visible: { transition: { staggerChildren: 0.08 } } };
+const item = { hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0 } };
+<motion.ul variants={list} initial="hidden" animate="visible">
+  {items.map(i => <motion.li key={i} variants={item} />)}
+</motion.ul>
+```
+
+**layoutId tab indicator:**
+```tsx
+{tabs.map(t => (
+  <button key={t} onClick={() => setActive(t)}>
+    {t}
+    {active === t && <motion.div layoutId="tab-indicator" className="indicator" />}
+  </button>
+))}
 ```
 
 ---
@@ -184,11 +202,8 @@ Define once, use everywhere:
 ## Install
 
 ```bash
-# Framer Motion (React / Next.js)
-npm install framer-motion
-
-# GSAP (optional — only for complex multi-step timelines)
-npm install gsap
+npm install framer-motion    # React/Next.js
+npm install gsap             # Optional: complex multi-step timelines only
 ```
 
 CSS animations, View Transitions API, and scroll-driven animations require no installation.
@@ -197,18 +212,15 @@ CSS animations, View Transitions API, and scroll-driven animations require no in
 
 ## Reference Files
 
-Read the appropriate file for implementation details and code examples:
-
-- **[references/framer-motion.md](references/framer-motion.md)** — variants, AnimatePresence, layout prop, gestures, useMotionValue, useAnimation, SVG animations, text animations, spring configs, common mistakes
-- **[references/css-animations.md](references/css-animations.md)** — transitions, @keyframes, scroll-driven animations (animation-timeline), View Transitions API, will-change rules, browser support table
-- **[references/animation-patterns.md](references/animation-patterns.md)** — complete production-ready patterns: micro-interactions, entrance/exit animations, page transitions, scroll patterns, loading states, gesture patterns, layout transitions, anti-patterns checklist
-
-### When to read which file
-
-- **"I need a hover effect / spinner / skeleton"** → css-animations.md
-- **"I need a page transition"** → css-animations.md (View Transitions) or framer-motion.md (fallback)
-- **"I need to animate a React list / modal / dropdown"** → framer-motion.md (AnimatePresence)
-- **"I need scroll reveal without JS"** → css-animations.md (scroll-driven)
-- **"I need drag, swipe, or gesture"** → framer-motion.md (drag section)
-- **"I need a complete copy-paste pattern"** → animation-patterns.md
-- **"I need a tab indicator / accordion / sidebar"** → animation-patterns.md (Layout Transitions section)
+| Need | File |
+|------|------|
+| Hover/spinner/skeleton | [css-animations.md](references/css-animations.md) |
+| Page transition | [css-animations.md](references/css-animations.md) (View Transitions) or [framer-motion.md](references/framer-motion.md) |
+| React list/modal/dropdown animation | [framer-motion.md](references/framer-motion.md) (AnimatePresence) |
+| Scroll reveal without JS | [css-animations.md](references/css-animations.md) (scroll-driven) |
+| Drag, swipe, gesture | [framer-motion.md](references/framer-motion.md) |
+| Complete copy-paste pattern | [animation-patterns.md](references/animation-patterns.md) |
+| Tab indicator/accordion/sidebar | [animation-patterns.md](references/animation-patterns.md) |
+| ARIA, types, error boundary, ESLint | [accessibility-code.md](references/accessibility-code.md) |
+| Decision tree (standalone) | [decision-tree.md](references/decision-tree.md) |
+| Production examples | [examples.md](references/examples.md) |

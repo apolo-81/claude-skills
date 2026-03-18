@@ -12,83 +12,53 @@ description: >
 
 # Data Visualization Dashboard — React/Next.js
 
-## 1. Elegir la librería correcta
-
-### Decision Tree
+## 1. Decision Tree
 
 ```
-¿Necesitas algo completamente custom que las librerías no pueden hacer?
-├── YES → D3.js (curva alta, solo para casos extremos)
+¿Completamente custom que librerías no pueden hacer?
+├── YES → D3.js (solo casos extremos)
 └── NO →
     ¿Prototipo rápido / internal tool / admin panel?
-    ├── YES → Tremor o shadcn/ui Charts (cero config, Tailwind nativo)
+    ├── YES → Tremor o shadcn/ui Charts
     └── NO →
-        ¿Muchos datos (>10k puntos) o animaciones complejas?
-        ├── YES → Chart.js + react-chartjs-2 (canvas, mejor performance)
-        └── NO → Recharts (recomendado — composable, SVG, excelente DX)
+        ¿>10k puntos o animaciones complejas?
+        ├── YES → Chart.js + react-chartjs-2 (canvas)
+        └── NO → Recharts (recomendado)
 ```
 
-### Comparativa
-
-| | Recharts | Tremor | Chart.js | Nivo | D3 |
-|---|---|---|---|---|---|
-| DX | Excelente | Excelente | Bueno | Bueno | Difícil |
-| Tailwind | Manual | Nativo | Manual | No | No |
-| Performance | Buena | Buena | Excelente | Buena | Excelente |
-| Customización | Alta | Media | Alta | Alta | Total |
-| Bundle size | ~300kb | ~150kb | ~200kb | ~500kb | ~500kb |
-| Casos de uso | General | Prototipos | Big data | Viz complejas | Todo custom |
-
-**Regla:** Recharts o Tremor para el 90% de casos. D3 solo como último recurso.
+**Regla:** Recharts o Tremor para el 90% de casos.
 
 ---
 
-## 2. Setup Recharts (stack principal)
+## 2. Setup Recharts
 
 ```bash
 npm install recharts date-fns
-npm install @types/recharts  # Si TS lo pide
 ```
 
-**Regla crítica — Server vs Client Components:**
-- Todos los charts son siempre `'use client'` — necesitan DOM y `window` para el resize
-- Fetch los datos en un Server Component y pásalos como props al chart
+- Charts siempre `'use client'` (necesitan DOM + window)
+- Fetch datos en Server Component, pasar como props
+- Siempre envolver en `<ResponsiveContainer width="100%" height={300}>`
 
 ```typescript
-// app/dashboard/page.tsx — Server Component (fetch data aquí)
-import { SalesChart } from '@/components/charts/SalesChart'
-import { getMetrics } from '@/lib/data'
-
-export default async function DashboardPage() {
-  const metrics = await getMetrics() // fetch en server
-  return <SalesChart data={metrics} />
-}
-
-// components/charts/SalesChart.tsx — Client Component (chart aquí)
-'use client'
-import { LineChart, /* ... */ } from 'recharts'
-```
-
-**ResponsiveContainer — siempre envolver los charts:**
-```typescript
-<ResponsiveContainer width="100%" height={300}>
-  <LineChart data={data}>...</LineChart>
-</ResponsiveContainer>
+// Server Component fetches, Client Component renders
+// app/dashboard/page.tsx
+const metrics = await getMetrics()
+return <SalesChart data={metrics} />
 ```
 
 ---
 
-## 3. Charts más comunes
+## 3. Charts comunes
 
-Ver código completo y listo para copy-paste en `references/chart-components.md`.
+Ver codigo completo en `references/chart-components.md`.
 
 ### Line Chart — Time Series
-Para métricas a lo largo del tiempo (usuarios, revenue, ejecuciones de n8n, etc.).
-Soporte: múltiples líneas, tooltip custom con formato de fechas, línea punteada para período anterior.
+Para metricas en el tiempo. Soporte: multiples lineas, tooltip custom, linea punteada periodo anterior.
 
 ```typescript
 'use client'
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import { format } from 'date-fns'
 
 export function TimeSeriesChart({ data }: { data: Array<{ date: string; value: number }> }) {
@@ -106,36 +76,20 @@ export function TimeSeriesChart({ data }: { data: Array<{ date: string; value: n
 }
 ```
 
-### Bar Chart
-Vertical (comparación), Horizontal (rankings), Grouped y Stacked — ver `references/chart-components.md`.
-
-### Area Chart con Gradient
-Gradiente de transparencia hacia abajo, soporte stacked y múltiples áreas — ver `references/chart-components.md`.
-
-### Donut / Pie Chart
-Custom label de porcentaje, label central con total, versión simple sin label — ver `references/chart-components.md`.
+### Otros charts disponibles en `references/chart-components.md`:
+- Bar Chart (vertical, horizontal, grouped, stacked)
+- Area Chart con gradient
+- Donut/Pie Chart con label de %
 
 ---
 
-## 4. Metric Cards (sin librería)
+## 4. Metric Cards
 
-Ver componentes completos en `references/chart-components.md`:
-- `MetricCard`: número grande + TrendingUp/Down icon + sparkline con Recharts
-- `StatCard`: comparación con período anterior, delta percentage con colores verde/rojo y badge
-
-Skeleton de loading incluido en ambos componentes.
+Ver `references/chart-components.md` para componentes completos con skeleton.
 
 ```typescript
-// Uso rápido:
-<MetricCard
-  title="Revenue mensual"
-  value={48352}
-  prefix="$"
-  change={12.5}
-  trend="up"
-  sparklineData={[3200, 3800, 4100, 4700, 5200]}
-/>
-
+<MetricCard title="Revenue mensual" value={48352} prefix="$" change={12.5} trend="up"
+  sparklineData={[3200, 3800, 4100, 4700, 5200]} />
 <StatCard title="Errores" current={3} previous={8} invertColors />
 ```
 
@@ -143,96 +97,37 @@ Skeleton de loading incluido en ambos componentes.
 
 ## 5. Datos desde n8n
 
-### Patrón A — n8n escribe en Supabase, dashboard lee
+Ver `references/data-patterns.md` para implementaciones completas.
 
-```typescript
-// lib/data/n8n-metrics.ts
-import { createClient } from '@/lib/supabase/server'
+**Patron A — n8n escribe en Supabase, dashboard lee:** Server Component con `getWorkflowMetrics(days)`.
 
-export async function getWorkflowMetrics(days = 30) {
-  const supabase = createClient()
-  const since = new Date(Date.now() - days * 86400000).toISOString()
-
-  const { data } = await supabase
-    .from('workflow_runs')
-    .select('workflow_name, status, executed_at, duration_ms')
-    .gte('executed_at', since)
-    .order('executed_at', { ascending: true })
-
-  return data ?? []
-}
-
-export async function getWorkflowStats() {
-  const supabase = createClient()
-  const { data } = await supabase.rpc('get_workflow_stats') // SQL function de agregación
-  return data
-}
-```
-
-### Patrón B — Dashboard hace polling al webhook de n8n
-
-```typescript
-'use client'
-import useSWR from 'swr'
-
-const fetcher = (url: string) => fetch(url).then((r) => r.json())
-
-export function useN8nMetrics() {
-  const { data, error, isLoading } = useSWR(
-    '/api/n8n-metrics',
-    fetcher,
-    { refreshInterval: 30_000 }
-  )
-  return { metrics: data, error, isLoading }
-}
-
-// app/api/n8n-metrics/route.ts
-export async function GET() {
-  const res = await fetch(process.env.N8N_WEBHOOK_URL!, {
-    headers: { 'x-api-key': process.env.N8N_API_KEY! },
-    next: { revalidate: 0 },
-  })
-  const data = await res.json()
-  return Response.json(data)
-}
-```
+**Patron B — Dashboard polling a n8n:** SWR hook con `refreshInterval: 30_000` via API route proxy.
 
 ---
 
 ## 6. Dashboard Layout
 
-Ver layout completo con sidebar colapsable, TopBar con search y notificaciones en `references/dashboard-layouts.md`.
+Ver `references/dashboard-layouts.md` para layout completo con sidebar colapsable y TopBar.
 
 ```typescript
-// app/dashboard/layout.tsx — estructura base
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="flex min-h-screen bg-background">
-      <Sidebar />
-      <div className="flex flex-1 flex-col">
-        <TopBar />
-        <main className="flex-1 overflow-auto p-6 lg:p-8">{children}</main>
-      </div>
-    </div>
-  )
-}
-
-// Grid de métricas KPI — responsive
-<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-  <MetricCard title="Total ejecuciones" value={1284} change={12.5} trend="up" />
-  <MetricCard title="Tasa de éxito" value={98.2} suffix="%" change={0.3} trend="up" />
-  <MetricCard title="Tiempo promedio" value={1.4} suffix="s" change={-8.1} trend="up" />
-  <MetricCard title="Errores hoy" value={3} change={50} trend="down" />
+// Estructura base
+<div className="flex min-h-screen bg-background">
+  <Sidebar />
+  <div className="flex flex-1 flex-col">
+    <TopBar />
+    <main className="flex-1 overflow-auto p-6 lg:p-8">{children}</main>
+  </div>
 </div>
 
-// Layout de charts 2/3 + 1/3
+// Grid KPI responsive
+<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+  <MetricCard ... />
+</div>
+
+// Charts 2/3 + 1/3
 <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-3">
-  <div className="lg:col-span-2 rounded-xl border bg-card p-6">
-    <TimeSeriesChart data={timeSeriesData} />
-  </div>
-  <div className="rounded-xl border bg-card p-6">
-    <DonutChart data={byWorkflow} />
-  </div>
+  <div className="lg:col-span-2 rounded-xl border bg-card p-6"><TimeSeriesChart /></div>
+  <div className="rounded-xl border bg-card p-6"><DonutChart /></div>
 </div>
 ```
 
@@ -240,84 +135,51 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
 ## 7. Date Range Filter
 
-Filtra todos los charts via URL search params. Ver `references/dashboard-layouts.md` para implementación completa con `getDateRangeFromParam()` helper.
+Filtra charts via URL search params. Presets: 7d, 30d, 90d, ytd, 1y.
 
 ```typescript
-// Presets: 7d, 30d, 90d, ytd, 1y → guarda en ?range=30d
-// En la page (Server Component):
 const { range = '30d' } = await searchParams
 const { from, to } = getDateRangeFromParam(range)
 ```
 
-Tabla de datos con paginación client-side y hook `useDashboardData(range)` con SWR también en `references/dashboard-layouts.md`.
+Ver `references/dashboard-layouts.md` para `getDateRangeFromParam()`, `useDashboardData` hook y DataTable con paginacion.
 
 ---
 
 ## 8. Performance
 
-```typescript
-// Memoizar transformaciones de datos pesadas
-const chartData = useMemo(() => {
-  return rawData.map((d) => ({
-    date: format(new Date(d.date), 'yyyy-MM-dd'),
-    value: d.count,
-  }))
-}, [rawData])
+- `useMemo` para transformaciones de datos pesadas
+- Suspense boundaries por seccion con `<ChartSkeleton />`
+- Skeleton loaders durante fetch: `<div className="h-[300px] rounded-xl bg-muted animate-pulse" />`
+- Tablas grandes: `@tanstack/react-virtual`
 
-// Suspense boundaries por sección
-<Suspense fallback={<ChartSkeleton height={300} />}>
-  <AsyncMetricCard />
-</Suspense>
-
-// Skeleton loaders durante el fetch
-{isLoading ? (
-  <div className="h-[300px] rounded-xl bg-muted animate-pulse" />
-) : (
-  <TimeSeriesChart data={chartData} />
-)}
-
-// Tablas grandes: virtualización
-npm install @tanstack/react-virtual
-```
-
-Ver skeletons `ChartSkeleton` y `TableSkeleton` en `references/dashboard-layouts.md`.
+Ver skeletons en `references/dashboard-layouts.md`.
 
 ---
 
-## 9. Tremor — Alternativa rápida
+## 9. Tremor — Alternativa rapida
 
 ```bash
 npm install @tremor/react
 ```
 
-```typescript
-import { Card, Metric, Text, AreaChart, DonutChart, BadgeDelta } from '@tremor/react'
+Preferir Tremor cuando: prototipo rapido, internal tool, admin panel.
 
+```typescript
+import { Card, Metric, Text, AreaChart, BadgeDelta } from '@tremor/react'
 <Card>
   <Text>Total Revenue</Text>
   <Metric>$48,352</Metric>
   <BadgeDelta deltaType="increase">12.5%</BadgeDelta>
 </Card>
-
-<Card>
-  <AreaChart
-    data={chartData}
-    index="date"
-    categories={['value', 'previousValue']}
-    colors={['indigo', 'gray']}
-    yAxisWidth={48}
-  />
-</Card>
 ```
 
-Ver equivalentes Tremor completos para todos los charts en `references/chart-components.md`.
-
-Preferir Tremor cuando: prototipo rápido, internal tool, admin panel, cliente quiere algo funcional en horas.
+Ver equivalentes Tremor completos en `references/chart-components.md`.
 
 ---
 
 ## Referencias
 
-Ver archivos en `references/`:
-- `chart-components.md`: Código TSX completo listo para copy-paste (MultiLineChart, BarChart vertical/horizontal/grouped/stacked, GradientAreaChart, DonutChart/PieChart con label de %, MetricCard con sparkline, StatCard con delta, Tremor equivalents)
-- `dashboard-layouts.md`: Sidebar colapsable, TopBar, KPIGrid con Suspense, DateRangePicker, DataTable con paginación, skeletons, hook `useDashboardData`, API route de métricas
+- `references/chart-components.md` — Codigo TSX completo (todos los charts, MetricCard, StatCard, Tremor)
+- `references/dashboard-layouts.md` — Sidebar, TopBar, KPIGrid, DateRangePicker, DataTable, skeletons
+- `references/data-patterns.md` — Patrones Supabase + n8n para datos

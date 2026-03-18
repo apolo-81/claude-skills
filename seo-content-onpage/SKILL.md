@@ -23,214 +23,90 @@ allowed-tools:
 
 # Content Quality, E-E-A-T & On-Page SEO
 
-Evaluate content against Google's Quality Rater Guidelines and perform deep
-single-page SEO analysis with scored, prioritized recommendations.
+## E-E-A-T (Dec 2025 QRG Update)
 
-## E-E-A-T Framework (December 2025 QRG Update)
+Read `../seo-core/references/eeat-framework.md` for full criteria.
 
-Read `../seo-core/references/eeat-framework.md` for full evaluation criteria.
+**Critical:** Dec 2025 extended E-E-A-T to ALL competitive queries, not just YMYL.
 
-**Critical update:** Dec 2025 extended E-E-A-T to ALL competitive queries, not
-just YMYL. Any page in a crowded SERP is assessed for E-E-A-T signals.
-
-### Experience (first-hand signals)
-- Original research, surveys, proprietary data, case studies with real numbers
-- Before/after documentation; personal anecdotes with concrete details
-- Photos, screenshots, videos from actual use/experience
-
-### Expertise
-- Author bio with verifiable credentials relevant to topic
-- Technical depth appropriate for audience; accurate, well-sourced claims
-- Demonstrates awareness of edge cases and limitations
-
-### Authoritativeness
-- Backlinks from authoritative publications; brand mentions in respected outlets
-- Content cited by recognized experts; awards, certifications
-- Wikipedia article about brand or key people
-
-### Trustworthiness (most important dimension)
-- Clear contact info; privacy policy and terms linked from footer
-- Visible publication and last-updated dates; transparent corrections
-- Secure site (HTTPS); authorship transparency (real names)
+### Signals Checklist
+- **Experience:** Original research, case studies with real numbers, before/after docs, photos/screenshots from actual use
+- **Expertise:** Author bio with verifiable credentials, technical depth, awareness of edge cases
+- **Authoritativeness:** Backlinks from authoritative publications, expert citations, awards
+- **Trustworthiness (most important):** Clear contact info, privacy policy, pub/updated dates, HTTPS, real author names
 
 ## Content Metrics
 
-### Word Count (Topical Coverage Floors)
+### Word Count Floors
 
 | Page Type | Minimum | Notes |
 |-----------|---------|-------|
-| Homepage | 500 | Key value prop and service summary |
+| Homepage | 500 | Value prop + service summary |
 | Service page | 800 | Problem, solution, proof, CTA |
-| Blog post | 1,500 | Comprehensive topical coverage |
+| Blog post | 1,500 | Comprehensive coverage |
 | Product page | 300-400 | Description + specs + reviews |
-| Location page | 500-600 | Must be >60% unique vs other location pages |
-
-### Readability
-- Flesch Reading Ease 60-70 for general audiences; lower for technical B2B
-- Sentence length: avg 15-20 words; paragraphs: 2-4 sentences
-- NOT a direct ranking factor (confirmed by John Mueller)
+| Location page | 500-600 | >60% unique vs other locations |
 
 ### Keyword Optimization
 - Primary keyword in title, H1, first 100 words
 - Natural density 1-3%; semantic variations present
-- No keyword stuffing
 
 ### Content Structure
-- Logical heading hierarchy (one H1, H2 for sections, H3 for subsections)
-- Bullet/numbered lists; table of contents for >2,000 words
-- Answer-first formatting (inverted pyramid)
+- One H1, H2 sections, H3 subsections; no skipped levels
+- Lists, ToC for >2,000 words; answer-first (inverted pyramid)
 
 ### Internal Linking
-- 3-5 relevant internal links per 1,000 words
-- Descriptive anchor text (not "click here")
+- 3-5 relevant links per 1,000 words; descriptive anchors
 - No orphan pages; link within content clusters
-
-### External Linking
-- Cite primary sources: academic studies, official documentation
-- Open external links in new tab; reasonable count
 
 ## AI Content Assessment (2026)
 
-Google's quality raters formally assess AI content quality since Sept 2025 QRG.
-The question is not "is this AI-generated?" but "does it demonstrate genuine E-E-A-T?"
+Google QRG (Sept 2025) formally assesses AI content quality. Question is not "is this AI?" but "does it show genuine E-E-A-T?"
 
-**Acceptable:** Genuine E-E-A-T signals, unique value, human oversight, specific
-examples, clear author attribution.
+- **Acceptable:** E-E-A-T signals, unique value, human oversight, specific examples, author attribution
+- **Low-quality:** Generic phrasing, no original insight, repetitive structure, no attribution, factual errors
 
-**Low-quality markers:** Generic phrasing, no original insight, repetitive
-structure across pages, no attribution, factual inaccuracies, excessive hedging.
+## AI Citation Readiness
 
-## AI Citation Readiness (GEO Signals)
+See `references/ai-citation.md` for passage-level citability scoring and platform-specific preferences.
 
-### Passage-Level Citability
-Optimal zone: **134-167 words** per self-contained answer block.
-
-| Signal | Description |
-|--------|-------------|
-| Self-contained | Understandable without reading rest of page |
-| Direct answer | Answer in first 2 sentences |
-| Specific facts | Statistics, dates, proper nouns, numbers |
-| Attribution | Claims linked to named sources |
-| Quotable sentence | One sentence cleanly states key point |
-
-Score 4+ on all = highly citable. Below 3 on "direct answer" = flag for rewrite.
-
-### Structural Signals for AI Citation
-- Question-based H2/H3 headings ("What is X?" "How does Y work?")
-- Definition patterns: "X is..." in first sentence
-- Tables for comparative data; numbered lists for steps
-- Statistic + source in same sentence
-
-### Platform-Specific Citation Preferences
-
-| Platform | Prioritizes |
-|----------|------------|
-| Google AI Overviews | Top-10 ranking pages, passage relevance, schema |
-| ChatGPT | Wikipedia, authoritative sources, freshness |
-| Perplexity | Reddit, Wikipedia, original research |
-| Claude | Authoritative sources, specific facts, clear attribution |
-| Bing Copilot | Bing index, news sources, IndexNow |
+Key: **134-167 word** self-contained answer blocks. Direct answer first, specific facts, named sources, quotable sentence.
 
 ---
 
-## Single Page Analysis Framework
+## Single Page Analysis
 
-### Pre-Analysis: Gather Context
-- Target keyword(s), current ranking, page type, audience
-- If not provided, infer from content and confirm with user
+### Pre-Analysis
+Gather: target keyword(s), current ranking, page type, audience. Infer from content if not provided.
 
-### Category 1: On-Page SEO Elements (25 points)
+### Scoring Model
+See `references/scoring-model.md` for full point breakdown per category.
 
-**Title Tag (8 pts):** 50-60 chars, primary keyword near start, unique, brand included.
-Front-load keyword; use numbers and power words for CTR.
-
-**Meta Description (5 pts):** 150-160 chars, compelling, keyword + CTA.
-Write as mini-ad; Google bolds matching keywords.
-
-**H1 Tag (5 pts):** Exactly one, includes primary keyword, under 70 chars.
-Related to but not identical to title tag.
-
-**Heading Hierarchy (4 pts):** Logical H1>H2>H3, no skipped levels, descriptive.
-
-**URL Structure (3 pts):** Short, descriptive, hyphenated, keyword included.
-
-### Category 2: Content Quality (30 points)
-
-**Word Count (6 pts):** Compare against top 3 ranking pages for target keyword.
-
-**Keyword Usage (6 pts):** Primary in title/H1/first 100 words; density 1-3%;
-semantic variations; secondary keywords in H2s.
-
-**Content Depth (8 pts):** Covers all subtopics competitors cover; unique angles;
-answers follow-up questions; specific examples and data.
-
-**Readability (4 pts):** Flesch 60-70; sentences <20 words; paragraphs 3-4 sentences.
-
-**E-E-A-T Signals (6 pts):** Experience 1.5pt, Expertise 1.5pt, Authority 1.5pt,
-Trust 1.5pt.
-
-### Category 3: Technical Page Elements (25 points)
-
-**Canonical Tag (6 pts):** Self-referencing, consistent www/protocol/slash.
-
-**Meta Robots (4 pts):** index,follow (or absent = default). Flag noindex on
-pages meant to rank as Critical.
-
-**Open Graph (4 pts):** og:title, og:description, og:image (1200x630+), og:url, og:type.
-
-**Page Speed Signals (6 pts):** LCP risk (hero image), INP risk (JS bundles),
-CLS risk (missing dimensions), render-blocking resources.
-
-**Internal Links (3 pts):** 3-5 relevant links out; 1-2 pages linking in;
-descriptive anchors.
-
-**External Links (2 pts):** Links to authoritative sources for claims.
-
-### Category 4: Schema Markup (10 points)
-See `seo-assets` skill for full schema workflow.
-
-### Category 5: Images (10 points)
-See `seo-assets` skill for image analysis.
-
-## Scoring Model
-
-```
-Overall Score: XX/100
-On-Page SEO:     XX/25
-Content Quality: XX/30
-Technical:       XX/25
-Schema:          XX/10
-Images:          XX/10
-```
+| Category | Points |
+|----------|--------|
+| On-Page SEO Elements | /25 |
+| Content Quality | /30 |
+| Technical Page Elements | /25 |
+| Schema Markup | /10 |
+| Images | /10 |
+| **Total** | **/100** |
 
 90-100: Excellent | 75-89: Good | 60-74: Fair | 45-59: Poor | <45: Critical
 
-## Quick Win vs Long Game
-
-**Quick Wins (2-4 weeks):**
-- Fix noindex on ranking pages; add fetchpriority to LCP image
-- Update title tags with keyword front-loaded; add missing alt text
-- Fix canonical inconsistencies; update meta descriptions on top 10 pages
-
-**Long Game (3-6+ months):**
-- Content depth expansion; E-E-A-T signal building
-- Internal link equity restructure; schema implementation
-- Core Web Vitals optimization
+## Quick Wins vs Long Game
+- **2-4 weeks:** Fix noindex on ranking pages, fetchpriority on LCP image, front-load keywords in titles, add missing alt text, fix canonical inconsistencies, update meta descriptions on top 10
+- **3-6+ months:** Content depth expansion, E-E-A-T building, internal link restructure, schema implementation, CWV optimization
 
 ## Content Freshness
-
-- Publication date visible (ISO 8601 in structured data)
-- Last updated date if substantively revised
+- Visible pub date (ISO 8601 in structured data) + last updated date
 - Flag content >12 months old on fast-moving topics
-- Annual review recommended even for evergreen content
+- Annual review for evergreen content
 
-## Output Format
-
-### PAGE-ANALYSIS.md
-1. Page Score Card with visual bars
-2. Executive Summary (3-5 sentences): what works, biggest barrier, highest-impact action
-3. Issues Found (Critical / High / Medium / Low)
+## Output: PAGE-ANALYSIS.md
+1. Page Score Card
+2. Executive Summary (what works, biggest barrier, highest-impact action)
+3. Issues (Critical / High / Medium / Low)
 4. Recommendations Table (Priority, Element, Current, Target, Impact)
-5. Schema Opportunities (JSON-LD code blocks)
-6. Quick Win Action Plan (top 5 by impact-to-effort)
+5. Schema Opportunities (JSON-LD blocks)
+6. Quick Win Action Plan (top 5)
 7. Competitive Gap Summary (if target keyword known)

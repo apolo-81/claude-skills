@@ -9,116 +9,100 @@ description: >
   "write copy for my homepage", "audit my competitor".
 ---
 
-# AI Marketing Suite — Main Orchestrator
-
-You are a comprehensive AI marketing analysis and content generation system for Claude Code. You help entrepreneurs, agency builders, and solopreneurs analyze websites, generate marketing content, audit funnels, create client proposals, and build marketing strategies — all from the command line.
+# AI Marketing Suite -- Main Orchestrator
 
 ## Quick Start
 
 ```
-/market audit <url>       → Full marketing audit with score (flagship)
-/market quick <url>       → 60-second snapshot, no subagents
-/market copy <url>        → Analyze and rewrite website copy
-/market landing <url>     → Landing page CRO teardown
-/market competitors <url> → Competitive intelligence report
+/market audit <url>       -> Full marketing audit with score (flagship)
+/market quick <url>       -> 60-second snapshot, no subagents
+/market copy <url>        -> Analyze and rewrite website copy
+/market landing <url>     -> Landing page CRO teardown
+/market competitors <url> -> Competitive intelligence report
 ```
 
 ## Command Reference
 
-| Command | Description | Output |
-|---------|-------------|--------|
-| `/market audit <url>` | Full marketing audit (parallel subagents) | MARKETING-AUDIT.md |
-| `/market quick <url>` | 60-second marketing snapshot | Terminal output |
-| `/market copy <url>` | Generate optimized copy for any page | Terminal + COPY-SUGGESTIONS.md |
-| `/market emails <topic/url>` | Generate email sequences | EMAIL-SEQUENCES.md |
-| `/market social <topic/url>` | Generate social media content calendar | SOCIAL-CALENDAR.md |
-| `/market ads <url>` | Generate ad creative and copy | AD-CAMPAIGNS.md |
-| `/market funnel <url>` | Analyze and optimize sales funnel | FUNNEL-ANALYSIS.md |
-| `/market competitors <url>` | Competitive intelligence analysis | COMPETITOR-REPORT.md |
-| `/market landing <url>` | Landing page CRO analysis | LANDING-CRO.md |
-| `/market launch <product>` | Generate launch playbook | LAUNCH-PLAYBOOK.md |
-| `/market proposal <client>` | Generate client proposal | CLIENT-PROPOSAL.md |
-| `/market report <url>` | Generate marketing report (Markdown) | MARKETING-REPORT.md |
-| `/market report-pdf <url>` | Generate marketing report (PDF) | MARKETING-REPORT.pdf |
-| `/market seo <url>` | SEO content audit | SEO-AUDIT.md |
-| `/market brand <url>` | Brand voice analysis and guidelines | BRAND-VOICE.md |
+| Command | Output |
+|---------|--------|
+| `/market audit <url>` | MARKETING-AUDIT.md |
+| `/market quick <url>` | Terminal output |
+| `/market copy <url>` | COPY-SUGGESTIONS.md |
+| `/market emails <topic/url>` | EMAIL-SEQUENCES.md |
+| `/market social <topic/url>` | SOCIAL-CALENDAR.md |
+| `/market ads <url>` | AD-CAMPAIGNS.md |
+| `/market funnel <url>` | FUNNEL-ANALYSIS.md |
+| `/market competitors <url>` | COMPETITOR-REPORT.md |
+| `/market landing <url>` | LANDING-CRO.md |
+| `/market launch <product>` | LAUNCH-PLAYBOOK.md |
+| `/market proposal <client>` | CLIENT-PROPOSAL.md |
+| `/market report <url>` | MARKETING-REPORT.md |
+| `/market report-pdf <url>` | MARKETING-REPORT.pdf |
+| `/market seo <url>` | SEO-AUDIT.md |
+| `/market brand <url>` | BRAND-VOICE.md |
 
 ## Routing Logic
 
-When the user invokes `/market <command>`, route to the appropriate sub-skill:
-
 ### Full Marketing Audit (`/market audit <url>`)
 
-This is the flagship command. It launches **5 parallel subagents** to analyze the website simultaneously, producing the most comprehensive deliverable in the suite:
+Flagship command. Launches **5 parallel subagents:**
+1. **market-content** -> Content quality, messaging, copy
+2. **market-conversion** -> CRO, funnels, landing pages, signup flows
+3. **market-competitive** -> Competitive positioning, market landscape
+4. **market-technical** -> Technical SEO, site architecture, page speed
+5. **market-strategy** -> Overall strategy, pricing, growth opportunities
 
-1. **market-content** agent → Content quality, messaging, copy effectiveness
-2. **market-conversion** agent → CRO, funnels, landing pages, signup flows
-3. **market-competitive** agent → Competitive positioning, market landscape
-4. **market-technical** agent → Technical SEO, site architecture, page speed
-5. **market-strategy** agent → Overall strategy, pricing, growth opportunities
+**Scoring (Marketing Score 0-100):**
 
-**Scoring Methodology (Marketing Score 0-100):**
+| Category | Weight |
+|----------|--------|
+| Content & Messaging | 25% |
+| Conversion Optimization | 20% |
+| SEO & Discoverability | 20% |
+| Competitive Positioning | 15% |
+| Brand & Trust | 10% |
+| Growth & Strategy | 10% |
 
-| Category | Weight | What It Measures |
-|----------|--------|------------------|
-| Content & Messaging | 25% | Copy quality, value props, clarity, persuasion |
-| Conversion Optimization | 20% | CTAs, forms, friction, social proof, urgency |
-| SEO & Discoverability | 20% | On-page SEO, technical SEO, content structure |
-| Competitive Positioning | 15% | Differentiation, market awareness, alternatives pages |
-| Brand & Trust | 10% | Brand consistency, trust signals, social proof |
-| Growth & Strategy | 10% | Pricing, referral, retention, expansion opportunities |
-
-**Composite Marketing Score** = Weighted average of all 6 categories
+**Composite Marketing Score** = Weighted average of all 6 categories.
 
 ### Quick Snapshot (`/market quick <url>`)
 
-Fast 60-second assessment. Do NOT launch subagents. Instead:
-1. Fetch the homepage using WebFetch
-2. Evaluate: headline clarity, CTA strength, value proposition, trust signals, mobile readiness
-3. Output a quick scorecard with top 3 wins and top 3 fixes
-4. Keep output under 30 lines
+Fast 60-second assessment. NO subagents. Fetch homepage with WebFetch, evaluate: headline clarity, CTA strength, value proposition, trust signals, mobile readiness. Output quick scorecard with top 3 wins and top 3 fixes. Keep under 30 lines.
 
 ### Individual Commands
 
-For all other commands (`/market copy`, `/market emails`, etc.), route to the corresponding sub-skill at `skills/market-<command>/SKILL.md`.
+Route `/market <command>` to `skills/market-<command>/SKILL.md`.
 
 ## Business Context Detection
 
-Before running any analysis, detect the business type. This shapes the entire analysis focus:
+Detect before any analysis -- shapes the entire focus:
 
-| Type | Detection Signals | Analysis Focus |
-|------|-------------------|----------------|
-| **SaaS/Software** | Free trial CTA, pricing tiers, feature pages, login link, API docs | Trial-to-paid conversion, onboarding, feature differentiation, churn |
-| **E-commerce** | Product listings, cart, checkout, categories, reviews | Product pages, cart abandonment, upsells, AOV optimization |
-| **Agency/Services** | Case studies, portfolio, "work with us", testimonials, contact | Trust signals, case studies, positioning, lead qualification |
-| **Local Business** | Address, phone, hours, maps embed | Local SEO, Google Business Profile, reviews, NAP consistency |
-| **Creator/Course** | Lead magnets, email capture, course listings, community | Email capture rate, funnel design, testimonials, content quality |
-| **Marketplace** | Two-sided messaging, buyer/seller flows, listing pages | Supply/demand balance, trust mechanisms, network effects |
+| Type | Detection Signals | Focus |
+|------|-------------------|-------|
+| **SaaS** | Free trial, pricing tiers, login, API docs | Trial-to-paid, onboarding, churn |
+| **E-commerce** | Product listings, cart, checkout | Product pages, cart abandonment, AOV |
+| **Agency/Services** | Case studies, portfolio, "work with us" | Trust, positioning, lead qualification |
+| **Local Business** | Address, phone, hours, maps | Local SEO, GBP, reviews, NAP |
+| **Creator/Course** | Lead magnets, email capture, courses | Capture rate, funnel, content quality |
+| **Marketplace** | Two-sided messaging, buyer/seller flows | Supply/demand, trust, network effects |
 
 ## Output Standards
 
-All outputs must follow these rules:
-
-1. **Actionable over theoretical** — Every recommendation must be specific enough to implement today
-2. **Prioritized** — Always rank by impact (High/Medium/Low) and effort
-3. **Revenue-focused** — Connect every suggestion to a business outcome
-4. **Example-driven** — Include before/after copy examples, not just advice
-5. **Client-ready** — Reports must be presentable to clients without editing
+1. **Actionable over theoretical** -- specific enough to implement today
+2. **Prioritized** -- rank by impact (High/Medium/Low) and effort
+3. **Revenue-focused** -- connect every suggestion to business outcome
+4. **Example-driven** -- before/after copy examples, not just advice
+5. **Client-ready** -- presentable without editing
 
 ## File Output
 
-Save detailed outputs to markdown files in the current directory:
-- Use descriptive filenames: `MARKETING-AUDIT.md`, `COMPETITOR-REPORT.md`, etc.
-- Include the URL, date, and overall score at the top of every file
-- Structure with clear headers and tables
-- Include an executive summary in all client-facing reports
+Save to markdown in current directory. Include URL, date, and overall score at top. Use clear headers, tables, and executive summary in all client-facing reports.
 
 ## Cross-Skill Integration
 
-Many skills compound when used together:
-- `/market audit` calls all subagents → produces the most comprehensive analysis
-- `/market proposal` can reference audit results if `MARKETING-AUDIT.md` is present
+- `/market audit` calls all subagents for comprehensive analysis
+- `/market proposal` references audit results if `MARKETING-AUDIT.md` exists
 - `/market report` and `/market report-pdf` compile all available analysis data
-- `/market copy` uses brand voice guidelines if `BRAND-VOICE.md` was run first
-- `/market emails` deepens its sequences when `FUNNEL-ANALYSIS.md` is available
-- When relevant files exist in the working directory, always incorporate their findings
+- `/market copy` uses `BRAND-VOICE.md` if available
+- `/market emails` deepens sequences when `FUNNEL-ANALYSIS.md` exists
+- Always incorporate findings from existing files in working directory

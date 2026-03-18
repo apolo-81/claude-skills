@@ -24,18 +24,14 @@ allowed-tools:
 
 # SEO Assets — Schema, Sitemaps & Images
 
-Technical SEO assets: structured data markup, XML sitemaps, and image optimization.
-All three are "implementable assets" that directly enable rich results, crawl
-discovery, and performance improvements.
-
 ---
 
 ## Part 1: Schema Markup
 
 ### Detection
-1. Scan for JSON-LD: `<script type="application/ld+json">`
-2. Check Microdata: `itemscope`, `itemtype`, `itemprop`
-3. Check RDFa: `typeof`, `property`, `vocab`
+1. JSON-LD: `<script type="application/ld+json">`
+2. Microdata: `itemscope`, `itemtype`, `itemprop`
+3. RDFa: `typeof`, `property`, `vocab`
 4. Note delivery method (server-rendered vs JS-injected — JS faces delayed processing)
 
 ### Validation
@@ -45,168 +41,88 @@ discovery, and performance improvements.
 | Missing `@context` | Critical | Add `"@context": "https://schema.org"` |
 | Missing/invalid `@type` | Critical | Use exact Schema.org type name |
 | Relative URLs | High | Use absolute HTTPS URLs |
-| Invalid ISO 8601 date | High | Use `YYYY-MM-DD` format |
-| Deprecated type in use | Critical | Replace with active alternative |
-| `aggregateRating` with zero reviews | High | Minimum 1 review required |
-
-**Validation levels:** Valid > Recommended > Warning > Invalid
+| Invalid ISO 8601 date | High | Use `YYYY-MM-DD` |
+| Deprecated type | Critical | Replace with active alternative |
+| `aggregateRating` zero reviews | High | Minimum 1 review required |
 
 ### Schema Type Status (March 2026)
 
-**ACTIVE — Recommend freely:**
-Organization, LocalBusiness, Person, ProfilePage, Article, BlogPosting,
-NewsArticle, WebPage, WebSite, Product, ProductGroup, Offer, Service,
-VideoObject, ImageObject, Review, AggregateRating, BreadcrumbList,
-Event, JobPosting, Course, SoftwareApplication, DiscussionForumPosting
+**ACTIVE:** Organization, LocalBusiness, Person, ProfilePage, Article, BlogPosting, NewsArticle, WebPage, WebSite, Product, ProductGroup, Offer, Service, VideoObject, ImageObject, Review, AggregateRating, BreadcrumbList, Event, JobPosting, Course, SoftwareApplication, DiscussionForumPosting
 
-**RESTRICTED:** FAQ — ONLY for government/healthcare sites (Aug 2023)
+**RESTRICTED:** FAQ — ONLY government/healthcare (Aug 2023)
 
-**DEPRECATED — Never recommend:**
-HowTo (Sept 2023), SpecialAnnouncement (July 2025), CourseInfo/EstimatedSalary/
-LearningVideo/ClaimReview/VehicleListing (June 2025), Practice Problem/Dataset (late 2025)
+**DEPRECATED — Never recommend:** HowTo (Sept 2023), SpecialAnnouncement (July 2025), CourseInfo/EstimatedSalary/LearningVideo/ClaimReview/VehicleListing (June 2025), Practice Problem/Dataset (late 2025)
 
 See `../seo-core/references/schema-types.md` for full details.
 
 ### JSON-LD Templates
-
-Provide ready-to-use templates for: Product, Article/BlogPosting, LocalBusiness,
-Organization, BreadcrumbList, WebSite (Sitelinks Searchbox), SoftwareApplication.
-See `references/schema-templates.md` for all templates.
+See `references/schema-templates.md` for ready-to-use templates: Product, Article/BlogPosting, LocalBusiness, Organization, BreadcrumbList, WebSite, SoftwareApplication.
 
 ### Schema and AI Overviews
-- Organization + sameAs helps AI identify brand entity
-- Article + dateModified increases citation likelihood
-- Product + complete Offer enables product cards in AI responses
-- Person schema on author pages builds E-E-A-T signals
+- Organization + sameAs: AI brand entity identification
+- Article + dateModified: increases citation likelihood
+- Product + complete Offer: enables product cards in AI responses
+- Person schema on author pages: builds E-E-A-T signals
 
 ### Output: SCHEMA-RECOMMENDATIONS.md
-- Detection Results table
-- Validation Results table
-- Missing Opportunities with CTR impact
-- GSC Fix Priority table
-- generated-schema.json with placement instructions
+Detection results, validation results, missing opportunities with CTR impact, GSC fix priority, generated-schema.json with placement instructions.
 
 ---
 
 ## Part 2: Sitemaps
 
-### Understanding Sitemaps
-**DO:** Help Googlebot discover pages, signal importance, communicate freshness.
-**DON'T:** Guarantee indexing, improve rankings directly, override robots.txt.
-
-`<priority>` and `<changefreq>` are ignored by Google — omit them.
+`<priority>` and `<changefreq>` ignored by Google — omit them.
 
 ### Analyze Existing Sitemap
-
 **Locate:** `/sitemap.xml` > `/sitemap_index.xml` > robots.txt `Sitemap:` directive
 
-**Structural validation:**
-- Valid XML, correct namespace, <50,000 URLs/file, <50MB uncompressed
-- URL health: all return 200, no redirects, no noindexed pages, only canonical URLs
+**Validate:** Valid XML, correct namespace, <50,000 URLs/file, <50MB uncompressed. All URLs return 200, no redirects, no noindex, only canonical URLs.
 
-**Coverage analysis:** Compare sitemap vs crawled pages vs indexed pages.
+**Coverage:** Compare sitemap vs crawled vs indexed pages.
 
-**Pages to EXCLUDE:** Noindex pages, non-canonical pages, paginated pages (2+),
-filtered/faceted URLs, login pages, thin content (<300 words), parameter URLs,
-session ID URLs, admin/staging URLs.
+**Exclude:** Noindex, non-canonical, paginated (2+), filtered/faceted, login, thin (<300 words), parameter URLs, session IDs, admin/staging.
 
 ### Generate New Sitemap
 
-**By site scale:**
-- Small (<1,000 URLs): single sitemap.xml
-- Medium (1k-50k): single or split by type
-- Large (50k-500k): sitemap index with multiple files
-- Very large (>500k): sitemap index, split by section + date
+| Scale | Approach |
+|-------|----------|
+| <1,000 URLs | Single sitemap.xml |
+| 1k-50k | Single or split by type |
+| 50k-500k | Sitemap index, multiple files |
+| >500k | Sitemap index, split by section + date |
 
-**CMS-specific guides:**
-- WordPress: Yoast/Rank Math at `/sitemap_index.xml`
-- Webflow: built-in at `/sitemap.xml`
-- Next.js: `/app/sitemap.js` (App Router)
-- Shopify: built-in, includes product images
-- Static sites: Hugo, Jekyll, Eleventy plugins
+**CMS:** WordPress (Yoast/Rank Math), Webflow (built-in), Next.js (`/app/sitemap.js`), Shopify (built-in), static sites (Hugo/Jekyll/Eleventy plugins).
 
-**Quality gates before adding:** HTTP 200, not noindexed, canonical version,
-meaningful content, not blocked by robots.txt.
-
-**lastmod:** Must reflect actual last modification date. Never set today's date
-on all pages — Google detects and ignores.
+**lastmod:** Must reflect actual modification date. Never set today's date on all pages.
 
 ### Sitemap Formats
+- **Standard:** `<urlset>` with `<url><loc>` and `<lastmod>` only
+- **Index:** `<sitemapindex>` referencing multiple files
+- **Image:** `xmlns:image` namespace, up to 1,000 images per URL
+- **Video:** `xmlns:video` namespace, thumbnail/title/description required
 
-**Standard:** `<urlset>` with `<url><loc>` and `<lastmod>` only.
-**Sitemap Index:** `<sitemapindex>` referencing multiple sitemap files.
-**Image Sitemap:** `xmlns:image` namespace, up to 1,000 images per URL entry.
-**Video Sitemap:** `xmlns:video` namespace, thumbnail/title/description required.
-
-Always declare sitemaps in robots.txt: `Sitemap: https://example.com/sitemap.xml`
+Always declare in robots.txt: `Sitemap: https://example.com/sitemap.xml`
 
 ### Output: SITEMAP-VALIDATION-REPORT.md
-- Summary (URL, total URLs, 200 count, issues)
-- Issues table with severity and fix
-- Coverage gap analysis
-- Prioritized recommendations
+Summary, issues table with severity, coverage gap analysis, prioritized recommendations.
 
 ---
 
 ## Part 3: Image Optimization
 
-### Why Image SEO Matters
-- LCP most commonly caused by unoptimized hero image
-- Missing alt text = invisible to Google Images (5-10% of search traffic)
-- Oversized images = slow pages = lower rankings
-- Proper dimensions prevent CLS (layout shift ranking signal)
+See `references/image-optimization.md` for file size thresholds, format selection, LCP image rules, responsive images, lazy loading, CLS prevention, and AI citability.
 
 ### Analysis Checklist
-
-**1. Alt Text Quality**
-- Present on all non-decorative images; descriptive, contextual
-- Natural keyword integration; 10-125 characters
-- Decorative images: `alt=""` or `role="presentation"`
-
-**2. File Size Thresholds**
-
-| Category | Target | Warning | Critical |
-|----------|--------|---------|----------|
-| Thumbnails/icons | <30KB | >75KB | >150KB |
-| Content images | <100KB | >200KB | >500KB |
-| Hero/banner | <200KB | >350KB | >700KB |
-
-**3. Format Selection (2026)**
-- New deployments: AVIF first, WebP fallback, JPEG final — use `<picture>`
-- Modernization: JPEG/PNG to WebP (25-35% reduction)
-- Icons/logos: SVG always
-- Animated: convert GIFs >100KB to `<video autoplay loop muted playsinline>`
-
-**4. Responsive Images:** srcset with 2+ width descriptors; sizes matching breakpoints.
-
-**5. LCP Image (Critical):**
-```html
-<img src="hero.webp" fetchpriority="high" alt="..." width="1200" height="630">
-```
-- NEVER `loading="lazy"` on LCP image
-- NEVER `decoding="async"` on LCP image
-- Must be in initial HTML (not JS-loaded)
-
-**6. Lazy Loading:** `loading="lazy"` + `decoding="async"` on below-fold images only.
-First 2-3 images: never lazy-load.
-
-**7. CLS Prevention:** Set width/height on all `<img>` elements. Alternative: CSS `aspect-ratio`.
-
-**8. File Names:** Descriptive, hyphenated, lowercase, 1-2 keywords, <60 chars.
-
-**9. CDN:** Recommend for >50 images or global audience. Long cache TTLs (1 year).
-
-**10. ImageObject Schema:** For editorial/product/author photos — improves Google
-Images and AI visual search indexation.
-
-### Images and AI Search Citability
-- Write alt text for AI: name subject precisely, include context
-- For charts: describe key finding, not just "chart"
-- Add text summaries below infographics for AI systems
-- Keep images in initial HTML — AI crawlers may not execute JS
+1. **Alt text:** Present on all non-decorative images; descriptive, contextual; 10-125 chars; decorative = `alt=""`
+2. **File size:** Check against thresholds in reference file
+3. **Format:** AVIF > WebP > JPEG; SVG for icons; video for large GIFs
+4. **Responsive:** srcset with 2+ widths; sizes matching breakpoints
+5. **LCP image:** `fetchpriority="high"`, no lazy-load, no decoding="async", in initial HTML
+6. **Lazy loading:** `loading="lazy"` only on below-fold images
+7. **CLS:** width/height on all `<img>` or CSS `aspect-ratio`
+8. **File names:** Descriptive, hyphenated, lowercase, <60 chars
+9. **CDN:** Recommend for >50 images or global audience
+10. **ImageObject schema:** For editorial/product/author photos
 
 ### Output: IMAGE-OPTIMIZATION.md
-- Audit summary table (total images, missing alt, oversized, wrong format, etc.)
-- Prioritized optimization list sorted by impact
-- Recommendations (Critical > High > Medium > Low)
-- Ready-to-use corrected HTML snippets
+Audit summary table, prioritized optimization list, recommendations by severity, corrected HTML snippets.

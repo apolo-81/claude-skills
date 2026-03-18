@@ -540,3 +540,210 @@ Use CSS variables to create a design system for animation tokens. This enables t
 | View Transitions (cross-doc) | 126+ | Partial | 18+ | Needs `@view-transition` rule |
 | animation-timeline: scroll() | 115+ | 129+ | 18+ | Same as scroll-driven |
 | animation-timeline: view() | 115+ | 129+ | 18+ | Same as scroll-driven |
+
+---
+
+## GSAP (Complex Multi-Step Timelines)
+
+Use GSAP only when Framer Motion is insufficient — very complex multi-step sequences, precise timing control, or SVG morphing.
+
+```bash
+npm install gsap
+```
+
+### Core Timeline Pattern
+
+```js
+import { gsap } from "gsap";
+
+// Create a timeline — animations run in sequence by default
+const tl = gsap.timeline({ defaults: { ease: "power2.out", duration: 0.4 } });
+
+tl.from(".hero-title", { opacity: 0, y: 40 })
+  .from(".hero-subtitle", { opacity: 0, y: 20 }, "-=0.2")   // overlap 0.2s
+  .from(".hero-cta", { opacity: 0, scale: 0.9 }, "-=0.1")
+  .from(".hero-image", { opacity: 0, x: 60 }, "<");          // same time as previous
+```
+
+### fromTo (explicit start → end state)
+
+```js
+gsap.fromTo(
+  ".card",
+  { opacity: 0, scale: 0.8, rotateY: -15 },
+  { opacity: 1, scale: 1, rotateY: 0, duration: 0.5, ease: "back.out(1.7)" }
+);
+```
+
+### Stagger (multiple elements)
+
+```js
+gsap.from(".list-item", {
+  opacity: 0,
+  y: 30,
+  stagger: 0.08,         // 80ms between each item
+  duration: 0.4,
+  ease: "power2.out",
+  clearProps: "all",     // clean up inline styles after animation
+});
+```
+
+### ScrollTrigger (scroll-linked, GSAP plugin)
+
+```js
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.from(".section", {
+  opacity: 0,
+  y: 60,
+  scrollTrigger: {
+    trigger: ".section",
+    start: "top 80%",   // when top of element is 80% from top of viewport
+    end: "top 30%",
+    scrub: true,         // ties animation to scroll position
+  },
+});
+```
+
+### prefers-reduced-motion with GSAP
+
+```js
+// Check once and disable all GSAP animations
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+if (prefersReducedMotion) {
+  gsap.globalTimeline.timeScale(0); // pause all
+}
+
+// Or per-animation
+if (!prefersReducedMotion) {
+  gsap.from(".hero", { opacity: 0, y: 40, duration: 0.6 });
+}
+```
+
+### When to use GSAP vs Framer Motion
+
+| Need | Use |
+|------|-----|
+| Multi-step narrative sequences (5+ elements, precise timing) | GSAP timeline |
+| SVG path morphing, DrawSVG, MotionPath | GSAP plugins |
+| Scroll-linked scrubbing with fine control | GSAP ScrollTrigger |
+| React component mount/unmount | Framer Motion (GSAP can't animate unmount) |
+| Physics/spring animations | Framer Motion |
+| Simple entrance/exit | Framer Motion or CSS |
+
+---
+
+## Advanced Performance Patterns
+
+### CSS `contain` Property
+
+Use `contain` to limit browser reflow scope:
+
+```css
+/* Isolate animated sections from the rest of the layout */
+.animated-card {
+  contain: layout paint;  /* changes inside don't affect outside */
+}
+
+/* For absolutely positioned animated overlays */
+.toast-container {
+  contain: layout;
+}
+```
+
+### LCP / CLS Impact of Animations
+
+- **LCP risk**: Animating the largest contentful element (hero image, H1) delays LCP. Avoid `opacity: 0` initial state on LCP elements — use `visibility: hidden` briefly or delay animation until after LCP fires.
+- **CLS risk**: Avoid animating elements in the document flow via `height`, `margin`, `padding`. Use `transform` only. Absolutely-positioned or fixed elements never cause CLS.
+
+```tsx
+// ❌ WRONG — hero image starts invisible, delays LCP
+<motion.img src="/hero.jpg" initial={{ opacity: 0 }} animate={{ opacity: 1 }} />
+
+// ✅ CORRECT — load image visible, then animate a decorative overlay
+<img src="/hero.jpg" />  {/* LCP fires immediately */}
+<motion.div className="hero-overlay" initial={{ opacity: 1 }} animate={{ opacity: 0 }} />
+```
+
+### Memory Leak Prevention
+
+```tsx
+// Cancel animations on unmount to prevent memory leaks
+function useAnimationCleanup(ref: React.RefObject<HTMLElement>) {
+  useEffect(() => {
+    const el = ref.current;
+    return () => {
+      // Cancel all WAAPI animations on the element
+      el?.getAnimations().forEach((a) => a.cancel());
+    };
+  }, [ref]);
+}
+```
+
+---
+
+## Container Queries + Animation (2025+)
+
+Animate based on **container size** rather than viewport — essential for reusable components that live in multiple layout contexts.
+
+```css
+/* 1. Define a containment context */
+.card-wrapper {
+  container-type: inline-size;
+  container-name: card;
+}
+
+/* 2. Animate differently based on container width */
+@container card (min-width: 400px) {
+  .card-icon {
+    transition: transform 0.3s ease-out;
+  }
+  .card-icon:hover {
+    transform: scale(1.2) rotate(5deg);
+  }
+}
+
+@container card (max-width: 399px) {
+  /* Compact: simpler animation to avoid visual noise */
+  .card-icon {
+    transition: opacity 0.2s ease;
+  }
+  .card-icon:hover { opacity: 0.7; }
+}
+```
+
+### Container Query + @keyframes Skeleton Shimmer
+
+```css
+@container (min-width: 600px) {
+  @keyframes shimmer-wide {
+    0%   { background-position: -600px 0; }
+    100% { background-position:  600px 0; }
+  }
+  .skeleton { animation: shimmer-wide 1.5s infinite linear; }
+}
+@container (max-width: 599px) {
+  @keyframes shimmer-narrow {
+    0%   { background-position: -300px 0; }
+    100% { background-position:  300px 0; }
+  }
+  .skeleton { animation: shimmer-narrow 1.2s infinite linear; }
+}
+```
+
+**Key rules:**
+- `container-type: inline-size` enables `@container` width queries (most common)
+- `container-type: size` only if you need height queries (rare)
+- Always pair with `prefers-reduced-motion`:
+
+```css
+@container card (min-width: 400px) {
+  @media (prefers-reduced-motion: no-preference) {
+    .card-icon { transition: transform 0.3s ease-out; }
+    .card-icon:hover { transform: scale(1.2); }
+  }
+}
+```
+
+**When to use**: Component-driven responsive motion, sidebar/panel widgets, design-system card variants. Container queries decouple animation from global breakpoints.
