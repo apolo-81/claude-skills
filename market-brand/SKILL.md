@@ -1,11 +1,10 @@
 ---
 name: market-brand
 description: >
-  Brand voice analysis and guidelines generation. Triggers: "brand voice",
-  "brand identity", "brand guidelines", "tono de marca", "cómo suena mi marca",
-  "estilo de comunicación", "branding", "rebranding", "messaging framework",
-  "copywriting guidelines", "how should my brand sound", "brand consistency",
-  "quiero definir el tono de mi empresa". Produces BRAND-VOICE.md.
+  Análisis y generación de voz de marca, tono e identidad comunicacional.
+  Usar cuando: "voz de marca", "tono de marca", "brand guidelines", "branding",
+  "rebranding", "cómo suena mi marca", "estilo de comunicación",
+  "quiero definir el tono de mi empresa". Genera BRAND-VOICE.md.
 ---
 
 # Brand Voice Analysis and Guidelines Generation

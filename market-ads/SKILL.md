@@ -1,11 +1,10 @@
 ---
 name: market-ads
 description: >
-  Multi-platform ad campaign generation (Google, Meta, LinkedIn, TikTok).
-  Triggers: "create ads", "ad copy", "Google Ads", "Meta Ads", "Facebook ads",
-  "PPC", "SEM", "paid social", "performance marketing", "ad creative",
-  "campaign structure", "targeting strategy", "ROAS", "budget allocation",
-  "anuncios para mi producto", "quiero hacer ads". Produces AD-CAMPAIGNS.md.
+  Genera campañas de anuncios para Google, Meta, LinkedIn y TikTok.
+  Usar cuando: "crear anuncios", "Google Ads", "Meta Ads", "Facebook Ads",
+  "PPC", "paid social", "copy para ads", "estructura de campaña",
+  "ROAS", "presupuesto de ads", "quiero hacer ads". Genera AD-CAMPAIGNS.md.
 ---
 
 # Ad Creative & Copy Generation

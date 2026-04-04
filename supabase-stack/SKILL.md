@@ -1,13 +1,10 @@
 ---
 name: supabase-stack
 description: >
-  Use when building web apps that need a backend without a custom server: auth,
-  database, storage, real-time, or edge functions. Trigger when user mentions
-  Supabase, needs login/signup, user authentication, database for web app,
-  file uploads, real-time updates, or wants a full-stack app without backend code.
-  Also trigger for: "quiero guardar datos de usuarios", "necesito una base de datos
-  para mi app", "auth para mi next.js", "registro de usuarios", row-level security,
-  PostgreSQL for web app, Supabase Storage, Supabase Realtime, Edge Functions.
+  Construye apps con Supabase: auth, PostgreSQL, storage, realtime y edge functions.
+  Stack: Next.js 15 App Router + TypeScript + Tailwind + Supabase v2.
+  Usar cuando: "Supabase", "auth", "login/signup", "RLS", "row-level security",
+  "realtime", "file upload", "edge functions", "full-stack sin backend custom".
 ---
 
 # Supabase Stack — Next.js App Router

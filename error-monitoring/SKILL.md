@@ -1,15 +1,10 @@
 ---
 name: error-monitoring
 description: >
-  Use when setting up error tracking, handling errors gracefully, implementing
-  error boundaries, or adding logging to a Next.js app. Trigger for: "Sentry",
-  "error tracking", "error monitoring", "crash reporting", "error boundary",
-  "ErrorBoundary", "logging", "logs", "logger", "structured logging",
-  "manejo de errores", "capturar errores", "errores en producción", "bug tracking",
-  "exception handling", "try catch", "error en producción", "debug en producción",
-  "alertas de errores", "monitoring", "observabilidad", "observability",
-  "toast de error", "feedback de error al usuario", "fallback UI",
-  "graceful degradation", "error page", "500 page", "not-found page".
+  Monitoreo de errores, logging estructurado y error boundaries en Next.js.
+  Stack: Sentry + structured logging + fallback UI.
+  Usar cuando: "Sentry", "error tracking", "errores en producción", "error boundary",
+  "logging", "observabilidad", "graceful degradation", "página de error", "500 page".
 ---
 
 # Error Monitoring — Next.js 15 App Router

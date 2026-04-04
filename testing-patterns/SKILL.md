@@ -1,14 +1,9 @@
 ---
 name: testing-patterns
 description: >
-  Use when writing tests, setting up a testing framework, implementing unit tests,
-  integration tests, or E2E tests for a Next.js app. Trigger for: "tests", "testing",
-  "unit test", "integration test", "E2E test", "Vitest", "Playwright", "Jest",
-  "Testing Library", "test coverage", "TDD", "escribir tests", "pruebas unitarias",
-  "pruebas de integración", "pruebas E2E", "pruebas automáticas", "CI testing",
-  "mock Supabase", "mock fetch", "test Server Components", "test Server Actions",
-  "test API routes", "snapshot test", "assertion", "expect", "describe", "it",
-  "beforeEach", "afterEach", "test setup", "test environment", "msw", "mock service worker".
+  Tests en Next.js: unit, integración y E2E. Stack: Vitest + Testing Library + Playwright.
+  Usar cuando: "tests", "pruebas unitarias", "pruebas E2E", "Vitest", "Playwright",
+  "TDD", "test coverage", "mock Supabase", "test Server Actions", "CI testing".
 ---
 
 # Testing Patterns — Next.js 15 App Router

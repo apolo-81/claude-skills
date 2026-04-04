@@ -1,15 +1,11 @@
 ---
 name: seo-international
 description: >
-  International and local SEO: hreflang audit/validation/generation for multi-language
-  and multi-region sites, plus AI search optimization (GEO) for AI Overviews, ChatGPT,
-  Perplexity, Claude, and Bing Copilot. Covers language/region codes, return tags,
-  x-default, cross-domain hreflang, sitemap-based implementation, llms.txt, RSL 1.0,
-  brand mention signals, AI crawler accessibility, and platform-specific citation
-  strategies. Trigger when user says: "hreflang", "international SEO", "multi-language",
-  "multi-region", "wrong country in search results", "x-default", "geo-targeting",
-  "ccTLD", "subdirectory by language", "AI Overviews", "GEO", "AI search",
-  "LLM optimization", "Perplexity", "AI citations", "ChatGPT search", "llms.txt",
+  SEO internacional y local: hreflang, sitios multi-idioma/región, GEO (visibilidad en
+  AI Overviews, ChatGPT, Perplexity, Claude). Cubre x-default, ccTLD, llms.txt, RSL 1.0.
+  Usar cuando: "hreflang", "SEO internacional", "multi-idioma", "multi-región",
+  "geo-targeting", "llms.txt", "AI search", "GEO", "aparecer en ChatGPT/Perplexity",
+  "citas en IA", "país incorrecto en resultados", "x-default".
   "AI visibility", "generative engine optimization", "AI Mode", "cited by AI",
   "zero-click AI results", "AI search traffic", "local SEO", "Google Business Profile".
 allowed-tools:

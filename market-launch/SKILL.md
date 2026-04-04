@@ -1,11 +1,10 @@
 ---
 name: market-launch
 description: >
-  Product/service launch playbook with week-by-week timeline. Triggers:
-  "launch plan", "go-to-market", "GTM", "product launch", "launch strategy",
-  "voy a lanzar", "estrategia de lanzamiento", "launch playbook",
-  "pre-launch checklist", "lanzamiento de producto", "launch campaign",
-  "cómo lanzo mi producto". Produces LAUNCH-PLAYBOOK.md.
+  Playbook de lanzamiento semana a semana para productos o servicios.
+  Usar cuando: "plan de lanzamiento", "go-to-market", "GTM", "voy a lanzar",
+  "estrategia de lanzamiento", "pre-launch checklist", "cómo lanzo mi producto",
+  "launch campaign". Genera LAUNCH-PLAYBOOK.md.
 ---
 
 # Product/Service Launch Playbook Generator

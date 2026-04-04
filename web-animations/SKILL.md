@@ -1,6 +1,10 @@
 ---
 name: web-animations
-description: Use when implementing animations, transitions, or any motion effect in a web app. Trigger on: "animaciones web", "transitions", "micro-interactions", "hover effects", "page transitions", "scroll animations", "loading animations", "CSS animations", "Framer Motion", "motion design", "animated UI", "entrance animations", "skeleton loading", "exit animations", "fade in", "slide up", "parallax", "staggered list", "spinner", "animated counter", "drag", "swipe", "gesture", "layout animation", "reorderable", "accordion animation", "sidebar animation", "tab indicator", "view transitions", "scroll-driven", "prefers-reduced-motion", "60fps", "performance animation", "GSAP", "WAAPI". Activate even without an explicit slash command — if a UI element needs motion, use this skill.
+description: >
+  Implementa animaciones, transiciones y efectos de movimiento en apps web (React/Next.js).
+  Usar cuando: "animación", "transición", "Framer Motion", "micro-interacción",
+  "skeleton loading", "scroll animation", "page transition", "drag", "swipe",
+  "spinner", "fade in", "GSAP", "prefers-reduced-motion", "motion design".
 ---
 
 # Web Animations

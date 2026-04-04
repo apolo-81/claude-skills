@@ -1,11 +1,9 @@
 ---
 name: market-report-pdf
 description: >
-  PDF marketing report with charts, score gauges, and visual tables. Triggers:
-  "PDF report", "reporte PDF", "client-ready report", "polished report",
-  "reporte con gráficos", "informe profesional", "deliverable para cliente",
-  "reporte ejecutivo", "branded report", "reporte con visualizaciones".
-  Produces MARKETING-REPORT-<domain>.pdf.
+  Reporte de marketing en PDF con gráficos, gauges y tablas visuales para entregar a clientes.
+  Usar cuando: "reporte PDF", "reporte para cliente", "informe profesional con gráficos",
+  "reporte ejecutivo", "deliverable visual", "reporte branded". Genera MARKETING-REPORT.pdf.
 ---
 
 # PDF Marketing Report Generator

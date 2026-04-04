@@ -1,11 +1,10 @@
 ---
 name: n8n-ai-agents
 description: >
-  AI agents in n8n with Claude, OpenAI, or LangChain. Triggers: "n8n AI",
-  "n8n agent", "n8n Claude", "n8n OpenAI", "n8n LangChain", "AI agent n8n",
-  "automatización con IA", "n8n tools agent", "n8n + GPT", "RAG en n8n",
-  "n8n vector store", "n8n memory", "n8n AI workflow", "n8n summarize",
-  "n8n extract data", "n8n classify", "n8n prompt".
+  Construye agentes IA en n8n con Claude, OpenAI o LangChain.
+  Usar cuando: "n8n AI", "n8n agent", "n8n Claude", "agente n8n",
+  "automatización con IA", "RAG en n8n", "n8n vector store",
+  "n8n memory", "clasificar con IA", "extraer datos con IA", "n8n + GPT".
 ---
 
 # n8n AI Agents
@@ -83,7 +82,7 @@ User: {{ $json.message }}
 
 ## 5. AI Agent — Agentes con Tools
 
-**Chat Model:** Claude claude-sonnet-4-6 (necesita tool use)
+**Chat Model:** `claude-sonnet-4-6` (necesita tool use)
 
 **Tools disponibles:** HTTP Request Tool, Code Tool, Supabase/PostgreSQL Tool, Calculator, Custom HTTP APIs.
 
@@ -125,7 +124,7 @@ Ver `references/agent-patterns.md` para schema SQL de `n8n_chat_memory`.
 Usuario escribe > POST /api/chat > n8n Webhook > AI Agent (memoria Postgres) > Respond to Webhook > streaming response
 ```
 
-Ver `references/agent-patterns.md` para los 4 patterns Next.js <> n8n con codigo TypeScript.
+Para los 4 patrones de comunicación Next.js ↔ n8n, ver skill `n8n-to-api`.
 
 ---
 

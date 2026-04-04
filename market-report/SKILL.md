@@ -1,11 +1,9 @@
 ---
 name: market-report
 description: >
-  Markdown marketing report for internal use. Triggers: "marketing report",
-  "reporte de marketing", "generar reporte", "informe de marketing",
-  "marketing assessment", "scorecard de marketing", "marketing summary",
-  "compile my marketing data", "reporte de auditoría". Produces
-  MARKETING-REPORT.md.
+  Reporte de marketing en Markdown para uso interno con scorecard y resumen ejecutivo.
+  Usar cuando: "reporte de marketing", "informe de marketing", "scorecard de marketing",
+  "generar reporte", "reporte de auditoría". Genera MARKETING-REPORT.md.
 ---
 
 # Marketing Report Generator (Markdown Format)

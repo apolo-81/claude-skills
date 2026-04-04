@@ -1,13 +1,10 @@
 ---
 name: cms-integration
 description: >
-  Use when adding a CMS to a website, connecting a headless CMS to Next.js, or
-  enabling non-technical users to edit website content. Trigger for: "CMS", "headless
-  CMS", "Sanity", "Contentful", "Strapi", "content management", "editable content",
-  "blog con CMS", "sitio administrable", "content editing", "rich text editor",
-  "GROQ", "content API", "preview mode", "live preview", "quiero que el cliente
-  pueda editar", "contenido dinámico", "página de blog", "portfolio administrable",
-  "productos administrables".
+  Integra un CMS headless a Next.js para que el cliente edite contenido sin código.
+  Stack: Sanity / Contentful / Strapi.
+  Usar cuando: "CMS", "headless CMS", "Sanity", "sitio administrable", "blog con CMS",
+  "el cliente quiere editar", "GROQ", "live preview", "contenido dinámico", "Strapi".
 ---
 
 # CMS Headless Integration — Next.js

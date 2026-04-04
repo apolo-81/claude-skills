@@ -1,95 +1,154 @@
 # Claude Skills Collection
 
-Skills personalizadas y optimizadas para Claude Code organizadas por categorias.
+Skills personalizadas y optimizadas para Claude Code — stack React/Next.js/Node.js/Express/Baileys/GHL.
 
-## Instalacion rapida
+## Restauración rápida (post reinstall)
 
 ```bash
-git clone https://github.com/apolo-81/claude-skills.git
-cd claude-skills
-# Copia las skills que quieras a ~/.claude/skills/
-cp -r <skill-name> ~/.claude/skills/
+git clone https://github.com/apolo-81/claude-skills.git ~/claude-skills
+cd ~/claude-skills
+bash scripts/install.sh
 ```
 
-## Skills incluidas (37 total)
+El script instala skills, plugins del marketplace, agents, commands y configura los grupos toggleables.
 
-> Todas las skills fueron optimizadas (~45% reduccion de tokens) moviendo codigo y templates a `references/` y eliminando prosa redundante.
+---
 
-### SEO (5 skills)
-| Skill | Descripcion |
-|-------|-------------|
-| `seo-core` | Auditorias completas, SEO tecnico, Core Web Vitals |
-| `seo-content-onpage` | Calidad de contenido, E-E-A-T, optimizacion on-page |
-| `seo-international` | hreflang, SEO local, optimizacion para AI search |
-| `seo-strategy` | Planificacion estrategica, SEO programatico |
-| `seo-assets` | Schema.org, sitemaps XML, SEO de imagenes |
-
-### Marketing (14 skills)
-| Skill | Descripcion |
-|-------|-------------|
-| `market` | Orquestador principal del suite de marketing |
-| `market-audit` | Auditoria completa con 5 subagentes en paralelo |
-| `market-brand` | Voz de marca y brand guidelines |
-| `market-competitors` | Inteligencia competitiva |
-| `market-copy` | Copywriting para sitios web |
-| `market-ads` | Campanas multi-plataforma (Google, Meta, LinkedIn) |
-| `market-emails` | Secuencias de email |
-| `market-funnel` | Analisis de funnel de ventas |
-| `market-landing` | CRO de landing pages |
-| `market-launch` | Playbook de lanzamiento de producto |
-| `market-proposal` | Propuestas de servicios de marketing |
-| `market-report` | Reporte Markdown (uso interno) |
-| `market-report-pdf` | Reporte PDF con charts y gauges |
-| `market-social` | Calendario 30 dias para redes sociales |
-
-### Desarrollo (7 skills)
-| Skill | Descripcion |
-|-------|-------------|
-| `form-handling` | Formularios con validacion y uploads |
-| `performance-next` | Optimizacion de rendimiento Next.js |
-| `error-monitoring` | Monitoreo de errores con Sentry |
-| `testing-patterns` | Testing con Vitest y Playwright |
-| `supabase-stack` | Backend con Supabase (auth, DB, storage) |
-| `saas-boilerplate` | Boilerplate SaaS con Stripe y auth |
-| `webhook-integration` | Integraciones con webhooks |
-
-### IA/Chatbot (3 skills)
-| Skill | Descripcion |
-|-------|-------------|
-| `chatbot-widget` | Widget de chatbot con IA |
-| `n8n-ai-agents` | Agentes de IA en n8n |
-| `n8n-to-api` | Exponer workflows n8n como API |
-
-### Diseno/UI (6 skills)
-| Skill | Descripcion |
-|-------|-------------|
-| `ui-designer` | Extraccion de design systems y generacion de UI |
-| `web-animations` | Animaciones web (CSS, Framer Motion) |
-| `landing-page-builder` | Constructor de landing pages |
-| `data-viz-dashboard` | Dashboards y visualizacion de datos |
-| `email-templates-builder` | Templates de email HTML responsivos |
-| `pro-presentations` | Slide decks profesionales para auditorios y keynotes |
-
-### Web (2 skills)
-| Skill | Descripcion |
-|-------|-------------|
-| `cms-integration` | Integracion de CMS headless |
-| `pwa-patterns` | Progressive Web Apps |
-
-## Estructura de archivos
+## Estructura del repo
 
 ```
-skill-name/
-  SKILL.md          # Definicion principal (optimizada, solo logica de decision)
-  references/       # Codigo, templates, output formats (cargados bajo demanda)
-  assets/           # Templates y recursos
-  scripts/          # Scripts auxiliares
+claude-skills/
+├── <skill-name>/         # 44 skills personalizadas
+│   └── SKILL.md
+├── config/
+│   ├── settings.json     # Configuración Claude Code (plugins, hooks, permisos)
+│   ├── CLAUDE.md         # Instrucciones globales
+│   ├── statusline-command.sh
+│   ├── agents/           # 4 agentes personalizados
+│   └── commands/         # 3 comandos personalizados (/resume, /compress, /skills)
+└── scripts/
+    ├── install.sh        # Script de restauración completa
+    └── skill-toggle      # Script para activar/desactivar grupos
 ```
 
-## Optimizacion de tokens
+---
 
-Las skills fueron optimizadas siguiendo estos principios:
+## Skills incluidas (44 total)
 
-- **SKILL.md compacto**: solo arboles de decision, tablas rapidas y checklists
-- **references/**: codigo, templates de output y frameworks detallados movidos aqui
-- **Sin prosa redundante**: eliminadas secciones "por que importa" y conocimiento generico
+### Siempre activas (sin grupo)
+
+| Skill | Stack |
+|-------|-------|
+| `auth-patterns` | NextAuth v5, JWT custom, RBAC, Prisma adapter |
+| `background-jobs` | BullMQ + Redis, queues anti-ban WhatsApp |
+| `chatbot-widget` | Vercel AI SDK, chat widgets embebibles |
+| `deployment` | Railway (SQLite volumes) + Vercel, GitHub Actions |
+| `express-api` | Express 5 + Zod + multi-tenant (patrón GHL) |
+| `ghl-integration` | GoHighLevel OAuth2, webhooks, iFrame SSO |
+| `pdf-generation` | Puppeteer, @sparticuz/chromium, @react-pdf |
+| `prisma-orm` | Prisma 5+, PostgreSQL, Neon, transactions |
+
+### Dev group (ON por defecto)
+
+| Skill | Descripción |
+|-------|-------------|
+| `form-handling` | Formularios Next.js, react-hook-form, Zod |
+| `performance-next` | Core Web Vitals, bundle optimization |
+| `error-monitoring` | Sentry, logging estructurado, error boundaries |
+| `testing-patterns` | Vitest, Playwright E2E, Testing Library |
+| `supabase-stack` | Auth, PostgreSQL, Storage, Realtime, RLS |
+| `saas-boilerplate` | Billing Stripe, multi-tenant, onboarding |
+| `webhook-integration` | Verificación HMAC, retry, idempotencia |
+
+### Design group (ON por defecto)
+
+| Skill | Descripción |
+|-------|-------------|
+| `ui-designer` | Design systems desde imágenes de referencia |
+| `web-animations` | Framer Motion, GSAP, CSS animations |
+| `pro-presentations` | Slides profesionales de alto impacto |
+| `landing-page-builder` | Landing pages desde cero o diseño Figma |
+| `data-viz-dashboard` | Recharts, Chart.js, dashboards React |
+| `email-templates-builder` | HTML emails, Resend, React Email |
+| `cms-integration` | Contentful, Sanity, Strapi con Next.js |
+| `pwa-patterns` | Service workers, offline-first, instalable |
+
+### Market suite (ON por defecto)
+
+| Skill | Descripción |
+|-------|-------------|
+| `market` | Orquestador del suite de marketing |
+| `market-copy` | Copywriting web, análisis y reescritura |
+| `market-landing` | CRO, análisis de landing pages |
+| `market-proposal` | Propuestas de servicios profesionales |
+| `market-brand` | Voz de marca, tono e identidad |
+| `market-launch` | Playbook de lanzamiento semana a semana |
+| `market-emails` | Secuencias de email marketing |
+
+### Audit group (OFF por defecto — bajo demanda)
+
+```bash
+skill-toggle audit on   # Activar
+skill-toggle audit off  # Desactivar
+```
+
+12 skills: seo-core, seo-content-onpage, seo-international, seo-strategy, seo-assets, market-audit, market-competitors, market-funnel, market-social, market-ads, market-report, market-report-pdf
+
+### N8N group (OFF por defecto — bajo demanda)
+
+```bash
+skill-toggle n8n on
+skill-toggle n8n off
+```
+
+2 skills: `n8n-ai-agents`, `n8n-to-api`
+
+---
+
+## Plugins del marketplace
+
+Instalados via `ccpm` — se restauran automáticamente con `install.sh`:
+
+| Plugin | Marketplace |
+|--------|-------------|
+| context7 | claude-plugins-official |
+| ralph-loop | claude-plugins-official |
+| commit-commands | claude-plugins-official |
+| playground | claude-plugins-official |
+| superpowers | claude-plugins-official |
+| playwright | claude-plugins-official |
+| plugin-dev | claude-plugins-official |
+| code-review | claude-plugins-official |
+| feature-dev | claude-plugins-official |
+| claude-code-history-files-finder | daymade-skills |
+| competitors-analysis | daymade-skills |
+| deep-research | daymade-skills |
+| pdf-creator | daymade-skills |
+| ppt-creator | daymade-skills |
+| skill-reviewer | daymade-skills |
+| skills-search | daymade-skills |
+| debugging-toolkit | claude-code-workflows |
+| codex | openai-codex |
+
+---
+
+## skill-toggle
+
+```bash
+skill-toggle status        # Ver estado actual de todos los grupos
+skill-toggle audit on/off  # SEO + market research (12 skills)
+skill-toggle n8n on/off    # N8N/Automatización (2 skills)
+skill-toggle dev on/off    # Desarrollo (7 skills)
+skill-toggle design on/off # Diseño/UI (8 skills)
+skill-toggle web on/off    # CMS/PWA (2 skills)
+skill-toggle list          # Listar grupos
+```
+
+Después de togglear ejecutar `/reload-plugins` en Claude Code.
+
+---
+
+## MCPs configurados
+
+`config/settings.json` incluye: `obsidian`, `supabase`, `openspace`.  
+Requieren configuración manual de credenciales en cada proyecto.

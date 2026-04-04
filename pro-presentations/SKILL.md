@@ -1,18 +1,15 @@
 ---
 name: pro-presentations
 description: >
-  Use when creating presentations for auditoriums, conferences, keynotes, pitch decks,
-  business reviews, quarterly reviews (QBR), sales decks, training slides, or any projected
-  setting. Relevant for: "presentacion profesional", "crear presentacion", "slides para
-  conferencia", "deck profesional", "pitch deck", "investor deck", "keynote slides",
-  "presentacion impactante", "corporate presentation", "academic presentation",
-  "TED-style talk", "consulting deck", "slide deck", "boardroom presentation",
-  "presentacion para auditorio".
+  Crea presentaciones profesionales de alto impacto (keynotes, pitch decks, propuestas comerciales).
+  Usar cuando: "presentacion profesional", "pitch deck", "crear slides", "deck para cliente",
+  "investor deck", "presentacion para auditorio", "consulting deck", "TED-style",
+  "propuesta visual", "slide deck", "presentacion impactante".
 ---
 
 # Pro Presentations
 
-> Create impactful, auditorium-ready presentations following the most rigorous professional standards. Based on Nancy Duarte, Garr Reynolds, Michael Alley, Edward Tufte, Barbara Minto, and lessons from Gamma, Beautiful.ai, Tome, Canva, and McKinsey/BCG.
+Metodología basada en Nancy Duarte, Garr Reynolds, Michael Alley, Edward Tufte, Barbara Minto y estándares McKinsey/BCG.
 
 ## Related Skills
 

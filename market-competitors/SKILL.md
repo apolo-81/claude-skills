@@ -1,12 +1,10 @@
 ---
 name: market-competitors
 description: >
-  Competitive intelligence analysis across messaging, pricing, features, SEO.
-  Triggers: "competitor analysis", "competitive research", "quién es mi
-  competencia", "cómo me comparo con X", "competitive landscape",
-  "inteligencia competitiva", "analiza a mi competencia", "market analysis",
-  "positioning analysis", "how do I differentiate", "switching narratives".
-  Produces COMPETITOR-REPORT.md.
+  Inteligencia competitiva: mensajería, precios, features y SEO vs competidores.
+  Usar cuando: "analiza a mi competencia", "quién es mi competencia",
+  "cómo me comparo con X", "competitive landscape", "cómo me diferencio",
+  "análisis de posicionamiento". Genera COMPETITOR-REPORT.md.
 ---
 
 # Competitive Intelligence Analysis

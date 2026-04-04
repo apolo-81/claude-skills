@@ -1,11 +1,10 @@
 ---
 name: market-audit
 description: >
-  Full marketing audit orchestrator with 5 parallel subagents. Triggers:
-  "audit my site", "marketing analysis", "full site review", "score my
-  marketing", "what's wrong with my site", "review my startup's marketing",
-  "audit this URL", "analyze my website marketing". Produces
-  MARKETING-AUDIT.md.
+  Auditoría completa de marketing con 5 subagentes paralelos. Evalúa y puntúa
+  copy, SEO, funnel, social y competidores en una sola pasada.
+  Usar cuando: "auditoría de marketing", "analiza mi sitio completo",
+  "qué está mal con mi marketing", "audit this URL". Genera MARKETING-AUDIT.md.
 ---
 
 # Marketing Audit Orchestrator

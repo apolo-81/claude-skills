@@ -1,13 +1,10 @@
 ---
 name: saas-boilerplate
 description: >
-  Use when building a SaaS application, adding subscription billing, implementing
-  multi-tenant architecture, or setting up user onboarding flows. Trigger for:
-  "SaaS", "subscription", "Stripe billing", "pricing plans", "free trial",
-  "freemium", "multi-tenant", "tenant isolation", "user onboarding", "admin panel",
-  "quiero monetizar mi app", "agregar pagos a mi app", "planes de suscripcion",
-  "trial gratuito", "upgrade/downgrade plan", "customer portal", "metered billing",
-  "seat-based pricing", "construir SaaS", "app de pago".
+  Arquitectura SaaS: billing, multi-tenant, onboarding y admin panel.
+  Stack: Next.js 15 + Supabase + Stripe.
+  Usar cuando: "SaaS", "subscripción", "Stripe", "planes de precios", "free trial",
+  "multi-tenant", "monetizar app", "customer portal", "upgrade/downgrade", "app de pago".
 ---
 
 # SaaS Boilerplate — Next.js 15 + Supabase + Stripe

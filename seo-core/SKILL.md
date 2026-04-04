@@ -1,15 +1,11 @@
 ---
 name: seo-core
 description: >
-  Core SEO analysis engine: full website audits, technical SEO (crawlability,
-  indexability, security, Core Web Vitals with INP, JS rendering, IndexNow,
-  AI crawler management), and orchestration of parallel subagents. Trigger when
-  user says: "SEO", "audit", "technical SEO", "Core Web Vitals", "crawl issues",
-  "robots.txt", "page speed", "site speed", "Googlebot", "indexing problems",
-  "security headers", "mobile SEO", "JavaScript SEO", "SPA SEO", "canonical tags",
-  "redirect chains", "crawl budget", "full SEO check", "SEO health", "SEO report",
-  "diagnose my site", "why doesn't my site appear on Google", "why am I not on the
-  first page", "LCP too slow", "INP score", "CLS score", "HTTPS issues",
+  Auditoría técnica SEO completa: crawlabilidad, indexación, Core Web Vitals, JS rendering,
+  robots.txt, canonical, redirects, seguridad, IndexNow. Motor principal que orquesta
+  subagentes para análisis paralelo. Usar cuando: "SEO", "auditoría SEO", "technical SEO",
+  "Core Web Vitals", "LCP", "INP", "CLS", "page speed", "Googlebot", "no aparezco en Google",
+  "robots.txt", "canonical tags", "crawl budget", "reporte SEO", "diagnóstico del sitio".
   "noindex problems", "mobile-first indexing", or shares a URL for general analysis.
 allowed-tools:
   - Read

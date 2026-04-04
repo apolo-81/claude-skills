@@ -1,12 +1,10 @@
 ---
 name: email-templates-builder
 description: >
-  Use when building HTML email templates, coding responsive emails, implementing
-  email designs, or sending transactional/marketing emails from a web app. Trigger
-  for: "email template", "HTML email", "responsive email", "transactional email",
-  "email de bienvenida en código", "implementar email", "React Email", "MJML",
-  "Resend", "Nodemailer", "email de confirmación", "receipt email", "password reset
-  email", "invoice email", "notification email", coding email sequences from copy.
+  Templates HTML de email transaccional y envío desde web app. Stack: React Email + Resend.
+  Para secuencias de email marketing usar `market-emails`.
+  Usar cuando: "email transaccional", "React Email", "Resend", "template de email",
+  "email de bienvenida HTML", "email de reset", "factura por email", "MJML", "Nodemailer".
 ---
 
 # Email Templates Builder

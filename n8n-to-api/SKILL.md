@@ -1,12 +1,10 @@
 ---
 name: n8n-to-api
 description: >
-  Use when exposing n8n workflows as APIs, calling n8n from a web app, using n8n
-  as backend logic, or building event-driven integrations between Next.js and n8n.
-  Trigger for: "llamar a n8n desde mi app", "n8n como backend", "n8n API", "webhook
-  de n8n", "trigger n8n workflow", "n8n HTTP trigger", "automatizar desde mi web",
-  "n8n como lógica de negocio", "n8n response webhook", "wait for n8n result",
-  "n8n + Next.js", "ejecutar automatización desde botón", "n8n workflow como función".
+  Expone workflows n8n como APIs o integra n8n con una app web como backend de lógica.
+  Usar cuando: "n8n webhook", "llamar n8n desde Next.js", "n8n como backend",
+  "fire and forget n8n", "n8n HTTP trigger", "n8n responde a webhook",
+  "tarea async n8n", "n8n + Supabase Realtime", "n8n callback", "n8n API".
 ---
 
 # n8n como Backend de Lógica de Negocio

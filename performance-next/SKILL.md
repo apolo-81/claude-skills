@@ -1,15 +1,10 @@
 ---
 name: performance-next
 description: >
-  Use when optimizing performance of a Next.js app, improving Core Web Vitals,
-  reducing bundle size, fixing slow pages, or implementing React performance patterns.
-  Trigger for: "performance", "rendimiento", "lento", "slow", "bundle size", "lighthouse",
-  "core web vitals", "LCP", "CLS", "INP", "FCP", "TTFB", "bundle analyzer",
-  "code splitting", "lazy loading", "React.memo", "useMemo", "useCallback",
-  "image optimization", "font optimization", "mi app está lenta", "mejorar velocidad",
-  "optimizar next.js", "reducir javascript", "eliminar unused code", "tree shaking",
-  "Suspense", "streaming", "partial prerendering", "PPR", "ISR", "cache strategy",
-  "next/image", "next/font", "prefetch", "preload".
+  Optimiza performance en Next.js: Core Web Vitals, bundle size, lazy loading, imágenes,
+  fonts, code splitting, Suspense, streaming, ISR y estrategia de caché.
+  Usar cuando: "LCP", "CLS", "INP", "página lenta", "bundle grande", "optimizar Next.js",
+  "lazy loading", "React.memo", "useMemo", "caché", "ISR", "PPR".
 ---
 
 # performance-next

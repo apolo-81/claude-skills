@@ -1,12 +1,10 @@
 ---
 name: chatbot-widget
 description: >
-  Use when adding a chatbot, AI assistant, or chat widget to a website or web app.
-  Trigger for: "chatbot", "chat widget", "AI assistant", "Claude widget", "OpenAI
-  chat", "customer support bot", "chat con IA", "asistente virtual", "chat flotante",
-  "embedded chat", "AI chat", "chatbot en mi web", "asistente de soporte",
-  "agregar chat a mi sitio", "bot de ventas", "FAQ bot", "Vercel AI SDK",
-  "useChat hook", "streaming responses", "chat UI", "asistente inteligente".
+  Agrega un chatbot, asistente IA o chat widget a un sitio web o app.
+  Usar cuando: "chatbot", "chat widget", "asistente virtual", "chat flotante",
+  "bot de ventas", "bot de soporte", "FAQ bot", "useChat", "streaming chat",
+  "Vercel AI SDK", "asistente inteligente", "chat con IA", "embedded chat".
 ---
 
 # Chatbot Widget — Integration Guide
@@ -20,7 +18,7 @@ description: >
 | In-app Assistant | System prompt dinámico | anthropic/claude-sonnet-4-6 |
 | Sales Assistant | Tool use para acciones | anthropic/claude-sonnet-4-6 |
 
-**Stack default:** AI SDK v6 + AI Gateway (OIDC), Next.js 16 App Router.
+**Stack default:** Vercel AI SDK + AI Gateway (OIDC), Next.js App Router.
 
 **Selección:**
 - Docs <50k tokens → system prompt directo
@@ -42,7 +40,7 @@ import { streamText, convertToModelMessages } from 'ai'
 export async function POST(req: Request) {
   const { messages } = await req.json()
   const result = streamText({
-    model: 'anthropic/claude-sonnet-4.6',
+    model: 'anthropic/claude-sonnet-4-6',
     system: 'Eres el asistente de [Producto]. Responde solo preguntas sobre [Producto].',
     messages: await convertToModelMessages(messages),
     maxTokens: 1024,
@@ -108,7 +106,7 @@ Ver `references/advanced-patterns.md` para implementacion completa.
 
 Patron clave:
 - `checkRateLimit(supabase, userId)` con tabla `chat_usage` y ventana de 1h
-- Modelo por plan: `user.plan === 'pro' ? 'claude-sonnet-4.6' : 'claude-haiku-4.5'`
+- Modelo por plan: `user.plan === 'pro' ? 'claude-sonnet-4-6' : 'claude-haiku-4.5'`
 - `result.usage.then()` para trackear tokens post-stream
 
 ```sql
@@ -145,7 +143,7 @@ Cargar historial como `initialMessages` en `useChat`. En `onFinish`, extraer tex
 import { streamText, stepCountIs } from 'ai'
 import { z } from 'zod'
 const result = streamText({
-  model: 'anthropic/claude-sonnet-4.6',
+  model: 'anthropic/claude-sonnet-4-6',
   messages: await convertToModelMessages(messages),
   stopWhen: stepCountIs(3),
   tools: {

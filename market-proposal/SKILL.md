@@ -1,16 +1,17 @@
 ---
 name: market-proposal
 description: >
-  Professional marketing service proposals for clients. Triggers: "client
-  proposal", "propuesta para cliente", "marketing proposal", "agency proposal",
-  "pricing proposal", "oferta comercial", "presentación de servicios",
-  "service proposal", "presupuesto para cliente", "quiero ganar un cliente".
-  Produces CLIENT-PROPOSAL.md.
+  Genera propuestas de servicios profesionales para clientes. Incluye pricing, scope y presentación.
+  Usar cuando: "propuesta para cliente", "oferta comercial", "presupuesto para cliente",
+  "presentación de servicios", "quiero ganar un cliente", "agency proposal",
+  "service proposal". Genera CLIENT-PROPOSAL.md.
 ---
 
-# Client Proposal Generator for Marketing Services
+# Client Proposal Generator
 
-Genera una propuesta de marketing que vende, no solo describe. El documento debe hacer que el cliente sienta que fue escrito solo para el. Si `/market audit` fue corrido previamente, extraer findings automaticamente para la Situation Analysis.
+Genera propuestas profesionales que venden, no solo describen — para servicios de marketing, desarrollo de software, o consultoría. El documento debe hacer que el cliente sienta que fue escrito solo para él. Si `/market audit` fue corrido previamente, extraer findings automáticamente para la Situation Analysis.
+
+> Para propuestas de software/dev: adaptar "Estrategia y Approach" a fases de desarrollo (Discovery → Build → Launch), y el pricing a proyecto por precio fijo en lugar de retainer mensual.
 
 ## How to Execute
 

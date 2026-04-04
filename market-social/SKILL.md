@@ -1,11 +1,10 @@
 ---
 name: market-social
 description: >
-  30-day social media content calendar with ready-to-publish posts. Triggers:
-  "social media strategy", "content calendar", "calendario de redes sociales",
-  "posts para Instagram", "LinkedIn content", "TikTok ideas", "hashtags",
-  "social media marketing", "quiero publicar en redes", "contenido social",
-  "content creation", "cómo crecer en redes sociales", "content repurposing".
+  Calendario de contenido 30 días para redes sociales, listo para publicar.
+  Usar cuando: "calendario de redes sociales", "posts para Instagram",
+  "contenido para LinkedIn", "ideas para TikTok", "quiero publicar en redes",
+  "estrategia de redes sociales", "cómo crecer en redes", "content repurposing".
 ---
 
 # Social Media Content Calendar & Generation

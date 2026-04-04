@@ -1,15 +1,11 @@
 ---
 name: seo-content-onpage
 description: >
-  Content quality, E-E-A-T analysis, AI citation readiness, and on-page SEO
-  optimization. Evaluates content against Google QRG (Dec 2025 update extending
-  E-E-A-T to all competitive queries), detects AI content quality signals, scores
-  passage-level citability for AI Overviews/ChatGPT/Perplexity, and performs deep
-  single-page audits covering title tags, meta descriptions, headings, keyword
-  optimization, internal linking, and page speed signals. Trigger when user says:
-  "content quality", "E-E-A-T", "content analysis", "thin content", "readability",
-  "on-page SEO", "title tag", "meta description", "H1 optimization", "keyword
-  density", "content audit", "page SEO", "analyze this page", "why is this page
+  Calidad de contenido, E-E-A-T y SEO on-page. Audita títulos, metas, headings,
+  keywords, enlaces internos. Evalúa citabilidad para AI Overviews/ChatGPT/Perplexity.
+  Usar cuando: "E-E-A-T", "calidad de contenido", "contenido delgado", "title tag",
+  "meta description", "H1", "on-page SEO", "auditar página", "keyword density",
+  "legibilidad", "por qué no rankea esta página", "optimizar contenido".
   not ranking", "on-page analysis", "heading structure", "internal linking",
   "AI content detection", "content score", "topical authority", "content clusters",
   "improve content", "page ranking audit", "canonical tag check", "open graph tags".

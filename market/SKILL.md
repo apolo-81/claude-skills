@@ -1,12 +1,10 @@
 ---
 name: market
 description: >
-  AI Marketing Suite orchestrator for all marketing tasks. Triggers:
-  "marketing audit", "analyze my site", "copy analysis", "email sequences",
-  "social media calendar", "ad campaigns", "sales funnel", "competitive
-  intelligence", "landing page CRO", "product launch", "client proposal",
-  "brand voice", "marketing report", "marketing strategy", "review my funnel",
-  "write copy for my homepage", "audit my competitor".
+  Orquestador del suite de marketing — delega a las skills especializadas según la tarea.
+  Usar cuando: "marketing", "estrategia de marketing", "auditoría de marketing",
+  "analiza mi sitio", "copy", "email marketing", "funnel", "propuesta para cliente",
+  "lanzamiento", "voz de marca", "landing page". Punto de entrada general.
 ---
 
 # AI Marketing Suite -- Main Orchestrator
@@ -38,7 +36,7 @@ description: >
 | `/market proposal <client>` | CLIENT-PROPOSAL.md |
 | `/market report <url>` | MARKETING-REPORT.md |
 | `/market report-pdf <url>` | MARKETING-REPORT.pdf |
-| `/market seo <url>` | SEO-AUDIT.md |
+| `/market seo <url>` | SEO-AUDIT.md *(requiere `skill-toggle audit on`)* |
 | `/market brand <url>` | BRAND-VOICE.md |
 
 ## Routing Logic

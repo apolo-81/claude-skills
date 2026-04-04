@@ -1,15 +1,11 @@
 ---
 name: seo-strategy
 description: >
-  Strategic SEO planning, programmatic SEO at scale, and competitor comparison page
-  generation. Creates comprehensive SEO strategies with content roadmaps, competitive
-  analysis, site architecture, and phased implementation plans. Plans and audits
-  programmatic pages from data sources with quality gates. Generates competitor
-  "X vs Y", "alternatives to X", and roundup pages. Trigger when user says:
-  "SEO plan", "SEO strategy", "SEO roadmap", "content strategy", "keyword research",
-  "site architecture", "90 day SEO plan", "increase organic traffic", "SEO quick wins",
-  "programmatic SEO", "pages at scale", "template pages", "location pages",
-  "generated pages", "data-driven SEO", "competitor comparison", "X vs Y page",
+  Estrategia SEO, roadmap de contenido, SEO programático a escala y páginas comparativas.
+  Genera planes con arquitectura, análisis competitivo e implementación por fases.
+  Usar cuando: "estrategia SEO", "plan SEO", "keyword research", "roadmap de contenido",
+  "arquitectura del sitio", "SEO programático", "páginas a escala", "quick wins SEO",
+  "aumentar tráfico orgánico", "página X vs Y", "alternativas a X".
   "alternative to X", "comparison page", "vs page", "alternatives page",
   "feature matrix", "challenger brand content", "content calendar", "link building plan".
 allowed-tools:

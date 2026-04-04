@@ -1,13 +1,10 @@
 ---
 name: data-viz-dashboard
 description: >
-  Use when building dashboards, charts, graphs, or data visualization components
-  in React/Next.js. Trigger for: "dashboard", "charts", "graphs", "Recharts",
-  "Chart.js", "metrics", "KPIs", "data visualization", "analytics dashboard",
-  "gráficas", "gráficos", "tablero de métricas", "visualizar datos", "time series",
-  "bar chart", "pie chart", "line chart", "funnel chart", "heatmap", "gauge",
-  "stats card", "metric card", "mostrar datos de n8n", "panel de control",
-  "reporting dashboard", "business intelligence", "admin dashboard".
+  Dashboards y visualización de datos en React/Next.js. Stack: Recharts / Chart.js.
+  Usar cuando: "dashboard", "gráfica", "chart", "KPIs", "métricas", "stat cards",
+  "bar chart", "pie chart", "line chart", "heatmap", "panel de analytics",
+  "reporting dashboard", "admin panel con datos", "visualizar datos".
 ---
 
 # Data Visualization Dashboard — React/Next.js

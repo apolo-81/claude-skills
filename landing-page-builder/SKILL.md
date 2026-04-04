@@ -1,13 +1,10 @@
 ---
 name: landing-page-builder
 description: >
-  Use when building a landing page from scratch or implementing a design into code.
-  Trigger when user wants to create a landing page, convert a mockup to code, build
-  a hero section, pricing page, features section, testimonials, CTA section, or any
-  marketing page. Also trigger for: "construir landing page", "hacer página de ventas",
-  "implementar diseño de landing", "quiero una página para mi producto", "crear homepage",
-  "página de captura de leads", "squeeze page", converting Figma to Next.js/Tailwind,
-  building signup pages, waitlist pages, or SaaS marketing sites.
+  Construye landing pages desde cero o implementa diseños en código Next.js + Tailwind.
+  Para análisis CRO de una landing existente usar `market-landing`.
+  Usar cuando: "construir landing page", "página de ventas", "hero section", "pricing page",
+  "testimonials", "implementar diseño", "Figma a Next.js", "waitlist page", "homepage".
 ---
 
 # Landing Page Builder

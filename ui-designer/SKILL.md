@@ -1,11 +1,11 @@
 ---
 name: ui-designer
 description: >
-  Extract design systems from reference UI images and generate implementation-ready
-  prompts. Triggers: "diseño de UI", "design system", "design tokens", "UI mockup",
-  "reproducir este diseño", "quiero algo parecido a X app", "UX/UI", "color palette",
-  "typography system", "referencia visual", "UI kit", "figma", "wireframe",
-  "dashboard design", "me gusta este diseño", "componentes visuales".
+  Extrae design systems de imágenes de referencia y genera prompts listos para implementar.
+  Workflow: imagen → tokens de diseño → PRD → componentes React.
+  Usar cuando: "diseño de UI", "design system", "design tokens", "mockup", "UI kit",
+  "reproducir este diseño", "quiero algo parecido a X", "Figma", "wireframe",
+  "palette de colores", "tipografía del sistema", "me gusta este diseño".
 ---
 
 # UI Designer

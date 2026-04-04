@@ -1,11 +1,10 @@
 ---
 name: market-copy
 description: >
-  Copywriting analysis and generation for websites. Triggers: "analyze my copy",
-  "rewrite my homepage", "improve my website text", "my copy doesn't convert",
-  "write better headlines", "fix my value proposition", "write copy for my
-  landing page", "optimize my CTA text", "review my product page copy",
-  "about page copy", "PAS", "AIDA", "swipe file", "copy scoring".
+  Análisis y generación de copy para sitios web. Evalúa y reescribe textos que no convierten.
+  Usar cuando: "analiza mi copy", "reescribe mi homepage", "mi texto no convierte",
+  "mejora mis headlines", "propuesta de valor", "copy del landing", "CTA",
+  "about page", "PAS", "AIDA", "puntaje de copy".
 ---
 
 # Copywriting Analysis & Generation

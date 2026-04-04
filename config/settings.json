@@ -1,0 +1,108 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rm -rf /home/apolo/.claude/plugins/cache/superpowers-marketplace/superpowers-developing-for-claude-code)",
+      "Bash(rm -rf /home/apolo/.claude/plugins/cache/claude-code-workflows/backend-api-security)",
+      "Read(//home/apolo/.claude/plugins/cache/superpowers-marketplace/**)",
+      "Read(//home/apolo/.claude/plugins/cache/claude-code-workflows/**)",
+      "Bash(python3:*)",
+      "Bash(rm -rf /home/apolo/.claude/plugins/cache/claude-plugins-official/semgrep)",
+      "Read(//home/apolo/.claude/plugins/**)",
+      "Read(//home/apolo/.claude/**)",
+      "Bash(read f:*)"
+    ],
+    "defaultMode": "dontAsk"
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "obsidian",
+    "supabase",
+    "openspace"
+  ],
+  "hooks": {
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "DATE=$(date +%Y-%m-%d); FILE=\"/home/apolo/Documents/55. Archive/apolo/05_Daily/${DATE}.md\"; if [ ! -f \"$FILE\" ]; then printf -- '---\\ntitle: \"%s\"\\ntags: [daily]\\n---\\n\\n## Prioridades\\n- [ ]\\n\\n## Capturas del dia\\n-\\n\\n## Pendientes detectados\\n-\\n' \"$DATE\" > \"$FILE\"; fi"
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash /home/apolo/.claude/statusline-command.sh"
+  },
+  "enabledPlugins": {
+    "context7@claude-plugins-official": true,
+    "ralph-loop@claude-plugins-official": true,
+    "commit-commands@claude-plugins-official": true,
+    "playground@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true,
+    "playwright@claude-plugins-official": true,
+    "plugin-dev@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true,
+    "claude-code-history-files-finder@daymade-skills": true,
+    "competitors-analysis@daymade-skills": true,
+    "deep-research@daymade-skills": true,
+    "pdf-creator@daymade-skills": true,
+    "ppt-creator@daymade-skills": true,
+    "skill-reviewer@daymade-skills": true,
+    "skills-search@daymade-skills": true,
+    "feature-dev@claude-plugins-official": true,
+    "debugging-toolkit@claude-code-workflows": true,
+    "codex@openai-codex": true
+  },
+  "extraKnownMarketplaces": {
+    "daymade-skills": {
+      "source": {
+        "source": "directory",
+        "path": "/home/apolo/.claude/plugins/marketplaces/daymade-claude-code-skills"
+      }
+    },
+    "claude-code-workflows": {
+      "source": {
+        "source": "directory",
+        "path": "/home/apolo/.claude/plugins/marketplaces/wshobson-agents"
+      }
+    },
+    "n8n-mcp-skills": {
+      "source": {
+        "source": "directory",
+        "path": "/home/apolo/.claude/plugins/marketplaces/czlonkowski-n8n-skills"
+      }
+    },
+    "superpowers-marketplace": {
+      "source": {
+        "source": "directory",
+        "path": "/home/apolo/.claude/plugins/marketplaces/obra-superpowers-marketplace"
+      }
+    },
+    "claude-plugins-official": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-official"
+      }
+    },
+    "semgrep": {
+      "source": {
+        "source": "github",
+        "repo": "semgrep/mcp-marketplace"
+      }
+    },
+    "openai-codex": {
+      "source": {
+        "source": "github",
+        "repo": "openai/codex-plugin-cc"
+      },
+      "autoUpdate": true
+    }
+  },
+  "language": "espanol",
+  "effortLevel": "medium",
+  "voiceEnabled": true,
+  "autoDreamEnabled": true,
+  "skipDangerousModePermissionPrompt": true
+}

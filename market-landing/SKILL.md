@@ -1,12 +1,10 @@
 ---
 name: market-landing
 description: >
-  Landing page CRO (Conversion Rate Optimization) analysis. Triggers:
-  "analyze my landing page", "why isn't my page converting", "CRO audit",
-  "improve my signup rate", "optimize my product page", "conversion analysis",
-  "review my checkout page", "A/B test", "hero section", "value proposition",
-  "social proof", "CTA optimization", "lead capture page". Produces
-  LANDING-CRO.md.
+  Análisis CRO de landing pages — identifica por qué no convierten y cómo mejorarlas.
+  Usar cuando: "analiza mi landing", "por qué no convierte", "auditoría CRO",
+  "mejorar tasa de registro", "hero section", "social proof", "A/B test",
+  "optimizar CTA", "página de captura", "checkout". Genera LANDING-CRO.md.
 ---
 
 # Landing Page CRO Analysis

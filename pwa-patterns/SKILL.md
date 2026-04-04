@@ -1,12 +1,10 @@
 ---
 name: pwa-patterns
 description: >
-  Use when making a web app installable, adding offline support, implementing push
-  notifications, or building Progressive Web App features. Trigger for: "PWA",
-  "Progressive Web App", "app instalable", "offline mode", "service worker", "push
-  notifications", "web push", "install prompt", "add to home screen", "cache strategy",
-  "offline first", "background sync", "manifest.json", "hacer mi app instalable",
-  "notificaciones push web", "app sin internet", "que funcione offline".
+  Convierte una web app en PWA instalable con soporte offline y notificaciones push.
+  Stack: Next.js 15 + service worker + Web Push API.
+  Usar cuando: "PWA", "app instalable", "offline", "service worker", "push notifications",
+  "manifest.json", "add to home screen", "que funcione sin internet", "background sync".
 ---
 
 # PWA Patterns — Next.js 15 + React + Tailwind

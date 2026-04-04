@@ -1,14 +1,10 @@
 ---
 name: form-handling
 description: >
-  Use when building forms, handling form validation, implementing form submission,
-  or working with user input in Next.js/React. Trigger for: "form", "formulario",
-  "React Hook Form", "RHF", "Zod", "form validation", "validación de formulario",
-  "server action form", "useFormState", "useActionState", "form errors", "form submission",
-  "multi-step form", "wizard form", "file upload form", "subir archivo",
-  "formulario con validación", "validar campos", "formulario de registro",
-  "formulario de contacto", "formulario con pasos", "checkbox", "select", "input mask",
-  "react-hook-form", "zod schema", "form state", "pending state", "optimistic update".
+  Formularios en Next.js/React: validación, submission, errores, multi-step y file upload.
+  Stack: React Hook Form + Zod + Server Actions.
+  Usar cuando: "form", "formulario", "validación de formulario", "React Hook Form",
+  "Zod", "formulario multi-paso", "subir archivo", "useActionState", "form errors".
 ---
 
 # Form Handling — Next.js 15 App Router + RHF + Zod

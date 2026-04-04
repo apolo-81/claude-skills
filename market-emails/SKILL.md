@@ -1,11 +1,10 @@
 ---
 name: market-emails
 description: >
-  Ready-to-send email sequences for any business. Triggers: "email sequences",
-  "email marketing", "welcome email", "drip campaign", "nurture campaign",
-  "email automation", "cart abandonment", "onboarding emails", "cold outreach",
-  "email de bienvenida", "secuencia de onboarding", "newsletter setup",
-  "quiero hacer email marketing", "customer retention emails".
+  Secuencias de email marketing listas para enviar: bienvenida, onboarding, nurture, retención.
+  Usar cuando: "secuencia de emails", "email marketing", "drip campaign",
+  "email de bienvenida", "onboarding emails", "cold outreach", "carrito abandonado",
+  "newsletter", "quiero hacer email marketing".
 ---
 
 # Email Sequence Generation

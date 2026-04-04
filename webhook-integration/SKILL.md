@@ -1,12 +1,10 @@
 ---
 name: webhook-integration
 description: >
-  Use when receiving webhooks from external services (Stripe, GitHub, Clerk),
-  verifying webhook signatures, handling retry logic, idempotency, or setting up
-  queue patterns for critical webhooks. Trigger for: "webhook", "Stripe webhook",
-  "GitHub webhook", "recibir eventos de", "notificación de pago", "payment webhook",
-  "webhook signature verification", "HMAC", "event-driven", "idempotency", queue
-  patterns. For n8n-specific webhook patterns, see skill `n8n-to-api`.
+  Recibe webhooks de servicios externos: verificación de firma HMAC, idempotencia,
+  retry logic y patrones de queue. Para n8n usar skill `n8n-to-api`.
+  Usar cuando: "webhook", "Stripe webhook", "GitHub webhook", "HMAC", "firma de webhook",
+  "idempotencia", "verificar webhook", "Clerk webhook", "webhook handler".
 ---
 
 # Webhook Integration

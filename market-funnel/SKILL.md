@@ -1,12 +1,10 @@
 ---
 name: market-funnel
 description: >
-  Sales funnel analysis and optimization from visit to purchase. Triggers:
-  "funnel analysis", "CRO", "sales funnel", "conversion rate optimization",
-  "customer journey", "drop-off analysis", "embudo de ventas",
-  "por qué no compran mis visitantes", "optimize my checkout",
-  "why am I losing customers", "signup friction", "onboarding drop-off",
-  "optimizar conversiones", "pricing page performance".
+  Análisis y optimización del embudo de ventas de visita a compra.
+  Usar cuando: "embudo de ventas", "funnel analysis", "CRO", "por qué no compran",
+  "dónde pierdo clientes", "optimizar checkout", "signup friction",
+  "onboarding drop-off", "optimizar conversiones".
 ---
 
 # Sales Funnel Analysis & Optimization
