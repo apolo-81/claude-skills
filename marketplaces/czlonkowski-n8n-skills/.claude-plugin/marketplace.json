@@ -1,0 +1,9 @@
+{
+  "name": "n8n-mcp-skills",
+  "description": "Expert skills for building n8n workflows",
+  "owner": {
+    "name": "Romuald Cz\u0142onkowski",
+    "url": "https://www.aiadvisors.pl/en"
+  },
+  "plugins": []
+}

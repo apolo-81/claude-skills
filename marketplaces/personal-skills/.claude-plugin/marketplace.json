@@ -1,0 +1,22 @@
+{
+  "name": "personal-skills",
+  "owner": {
+    "name": "apolo",
+    "email": ""
+  },
+  "metadata": {
+    "description": "Personal skills for daily workflow",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "drawio-diagram",
+      "description": "Generate draw.io diagrams from the CLI using cli-anything-drawio",
+      "source": "./",
+      "version": "1.0.0",
+      "skills": [
+        "./drawio-diagram"
+      ]
+    }
+  ]
+}
