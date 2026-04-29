@@ -1,0 +1,1600 @@
+{
+  "numStartups": 88,
+  "installMethod": "native",
+  "autoUpdates": false,
+  "theme": "dark-daltonized",
+  "hasSeenTasksHint": true,
+  "tipsHistory": {
+    "new-user-warmup": 7,
+    "plan-mode-for-complex-tasks": 87,
+    "terminal-setup": 84,
+    "memory-command": 76,
+    "theme-command": 81,
+    "status-line": 51,
+    "prompt-queue": 1,
+    "enter-to-steer-in-relatime": 82,
+    "todo-list": 82,
+    "install-github-app": 85,
+    "install-slack-app": 85,
+    "drag-and-drop-images": 85,
+    "double-esc-code-restore": 87,
+    "continue": 88,
+    "shift-tab": 88,
+    "image-paste": 82,
+    "web-app": 76,
+    "mobile-app": 77,
+    "frontend-design-plugin": 75,
+    "ide-upsell-external-terminal": 86,
+    "color-when-multi-clauding": 76,
+    "custom-agents": 84,
+    "agent-flag": 84,
+    "feedback-command": 84,
+    "permissions": 85,
+    "rename-conversation": 86,
+    "custom-commands": 86,
+    "git-worktrees": 82,
+    "overage-credit": 63,
+    "vercel-plugin": 68,
+    "remote-control": 88
+  },
+  "promptQueueUseCount": 385,
+  "btwUseCount": 1,
+  "cachedGrowthBookFeatures": {
+    "tengu_gouda_loop": true,
+    "tengu_ashen_kelp": false,
+    "tengu_harbor_permissions": true,
+    "tengu_quiet_slate_wren": false,
+    "tengu_blue_coaster": false,
+    "tengu_billiard_aviary": false,
+    "tengu_summarize_tool_results": true,
+    "tengu_amber_wren": {
+      "targetedRangeNudge": true,
+      "maxTokens": 25000
+    },
+    "tengu_malort_pedway": {
+      "enabled": true,
+      "pixelValidation": false,
+      "clipboardPasteMultiline": true,
+      "screenshotFilter": true,
+      "mouseAnimation": true,
+      "hideBeforeAction": true,
+      "autoTargetDisplay": false,
+      "coordinateMode": "pixels"
+    },
+    "tengu_sepia_heron": false,
+    "tengu_desktop_upsell_v2": {
+      "enabled": false
+    },
+    "tengu_relay_chain_v1": false,
+    "tengu_walrus_canteen": false,
+    "tengu_compact_line_prefix_killswitch": false,
+    "tengu_post_compact_survey": false,
+    "tengu_sm_config": {
+      "minimumMessageTokensToInit": 150000,
+      "minimumTokensBetweenUpdate": 40000,
+      "toolCallsBetweenUpdates": 10
+    },
+    "tengu_noreread_q7m_velvet": false,
+    "tengu_thinkback": false,
+    "tengu_prompt_cache_1h_config": {
+      "allowlist": [
+        "repl_main_thread*",
+        "sdk",
+        "auto_mode",
+        "rolling_compact",
+        "memdir_relevance"
+      ]
+    },
+    "tengu_c4w_usage_limit_notifications_enabled": true,
+    "tengu_slate_ribbon": true,
+    "tengu_bridge_repl_v2_config": {
+      "init_retry_max_attempts": 3,
+      "init_retry_base_delay_ms": 500,
+      "init_retry_jitter_fraction": 0.25,
+      "init_retry_max_delay_ms": 4000,
+      "http_timeout_ms": 10000,
+      "uuid_dedup_buffer_size": 2000,
+      "heartbeat_interval_ms": 20000,
+      "heartbeat_jitter_fraction": 0.1,
+      "token_refresh_buffer_ms": 600000,
+      "teardown_archive_timeout_ms": 1500,
+      "connect_timeout_ms": 15000,
+      "min_version": "2.1.70",
+      "should_show_app_upgrade_message": false
+    },
+    "tengu_lichen_compass": false,
+    "tengu_cork_m4q": true,
+    "tengu_plum_vx3": true,
+    "tengu_quill_anvil": false,
+    "tengu_prism_ledger": false,
+    "tengu_cedar_inlet": "off",
+    "tengu_react_vulnerability_warning": false,
+    "tengu_gleaming_fair": true,
+    "tengu_frond_boric": {},
+    "tengu_bad_survey_transcript_ask_config": {
+      "probability": 0.5
+    },
+    "tengu_amber_stoat": true,
+    "tengu_pewter_lantern": false,
+    "tengu_grey_wool": true,
+    "tengu_plank_river_frost": "user_intent",
+    "tengu_sepia_cormorant": [],
+    "tengu_harbor_ledger": [
+      {
+        "marketplace": "claude-plugins-official",
+        "plugin": "discord"
+      },
+      {
+        "marketplace": "claude-plugins-official",
+        "plugin": "telegram"
+      },
+      {
+        "marketplace": "claude-plugins-official",
+        "plugin": "fakechat"
+      },
+      {
+        "marketplace": "claude-plugins-official",
+        "plugin": "imessage"
+      }
+    ],
+    "tengu_willow_mode": "hint_v2",
+    "tengu_bramble_lintel": 7,
+    "tengu_bridge_repl_v2": true,
+    "tengu_moth_copse": false,
+    "tengu_workout2": true,
+    "tengu_read_dedup_killswitch": true,
+    "tengu_sotto_voce": true,
+    "tengu_pewter_kestrel": {
+      "global": 50000,
+      "Bash": 30000,
+      "PowerShell": 30000,
+      "Grep": 20000,
+      "Snip": 1000,
+      "StrReplaceBasedEditTool": 30000,
+      "BashSearchTool": 20000
+    },
+    "tengu_feedback_survey_config": {
+      "minTimeBeforeFeedbackMs": 600000,
+      "minTimeBetweenFeedbackMs": 43200000,
+      "minTimeBetweenGlobalFeedbackMs": 43200000,
+      "minUserTurnsBeforeFeedback": 5,
+      "minUserTurnsBetweenFeedback": 25,
+      "hideThanksAfterMs": 3000,
+      "onForModels": [
+        "*"
+      ],
+      "probability": 0.01
+    },
+    "tengu_marble_anvil": true,
+    "tengu_chair_sermon": false,
+    "tengu_doorbell_agave": false,
+    "tengu_prompt_suggestion": true,
+    "tengu_auto_mode_config": {
+      "enabled": "disabled"
+    },
+    "tengu_fg_left_arrow_agents": false,
+    "tengu_amber_coil_r4n": false,
+    "tengu_system_prompt_global_cache": true,
+    "tengu_sm_compact": false,
+    "tengu_vellum_lantern": false,
+    "tengu_hawthorn_steeple": false,
+    "tengu_slate_moth": true,
+    "tengu_immediate_model_command": false,
+    "tengu_ultraplan_config": {
+      "enabled": true
+    },
+    "tengu_loud_sugary_rock": false,
+    "tengu_amber_lattice": {
+      "plugins": [
+        "security-guidance",
+        "code-review",
+        "commit-commands",
+        "code-simplifier",
+        "hookify",
+        "feature-dev",
+        "frontend-design",
+        "pr-review-toolkit",
+        "skill-creator",
+        "plugin-dev",
+        "agent-sdk-dev",
+        "mcp-server-dev",
+        "claude-code-setup",
+        "claude-md-management",
+        "playground",
+        "ralph-loop",
+        "explanatory-output-style",
+        "learning-output-style",
+        "clangd-lsp",
+        "csharp-lsp",
+        "gopls-lsp",
+        "jdtls-lsp",
+        "kotlin-lsp",
+        "lua-lsp",
+        "php-lsp",
+        "pyright-lsp",
+        "ruby-lsp",
+        "rust-analyzer-lsp",
+        "swift-lsp",
+        "typescript-lsp"
+      ]
+    },
+    "tengu_ccr_bundle_seed_enabled": true,
+    "tengu_plugin_official_mkt_git_fallback": true,
+    "tengu_cedar_halo": false,
+    "tengu_hayate": false,
+    "tengu_vscode_cc_auth": true,
+    "tengu-top-of-feed-tip": {
+      "tip": "",
+      "color": ""
+    },
+    "tengu_fennel_kite": false,
+    "tengu_trace_lantern": false,
+    "tengu_surreal_dali": true,
+    "tengu_amber_prism": true,
+    "tengu_log_datadog_events": true,
+    "tengu_timber_lark": "off",
+    "tengu_marble_whisper2": true,
+    "tengu_claudeai_mcp_connectors": true,
+    "tengu_willow_census_ttl_hours": 24,
+    "tengu_session_memory": false,
+    "tengu_ccr_bridge_multi_session": true,
+    "tengu_prompt_cache_diagnostics": true,
+    "tengu_kairos_cron": true,
+    "tengu_sm_compact_config": {
+      "minTokens": 2000,
+      "maxTokens": 20000,
+      "minTextBlockMessages": 5
+    },
+    "tengu_good_survey_transcript_ask_config": {
+      "probability": 0.5
+    },
+    "tengu_edit_anchorwaste_kp3": false,
+    "tengu_disable_bypass_permissions_mode": false,
+    "tengu_drift_lantern": false,
+    "tengu_keybinding_customization_release": true,
+    "tengu_olive_hinge": "",
+    "tengu_tangerine_ladder_boost": true,
+    "tengu_birthday_hat": false,
+    "tengu_auto_notice_once": false,
+    "tengu_pewter_ledger": "OFF",
+    "tengu_canary": {},
+    "tengu_hazel_osprey_floor": 75000,
+    "tengu_idle_amber_finch": false,
+    "tengu_review_bughunter_config": {
+      "fleet_size": 5,
+      "max_duration_minutes": 10,
+      "agent_timeout_seconds": 600,
+      "total_wallclock_minutes": 22,
+      "model": "claude-opus-4-7",
+      "cost_note": "$5-$20",
+      "duration_note": "~5-10 min",
+      "enabled": true
+    },
+    "tengu_scratch": false,
+    "tengu_lapis_finch": true,
+    "tengu_orchid_trellis": false,
+    "tengu_nimble_amber_prose": false,
+    "tengu_cork_lantern": false,
+    "tengu_slate_heron": {
+      "enabled": false,
+      "gapThresholdMinutes": 60,
+      "keepRecent": 5
+    },
+    "tengu_cinder_almanac": true,
+    "tengu_kairos_loop_dynamic": true,
+    "tengu_mocha_barista": true,
+    "tengu_willow_sentinel_ttl_hours": 1,
+    "tengu_streaming_tool_execution2": true,
+    "tengu_max_version_config": {},
+    "tengu_dunwich_bell": false,
+    "tengu_kv7_prompt_sort": false,
+    "tengu_chomp_inflection": false,
+    "tengu_desktop_upsell": {
+      "enable_shortcut_tip": true,
+      "enable_startup_dialog": false
+    },
+    "tengu_ultraplan_prompt_identifier": "visual_plan",
+    "tengu_ember_trail": "0",
+    "tengu_auto_mode_default_on": false,
+    "tengu_penguin_mode_promo": {
+      "discountPercent": 0,
+      "endDate": "Feb 16"
+    },
+    "tengu_velvet_moth": 0.2,
+    "tengu_maple_forge_w8k": false,
+    "tengu_slate_meadow": false,
+    "tengu_ccr_bundle_max_bytes": 104857600,
+    "tengu_classifier_summary_heuristic_emit": false,
+    "tengu_snippet_save": false,
+    "tengu_sub_nomdrep_q7k": true,
+    "tengu_slate_nexus": true,
+    "tengu_tool_pear": false,
+    "tengu_amber_lynx": false,
+    "tengu_swann_brevity": "focused",
+    "tengu_satin_quoll": {},
+    "tengu_silk_hinge": false,
+    "tengu_passport_quail": false,
+    "tengu_tool_result_persistence": false,
+    "tengu_code_diff_cli": true,
+    "tengu_onyx_plover": {
+      "enabled": false,
+      "minHours": 24,
+      "minSessions": 3
+    },
+    "tengu_sparrow_ledger": false,
+    "tengu_orchid_mantis": false,
+    "tengu_version_config": {
+      "minVersion": "1.0.24"
+    },
+    "tengu_pewter_brook": false,
+    "tengu_willow_refresh_ttl_hours": 0,
+    "tengu_sage_compass": {},
+    "tengu_classifier_disabled_surfaces": "",
+    "tengu_grey_step2": {
+      "enabled": true,
+      "dialogTitle": "We recommend medium effort for Opus",
+      "dialogDescription": "Effort determines how long Claude thinks for when completing your task. We recommend medium effort for most tasks to balance speed and intelligence and maximize rate limits. Use ultrathink to trigger high effort when needed."
+    },
+    "tengu_hawthorn_window": 200000,
+    "tengu_classifier_summary_llm_emit": false,
+    "tengu_mcp_elicitation": true,
+    "tengu_file_write_optimization": true,
+    "tengu_gha_plugin_code_review": false,
+    "tengu_copper_bridge": true,
+    "tengu_turtle_carbon": true,
+    "tengu_cobalt_compass": true,
+    "tengu_slate_finch": true,
+    "tengu_event_sampling_config": {},
+    "tengu_quill_anvil_v2": false,
+    "tengu_copper_fox": false,
+    "tengu_tern_alloy": "off",
+    "tengu_ant_attribution_header_new": true,
+    "tengu_cobalt_ridge": true,
+    "tengu_oboe": true,
+    "tengu_miraculo_the_bard": false,
+    "tengu_quiet_harbor": false,
+    "tengu_collage_kaleidoscope": true,
+    "tengu_brass_pebble": false,
+    "tengu_worktree_mode": true,
+    "tengu_cobalt_lantern": true,
+    "tengu_sage_compass2": {
+      "enabled": true
+    },
+    "tengu_compact_cache_prefix": true,
+    "tengu_ochre_hollow": false,
+    "tengu_vscode_onboarding": false,
+    "tengu_ember_latch": false,
+    "tengu_flint_harbor": false,
+    "tengu_gypsum_kite": true,
+    "tengu_copper_wren": false,
+    "tengu_bridge_poll_interval_config": {
+      "poll_interval_ms_not_at_capacity": 2000,
+      "poll_interval_ms_at_capacity": 600000,
+      "heartbeat_interval_ms": 0,
+      "multisession_poll_interval_ms_not_at_capacity": 5000,
+      "multisession_poll_interval_ms_at_capacity": 60000,
+      "multisession_poll_interval_ms_partial_capacity": 5000,
+      "non_exclusive_heartbeat_interval_ms": 180000,
+      "session_keepalive_interval_ms": 0,
+      "session_keepalive_interval_v2_ms": 0
+    },
+    "tengu_year_end_2025_campaign_promo": false,
+    "tengu_editafterwrite_qpl": false,
+    "tengu_otk_slot_v1": false,
+    "tengu_willow_prism": true,
+    "tengu_marble_sandcastle": false,
+    "tengu_ccr_bridge": true,
+    "tengu_mcp_retry_failed_remote": false,
+    "tengu_attribution_header": true,
+    "tengu_crimson_vector": true,
+    "tengu_bridge_min_version": {
+      "minVersion": "2.1.70"
+    },
+    "tengu_negative_interaction_transcript_ask_config": {
+      "probability": 0
+    },
+    "tengu_relpath_gh7k": false,
+    "tengu_red_coaster": false,
+    "tengu_ccr_post_turn_summary": false,
+    "tengu_sedge_lantern": true,
+    "tengu_tide_elm": "off",
+    "tengu_ultraplan_timeout_seconds": 5400,
+    "tengu_shale_finch": true,
+    "tengu_slate_harrier": "off",
+    "tengu_kairos_cron_durable": false,
+    "tengu_hazel_osprey": false,
+    "tengu_amber_redwood2": "",
+    "tengu_cobalt_raccoon": false,
+    "tengu_amber_sentinel": true,
+    "tengu_slate_siskin": {
+      "enabled": false,
+      "timeoutMs": 8000,
+      "throttleMs": 30000,
+      "summaryLineThreshold": 5
+    },
+    "tengu_slate_thimble": false,
+    "tengu_1p_event_batch_config": {
+      "scheduledDelayMillis": 10000,
+      "maxExportBatchSize": 400,
+      "maxQueueSize": 8192,
+      "path": "/api/event_logging/v2/batch"
+    },
+    "tengu_birch_compass": true,
+    "tengu_coral_fern": false,
+    "tengu_crystal_beam": {
+      "budgetTokens": 0
+    },
+    "tengu_destructive_command_warning": false,
+    "tengu_slate_kestrel": false,
+    "tengu_lean_sub_pf7q": false,
+    "tengu_kairos_push_notifications": true,
+    "tengu_harbor": true,
+    "tengu_umber_petrel": false,
+    "tengu_quiet_basalt_echo": false,
+    "tengu_marble_whisper": true,
+    "tengu_vscode_review_upsell": false,
+    "tengu_ember_quill": false,
+    "tengu_bridge_requires_action_details": false,
+    "tengu_cobalt_wren": false,
+    "tengu_cobalt_heron": true,
+    "tengu_flint_harbor_prompt": {
+      "prompt": "You are helping a power user generate an onboarding guide for teammates who are new to Claude Code. The guide will live in the team's onboarding docs and can be pasted into Claude for an interactive walkthrough.\n\nYou're co-authoring this with them \u2014 collaborative and helpful, like a teammate who's done this before and is happy to share.\n\n## Usage data (last {{WINDOW_DAYS}} days)\n\nThis was scanned from the guide creator's local Claude Code transcripts:\n\n```json\n{{USAGE_DATA}}\n```\n\n## Your task\n\nBefore anything else \u2014 including before thinking through the classification \u2014 output exactly this line as your first visible text:\n\n> Looking at how you've used Claude over the last {{WINDOW_DAYS}} days to put together an onboarding guide for teammates new to Claude Code.\n\nThis must come before any extended thinking about session descriptors. The guide creator is staring at a blank screen until you do. Classification is step 2, not step 1.\n\nGenerate the guide immediately, then ask for revisions. Don't wait for answers first \u2014 it's easier for the guide creator to edit a concrete draft than answer abstract questions.\n\n1. **Output the acknowledgment line above.** No thinking, no classification, no tool calls before this. One line, then move on.\n\n2. **Derive the work-type breakdown.** Read the `sessionDescriptors` array \u2014 each entry describes one session via its title, any linked code reviews (`prNumbers`), and first user message. Classify each session into one of these task types:\n\n   - **build_feature** \u2014 new functionality, scripts, tools, config/CI/env setup\n   - **debug_fix** \u2014 investigating and fixing bugs\n   - **improve_quality** \u2014 refactoring, tests, cleanup, code review\n   - **analyze_data** \u2014 queries, metrics, number crunching\n   - **plan_design** \u2014 architecture, approach, strategy, understanding unfamiliar code, design review\n   - **prototype** \u2014 spikes, POCs, throwaway exploration\n   - **write_docs** \u2014 PRDs, RFCs, READMEs, design docs, copy/doc review\n\n   Categories describe the *type of task*, not the project or domain \u2014 a teammate on any project should recognize them. Review sessions belong with whatever's being reviewed: code review is improve_quality, doc review is write_docs, design review is plan_design. Most sessions fit the list; only invent a new category if it's genuinely a different type of task. Pick the top 3-5 with rough percentages. First messages alone are usually enough; titles and code-review links are enrichment. If first messages are uninformative, use tool and MCP counts as a weak hint. If there are ~0 sessions, leave the breakdown as a TODO.\n\n   In the rendered guide, display categories with spaces and title case (e.g. \"Build Feature\" not \"build_feature\").\n\n3. **Gather the remaining pieces.** For repos, start with `currentRepo` and check the workspace for sibling repo directories. For MCP server setup, use each entry's `name` (and `urlOrigin` where present) to infer what the server does and how a teammate would get access. Leave the Team Tips and Get Started sections as TODO placeholders \u2014 you'll ask for these in Review and fill them in after.\n\n4. **Write the guide to `ONBOARDING.md`** following this template:\n\n```\n{{GUIDE_TEMPLATE}}\n```\n\n   Fill in real numbers from the usage data (not placeholders). Use `generatedBy` for the name; if it's missing, omit the name. Ascii bar charts: `\u2588` for filled, `\u2591` for empty, 20 chars wide. Keep the HTML comment instruction at the bottom exactly as shown.\n\n5. **Render the guide in a code block, then close out the first turn.** You're co-authoring this guide with the guide creator \u2014 frame the follow-up as collaboration, not corrections.\n\n   After the code block, add a `---` horizontal rule and a `**Review**` heading so the guide is visually separated from your questions. Under the heading, number these three questions:\n\n   1. \"I went with '[X]' for the team name \u2014 let me know if that sounds right.\" (or if you couldn't tell: \"What's the team name? I'll add it in.\")\n   2. Is there a starter task for someone new to Claude Code? (ticket or doc link \u2014 optional)\n   3. Any team tips you'd tell a new teammate that aren't already in CLAUDE.md?\n\n   After they answer, update `ONBOARDING.md` with their team name, tips, and starter task. Then close with this exact line (not numbered, not paraphrased):\n\n   Saved to `ONBOARDING.md`. Drop it in your team docs and channels \u2014 when a new teammate pastes it into Claude Code, they get a guided onboarding tour from there.\n\n   Apply any edits they come back with to the file.",
+      "guideTemplate": "# Welcome to [Team Name]\n\n## How We Use Claude\n\nBased on [name]'s usage over the last [N] days:\n\nWork Type Breakdown:\n  [Category 1]  [ascii bar]  [N]%\n  [Category 2]  [ascii bar]  [N]%\n  [Category 3]  [ascii bar]  [N]%\n  ...\n\nTop Skills & Commands:\n  [/command]  [ascii bar]  [N]x/month\n  ...\n\nTop MCP Servers:\n  [Server]  [ascii bar]  [N] calls\n  ...\n\n## Your Setup Checklist\n\n### Codebases\n- [ ] [repo-name] \u2014 [repo url]\n...\n\n### MCP Servers to Activate\n- [ ] [Server] \u2014 [what it's for]. [How to get access]\n...\n\n### Skills to Know About\n- [/command] \u2014 [what it does, when the team uses it]\n...\n\n## Team Tips\n\n_TODO_\n\n## Get Started\n\n_TODO_\n\n<!-- INSTRUCTION FOR CLAUDE: A new teammate just pasted this guide for how the\nteam uses Claude Code. You're their onboarding buddy \u2014 warm, conversational,\nnot lecture-y.\n\nOpen with a warm welcome \u2014 include the team name from the title. Then: \"Your\nteammate uses Claude Code for [list all the work types]. Let's get you started.\"\n\nCheck what's already in place against everything under Setup Checklist\n(including skills), using markdown checkboxes \u2014 [x] done, [ ] not yet. Lead\nwith what they already have. One sentence per item, all in one message.\n\nTell them you'll help with setup, cover the actionable team tips, then the\nstarter task (if there is one). Offer to start with the first unchecked item,\nget their go-ahead, then work through the rest one by one.\n\nAfter setup, walk them through the remaining sections \u2014 offer to help where you\ncan (e.g. link to channels), and just surface the purely informational bits.\n\nDon't invent sections or summaries that aren't in the guide. The stats are the\nguide creator's personal usage data \u2014 don't extrapolate them into a \"team\nworkflow\" narrative. -->",
+      "windowDays": 30
+    },
+    "tengu_penguins_enabled": true,
+    "tengu_scarf_coffee": false,
+    "tengu_cache_plum_violet": true,
+    "tengu_amber_anchor": false,
+    "tengu_herring_clock": false,
+    "tengu_bridge_poll_interval_ms": 0,
+    "tengu_amber_lark": true,
+    "tengu_tool_search_unsupported_models": [
+      "haiku"
+    ],
+    "tengu_native_installation": false,
+    "tengu_coral_beacon": false,
+    "tengu_jade_anvil_4": false,
+    "tengu_amber_flint": true,
+    "tengu_mcp_subagent_prompt": false,
+    "tengu-off-switch": {
+      "activated": false
+    }
+  },
+  "copyFullResponse": true,
+  "unpinOpus47LaunchEffort": true,
+  "firstStartTime": "2026-03-19T03:55:07.387Z",
+  "opusProMigrationComplete": true,
+  "sonnet1m45MigrationComplete": true,
+  "userID": "0586a61123e50d96b51ba4ccdcfbd581cf92e6ca493c0706a809e79098494989",
+  "cachedChromeExtensionInstalled": true,
+  "changelogLastFetched": 1777303517178,
+  "autoUpdatesProtectedForNative": true,
+  "claudeCodeFirstTokenDate": "2025-12-18T02:31:03.391793Z",
+  "hasCompletedOnboarding": true,
+  "lastOnboardingVersion": "2.1.92",
+  "projects": {
+    "/home/apolo/Documents/44. Web Apps/WA": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {
+        "jcodemunch": {
+          "type": "stdio",
+          "command": "uvx",
+          "args": [
+            "jcodemunch-mcp"
+          ],
+          "env": {}
+        }
+      },
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "projectOnboardingSeenCount": 0,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "hasCompletedProjectOnboarding": true,
+      "lastCost": 18.227780550000006,
+      "lastAPIDuration": 4157216,
+      "lastAPIDurationWithoutRetries": 4156693,
+      "lastToolDuration": 1745000,
+      "lastDuration": 49291179,
+      "lastLinesAdded": 2785,
+      "lastLinesRemoved": 930,
+      "lastTotalInputTokens": 483357,
+      "lastTotalOutputTokens": 203000,
+      "lastTotalCacheCreationInputTokens": 2351625,
+      "lastTotalCacheReadInputTokens": 16999770,
+      "lastTotalWebSearchRequests": 67,
+      "lastModelUsage": {
+        "claude-sonnet-4-6": {
+          "inputTokens": 2187,
+          "outputTokens": 78284,
+          "cacheReadInputTokens": 9746231,
+          "cacheCreationInputTokens": 792601,
+          "webSearchRequests": 0,
+          "costUSD": 7.07694405
+        },
+        "claude-opus-4-6": {
+          "inputTokens": 11362,
+          "outputTokens": 78435,
+          "cacheReadInputTokens": 6610474,
+          "cacheCreationInputTokens": 488723,
+          "webSearchRequests": 0,
+          "costUSD": 8.377440750000002
+        },
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 469808,
+          "outputTokens": 46281,
+          "cacheReadInputTokens": 643065,
+          "cacheCreationInputTokens": 1070301,
+          "webSearchRequests": 67,
+          "costUSD": 2.7733957499999993
+        }
+      },
+      "lastSessionId": "007235ad-525d-45ce-b208-3e3b268b10a2",
+      "lastSessionMetrics": {
+        "frame_duration_ms_count": 23770,
+        "frame_duration_ms_min": 0.02925500087440014,
+        "frame_duration_ms_max": 164.03880999982357,
+        "frame_duration_ms_avg": 1.3042281365573738,
+        "frame_duration_ms_p50": 1.0903250006958842,
+        "frame_duration_ms_p95": 2.3287530501256697,
+        "frame_duration_ms_p99": 2.957518419970292,
+        "hook_duration_ms_count": 43,
+        "hook_duration_ms_min": 0,
+        "hook_duration_ms_max": 2666,
+        "hook_duration_ms_avg": 621.9302325581396,
+        "hook_duration_ms_p50": 19,
+        "hook_duration_ms_p95": 2632.2,
+        "hook_duration_ms_p99": 2654.24,
+        "pre_tool_hook_duration_ms_count": 101,
+        "pre_tool_hook_duration_ms_min": 0,
+        "pre_tool_hook_duration_ms_max": 1,
+        "pre_tool_hook_duration_ms_avg": 0.039603960396039604,
+        "pre_tool_hook_duration_ms_p50": 0,
+        "pre_tool_hook_duration_ms_p95": 0,
+        "pre_tool_hook_duration_ms_p99": 1
+      },
+      "lastFpsAverage": 1.82,
+      "lastFpsLow1Pct": 251.11
+    },
+    "/home/apolo/Documents/44. Web Apps/WA Group Poster": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "projectOnboardingSeenCount": 0,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "hasCompletedProjectOnboarding": true,
+      "lastCost": 1.8615517000000001,
+      "lastAPIDuration": 503076,
+      "lastAPIDurationWithoutRetries": 503032,
+      "lastToolDuration": 90051,
+      "lastDuration": 2685764,
+      "lastLinesAdded": 129,
+      "lastLinesRemoved": 14,
+      "lastTotalInputTokens": 444,
+      "lastTotalOutputTokens": 23064,
+      "lastTotalCacheCreationInputTokens": 131046,
+      "lastTotalCacheReadInputTokens": 3412384,
+      "lastTotalWebSearchRequests": 0,
+      "lastFpsAverage": 1.79,
+      "lastFpsLow1Pct": 283.16,
+      "lastModelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 369,
+          "outputTokens": 14,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0,
+          "webSearchRequests": 0,
+          "costUSD": 0.00043900000000000005
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 75,
+          "outputTokens": 23050,
+          "cacheReadInputTokens": 3412384,
+          "cacheCreationInputTokens": 131046,
+          "webSearchRequests": 0,
+          "costUSD": 1.8611127000000005
+        }
+      },
+      "lastSessionId": "2bb7b7db-2b17-48ba-99f7-b3416f61a010",
+      "lastSessionMetrics": {
+        "frame_duration_ms_count": 4801,
+        "frame_duration_ms_min": 0.06832700000086334,
+        "frame_duration_ms_max": 13.068589999806136,
+        "frame_duration_ms_avg": 0.5985340287453719,
+        "frame_duration_ms_p50": 0.5338214999937918,
+        "frame_duration_ms_p95": 0.8661972500325643,
+        "frame_duration_ms_p99": 1.9310197902220472,
+        "hook_duration_ms_count": 37,
+        "hook_duration_ms_min": 0,
+        "hook_duration_ms_max": 73,
+        "hook_duration_ms_avg": 2.5135135135135136,
+        "hook_duration_ms_p50": 0,
+        "hook_duration_ms_p95": 2.7999999999999616,
+        "hook_duration_ms_p99": 50.320000000000036,
+        "pre_tool_hook_duration_ms_count": 68,
+        "pre_tool_hook_duration_ms_min": 0,
+        "pre_tool_hook_duration_ms_max": 1,
+        "pre_tool_hook_duration_ms_avg": 0.058823529411764705,
+        "pre_tool_hook_duration_ms_p50": 0,
+        "pre_tool_hook_duration_ms_p95": 0.6499999999999986,
+        "pre_tool_hook_duration_ms_p99": 1
+      }
+    },
+    "/home/apolo/Documents/44. Web Apps/AULA - UC LOGOS": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "projectOnboardingSeenCount": 0,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": [
+        "app.js",
+        "validation.js",
+        "courses.js",
+        "CLAUDE.md",
+        "Profile.tsx"
+      ],
+      "exampleFilesGeneratedAt": 1773965358865,
+      "hasCompletedProjectOnboarding": true,
+      "lastCost": 4.818737399999999,
+      "lastAPIDuration": 1094848,
+      "lastAPIDurationWithoutRetries": 1094790,
+      "lastToolDuration": 87837,
+      "lastDuration": 18445682,
+      "lastLinesAdded": 285,
+      "lastLinesRemoved": 10,
+      "lastTotalInputTokens": 1336,
+      "lastTotalOutputTokens": 35601,
+      "lastTotalCacheCreationInputTokens": 305190,
+      "lastTotalCacheReadInputTokens": 10454173,
+      "lastTotalWebSearchRequests": 0,
+      "lastFpsAverage": 1.29,
+      "lastFpsLow1Pct": 68.4,
+      "lastModelUsage": {
+        "claude-sonnet-4-6": {
+          "inputTokens": 1336,
+          "outputTokens": 35601,
+          "cacheReadInputTokens": 10454173,
+          "cacheCreationInputTokens": 305190,
+          "webSearchRequests": 0,
+          "costUSD": 4.818737399999999
+        }
+      },
+      "lastSessionId": "f5851f53-c72a-41e0-9d8e-6c0d9dedb791",
+      "lastSessionMetrics": {
+        "frame_duration_ms_count": 23829,
+        "frame_duration_ms_min": 0.06056400015950203,
+        "frame_duration_ms_max": 106.78851399943233,
+        "frame_duration_ms_avg": 2.776486996007133,
+        "frame_duration_ms_p50": 2.499812001362443,
+        "frame_duration_ms_p95": 4.274060250911861,
+        "frame_duration_ms_p99": 12.079835500027974,
+        "hook_duration_ms_count": 51,
+        "hook_duration_ms_min": 0,
+        "hook_duration_ms_max": 63,
+        "hook_duration_ms_avg": 14.92156862745098,
+        "hook_duration_ms_p50": 1,
+        "hook_duration_ms_p95": 41.5,
+        "hook_duration_ms_p99": 53,
+        "pre_tool_hook_duration_ms_count": 115,
+        "pre_tool_hook_duration_ms_min": 0,
+        "pre_tool_hook_duration_ms_max": 1,
+        "pre_tool_hook_duration_ms_avg": 0.06086956521739131,
+        "pre_tool_hook_duration_ms_p50": 0,
+        "pre_tool_hook_duration_ms_p95": 1,
+        "pre_tool_hook_duration_ms_p99": 1
+      }
+    },
+    "/home/apolo/Documents/44. Web Apps/AULA - UC LOGOS/frontend": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": false,
+      "projectOnboardingSeenCount": 0,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false
+    },
+    "/home/apolo/Documents/44. Web Apps/Dental Lead Manager": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "projectOnboardingSeenCount": 0,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "lastCost": 6.352960049999998,
+      "lastAPIDuration": 1703749,
+      "lastAPIDurationWithoutRetries": 1703334,
+      "lastToolDuration": 273453,
+      "lastDuration": 19616075,
+      "lastLinesAdded": 1462,
+      "lastLinesRemoved": 195,
+      "lastTotalInputTokens": 267,
+      "lastTotalOutputTokens": 82122,
+      "lastTotalCacheCreationInputTokens": 336529,
+      "lastTotalCacheReadInputTokens": 12861151,
+      "lastTotalWebSearchRequests": 0,
+      "lastFpsAverage": 1.87,
+      "lastFpsLow1Pct": 44.03,
+      "lastModelUsage": {
+        "claude-sonnet-4-6": {
+          "inputTokens": 267,
+          "outputTokens": 82122,
+          "cacheReadInputTokens": 12861151,
+          "cacheCreationInputTokens": 336529,
+          "webSearchRequests": 0,
+          "costUSD": 6.352960049999998
+        }
+      },
+      "lastSessionId": "2b91799e-bf6b-4b2a-ae0c-e7f8da7eea78",
+      "lastSessionMetrics": {
+        "frame_duration_ms_count": 36747,
+        "frame_duration_ms_min": 0.03432399779558182,
+        "frame_duration_ms_max": 171.83933299966156,
+        "frame_duration_ms_avg": 2.6002513458964396,
+        "frame_duration_ms_p50": 1.6556600003968924,
+        "frame_duration_ms_p95": 4.481633750209582,
+        "frame_duration_ms_p99": 12.10683315012604,
+        "hook_duration_ms_count": 128,
+        "hook_duration_ms_min": 0,
+        "hook_duration_ms_max": 77,
+        "hook_duration_ms_avg": 8.4375,
+        "hook_duration_ms_p50": 0,
+        "hook_duration_ms_p95": 47.29999999999998,
+        "hook_duration_ms_p99": 51.730000000000004,
+        "pre_tool_hook_duration_ms_count": 177,
+        "pre_tool_hook_duration_ms_min": 0,
+        "pre_tool_hook_duration_ms_max": 4,
+        "pre_tool_hook_duration_ms_avg": 0.11864406779661017,
+        "pre_tool_hook_duration_ms_p50": 0,
+        "pre_tool_hook_duration_ms_p95": 1,
+        "pre_tool_hook_duration_ms_p99": 1.7200000000000273
+      },
+      "hasCompletedProjectOnboarding": true
+    },
+    "/home/apolo": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": false,
+      "projectOnboardingSeenCount": 2,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": [],
+      "lastCost": 0,
+      "lastAPIDuration": 0,
+      "lastAPIDurationWithoutRetries": 0,
+      "lastToolDuration": 0,
+      "lastDuration": 741360,
+      "lastLinesAdded": 0,
+      "lastLinesRemoved": 0,
+      "lastTotalInputTokens": 0,
+      "lastTotalOutputTokens": 0,
+      "lastTotalCacheCreationInputTokens": 0,
+      "lastTotalCacheReadInputTokens": 0,
+      "lastTotalWebSearchRequests": 0,
+      "lastFpsAverage": 0.09,
+      "lastFpsLow1Pct": 186.86,
+      "lastModelUsage": {},
+      "lastSessionId": "17a218b4-4df1-4b60-8de5-e105065be0a8",
+      "lastSessionMetrics": {
+        "frame_duration_ms_count": 69,
+        "frame_duration_ms_min": 0.1207959999992454,
+        "frame_duration_ms_max": 5.3516099999997095,
+        "frame_duration_ms_avg": 1.2941288985518509,
+        "frame_duration_ms_p50": 0.6555940000107512,
+        "frame_duration_ms_p95": 4.695108400005847,
+        "frame_duration_ms_p99": 5.216466119999874,
+        "hook_duration_ms_count": 1,
+        "hook_duration_ms_min": 121,
+        "hook_duration_ms_max": 121,
+        "hook_duration_ms_avg": 121,
+        "hook_duration_ms_p50": 121,
+        "hook_duration_ms_p95": 121,
+        "hook_duration_ms_p99": 121
+      },
+      "lastGracefulShutdown": true
+    },
+    "/home/apolo/Documents/33. WebSites Design/Amplifica Site": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "projectOnboardingSeenCount": 0,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": [
+        "index.html",
+        "48-horas-vs-4-semanas.html",
+        "servicios.html",
+        "aviso-publicidad-cofepris-gratis.html",
+        "caso-exito-dentista-queretaro.html"
+      ],
+      "exampleFilesGeneratedAt": 1774121427172,
+      "hasCompletedProjectOnboarding": true,
+      "lastCost": 1.2168183000000004,
+      "lastAPIDuration": 641278,
+      "lastAPIDurationWithoutRetries": 641234,
+      "lastToolDuration": 2608,
+      "lastDuration": 18278356,
+      "lastLinesAdded": 1656,
+      "lastLinesRemoved": 0,
+      "lastTotalInputTokens": 1693,
+      "lastTotalOutputTokens": 32225,
+      "lastTotalCacheCreationInputTokens": 90496,
+      "lastTotalCacheReadInputTokens": 1299801,
+      "lastTotalWebSearchRequests": 0,
+      "lastFpsAverage": 0.53,
+      "lastFpsLow1Pct": 105.95,
+      "lastModelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 408,
+          "outputTokens": 12,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0,
+          "webSearchRequests": 0,
+          "costUSD": 0.000468
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 1285,
+          "outputTokens": 32213,
+          "cacheReadInputTokens": 1299801,
+          "cacheCreationInputTokens": 90496,
+          "webSearchRequests": 0,
+          "costUSD": 1.2163503000000002
+        }
+      },
+      "lastSessionId": "db8da7de-cb6c-4358-89fa-536eccd4eb94",
+      "lastSessionMetrics": {
+        "frame_duration_ms_count": 9740,
+        "frame_duration_ms_min": 0.05196700000669807,
+        "frame_duration_ms_max": 357.9539090000326,
+        "frame_duration_ms_avg": 1.5733730977418414,
+        "frame_duration_ms_p50": 0.9016580000170507,
+        "frame_duration_ms_p95": 6.105538849992445,
+        "frame_duration_ms_p99": 8.45401651006192,
+        "hook_duration_ms_count": 23,
+        "hook_duration_ms_min": 0,
+        "hook_duration_ms_max": 151,
+        "hook_duration_ms_avg": 16.08695652173913,
+        "hook_duration_ms_p50": 0,
+        "hook_duration_ms_p95": 91.59999999999995,
+        "hook_duration_ms_p99": 138.68000000000006,
+        "pre_tool_hook_duration_ms_count": 31,
+        "pre_tool_hook_duration_ms_min": 0,
+        "pre_tool_hook_duration_ms_max": 1,
+        "pre_tool_hook_duration_ms_avg": 0.03225806451612903,
+        "pre_tool_hook_duration_ms_p50": 0,
+        "pre_tool_hook_duration_ms_p95": 0,
+        "pre_tool_hook_duration_ms_p99": 0.6999999999999993
+      }
+    },
+    "/home/apolo/Documents/33. WebSites Design/Universidad Cristiana Logos": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "projectOnboardingSeenCount": 0,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": [
+        "AppRouter.jsx",
+        "HomePage.jsx",
+        "index.html",
+        ".htaccess",
+        "usePageMeta.js"
+      ],
+      "exampleFilesGeneratedAt": 1774316015309,
+      "hasCompletedProjectOnboarding": true,
+      "disabledMcpServers": [
+        "pencil"
+      ],
+      "lastCost": 0,
+      "lastAPIDuration": 0,
+      "lastAPIDurationWithoutRetries": 0,
+      "lastToolDuration": 0,
+      "lastDuration": 733162,
+      "lastLinesAdded": 0,
+      "lastLinesRemoved": 0,
+      "lastTotalInputTokens": 0,
+      "lastTotalOutputTokens": 0,
+      "lastTotalCacheCreationInputTokens": 0,
+      "lastTotalCacheReadInputTokens": 0,
+      "lastTotalWebSearchRequests": 0,
+      "lastFpsAverage": 0.33,
+      "lastFpsLow1Pct": 171.51,
+      "lastModelUsage": {},
+      "lastSessionId": "fb89f3da-eb54-404f-b30c-581989037ec0",
+      "lastSessionMetrics": {
+        "frame_duration_ms_count": 244,
+        "frame_duration_ms_min": 0.09130000000004657,
+        "frame_duration_ms_max": 8.721129999998084,
+        "frame_duration_ms_avg": 0.5707572131152279,
+        "frame_duration_ms_p50": 0.40967450000243844,
+        "frame_duration_ms_p95": 1.557472499972208,
+        "frame_duration_ms_p99": 5.480694930054009,
+        "hook_duration_ms_count": 1,
+        "hook_duration_ms_min": 129,
+        "hook_duration_ms_max": 129,
+        "hook_duration_ms_avg": 129,
+        "hook_duration_ms_p50": 129,
+        "hook_duration_ms_p95": 129,
+        "hook_duration_ms_p99": 129
+      }
+    },
+    "/home/apolo/Documents/77. Proyectos/Universidad Cristiana Logos": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "projectOnboardingSeenCount": 0,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "lastSessionMetrics": {
+        "frame_duration_ms_count": 3586,
+        "frame_duration_ms_min": 0.07389800006058067,
+        "frame_duration_ms_max": 37.535048000048846,
+        "frame_duration_ms_avg": 0.8365793056342745,
+        "frame_duration_ms_p50": 0.7405624999664724,
+        "frame_duration_ms_p95": 1.2988498500082641,
+        "frame_duration_ms_p99": 1.6308031799539455,
+        "hook_duration_ms_count": 14,
+        "hook_duration_ms_min": 0,
+        "hook_duration_ms_max": 84,
+        "hook_duration_ms_avg": 7.142857142857143,
+        "hook_duration_ms_p50": 0.5,
+        "hook_duration_ms_p95": 36.549999999999976,
+        "hook_duration_ms_p99": 74.50999999999993,
+        "pre_tool_hook_duration_ms_count": 30,
+        "pre_tool_hook_duration_ms_min": 0,
+        "pre_tool_hook_duration_ms_max": 1,
+        "pre_tool_hook_duration_ms_avg": 0.06666666666666667,
+        "pre_tool_hook_duration_ms_p50": 0,
+        "pre_tool_hook_duration_ms_p95": 0.5499999999999972,
+        "pre_tool_hook_duration_ms_p99": 1
+      },
+      "lastCost": 0.4988965,
+      "lastAPIDuration": 188157,
+      "lastAPIDurationWithoutRetries": 188146,
+      "lastToolDuration": 1589,
+      "lastDuration": 2220742,
+      "lastLinesAdded": 319,
+      "lastLinesRemoved": 0,
+      "lastTotalInputTokens": 462,
+      "lastTotalOutputTokens": 8859,
+      "lastTotalCacheCreationInputTokens": 50172,
+      "lastTotalCacheReadInputTokens": 591755,
+      "lastTotalWebSearchRequests": 0,
+      "lastFpsAverage": 1.62,
+      "lastFpsLow1Pct": 438.21,
+      "lastModelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 433,
+          "outputTokens": 18,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0,
+          "webSearchRequests": 0,
+          "costUSD": 0.000523
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 29,
+          "outputTokens": 8841,
+          "cacheReadInputTokens": 591755,
+          "cacheCreationInputTokens": 50172,
+          "webSearchRequests": 0,
+          "costUSD": 0.4983735
+        }
+      },
+      "lastSessionId": "923384f0-369d-45ce-ada7-e0e6e5bacacb"
+    },
+    "/home/apolo/Documents/88. Proyectos/Universidad Cristiana Logos": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "projectOnboardingSeenCount": 0,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "hasCompletedProjectOnboarding": true,
+      "lastCost": 0.6723062,
+      "lastAPIDuration": 203128,
+      "lastAPIDurationWithoutRetries": 203095,
+      "lastToolDuration": 746955,
+      "lastDuration": 1337257,
+      "lastLinesAdded": 39,
+      "lastLinesRemoved": 11,
+      "lastTotalInputTokens": 665,
+      "lastTotalOutputTokens": 7765,
+      "lastTotalCacheCreationInputTokens": 34974,
+      "lastTotalCacheReadInputTokens": 1411719,
+      "lastTotalWebSearchRequests": 0,
+      "lastModelUsage": {
+        "claude-sonnet-4-6": {
+          "inputTokens": 319,
+          "outputTokens": 7751,
+          "cacheReadInputTokens": 1411719,
+          "cacheCreationInputTokens": 34974,
+          "webSearchRequests": 0,
+          "costUSD": 0.6718902
+        },
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 346,
+          "outputTokens": 14,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0,
+          "webSearchRequests": 0,
+          "costUSD": 0.00041600000000000003
+        }
+      },
+      "lastSessionId": "5897c62e-b644-47ec-8c3f-f2ad0392c6eb",
+      "lastSessionMetrics": {
+        "frame_duration_ms_count": 15298,
+        "frame_duration_ms_min": 0.07454899999902409,
+        "frame_duration_ms_max": 9.719799000005878,
+        "frame_duration_ms_avg": 0.9355149218187109,
+        "frame_duration_ms_p50": 0.9308169999858364,
+        "frame_duration_ms_p95": 1.2526638499693945,
+        "frame_duration_ms_p99": 1.7391202499438068,
+        "hook_duration_ms_count": 28,
+        "hook_duration_ms_min": 0,
+        "hook_duration_ms_max": 86,
+        "hook_duration_ms_avg": 7.285714285714286,
+        "hook_duration_ms_p50": 1,
+        "hook_duration_ms_p95": 21,
+        "hook_duration_ms_p99": 68.45000000000003,
+        "pre_tool_hook_duration_ms_count": 36,
+        "pre_tool_hook_duration_ms_min": 0,
+        "pre_tool_hook_duration_ms_max": 5,
+        "pre_tool_hook_duration_ms_avg": 0.16666666666666666,
+        "pre_tool_hook_duration_ms_p50": 0,
+        "pre_tool_hook_duration_ms_p95": 0.25,
+        "pre_tool_hook_duration_ms_p99": 3.5999999999999943
+      },
+      "lastFpsAverage": 11.45,
+      "lastFpsLow1Pct": 581.22
+    },
+    "/home/apolo/Documents/55. Archive/apolo": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "projectOnboardingSeenCount": 0,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "lastCost": 0.17003775000000002,
+      "lastAPIDuration": 29038,
+      "lastAPIDurationWithoutRetries": 29036,
+      "lastToolDuration": 211,
+      "lastDuration": 43226,
+      "lastLinesAdded": 0,
+      "lastLinesRemoved": 0,
+      "lastTotalInputTokens": 8,
+      "lastTotalOutputTokens": 1371,
+      "lastTotalCacheCreationInputTokens": 27741,
+      "lastTotalCacheReadInputTokens": 151400,
+      "lastTotalWebSearchRequests": 0,
+      "lastModelUsage": {
+        "claude-sonnet-4-6": {
+          "inputTokens": 8,
+          "outputTokens": 1371,
+          "cacheReadInputTokens": 151400,
+          "cacheCreationInputTokens": 27741,
+          "webSearchRequests": 0,
+          "costUSD": 0.17003775000000002
+        }
+      },
+      "lastSessionId": "6e0d30db-4747-4d9d-ac6d-12aa8d74afae",
+      "lastSessionMetrics": {
+        "frame_duration_ms_count": 508,
+        "frame_duration_ms_min": 0.06323799999972834,
+        "frame_duration_ms_max": 7.0435699999999315,
+        "frame_duration_ms_avg": 0.6161529625984613,
+        "frame_duration_ms_p50": 0.4964764999995168,
+        "frame_duration_ms_p95": 1.1361167499992002,
+        "frame_duration_ms_p99": 4.543812850002069,
+        "hook_duration_ms_count": 11,
+        "hook_duration_ms_min": 0,
+        "hook_duration_ms_max": 70,
+        "hook_duration_ms_avg": 7.181818181818182,
+        "hook_duration_ms_p50": 0,
+        "hook_duration_ms_p95": 39,
+        "hook_duration_ms_p99": 63.800000000000026,
+        "pre_tool_hook_duration_ms_count": 10,
+        "pre_tool_hook_duration_ms_min": 0,
+        "pre_tool_hook_duration_ms_max": 1,
+        "pre_tool_hook_duration_ms_avg": 0.2,
+        "pre_tool_hook_duration_ms_p50": 0,
+        "pre_tool_hook_duration_ms_p95": 1,
+        "pre_tool_hook_duration_ms_p99": 1
+      },
+      "lastFpsAverage": 12.1,
+      "lastFpsLow1Pct": 219.8
+    },
+    "/home/apolo/Documents/88. Proyectos/Tarjeta Digital MLM": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "projectOnboardingSeenCount": 0,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "hasCompletedProjectOnboarding": true,
+      "lastCost": 8.800187849999999,
+      "lastAPIDuration": 2375596,
+      "lastAPIDurationWithoutRetries": 2375423,
+      "lastToolDuration": 1088912,
+      "lastDuration": 62635893,
+      "lastLinesAdded": 4828,
+      "lastLinesRemoved": 147,
+      "lastTotalInputTokens": 2756,
+      "lastTotalOutputTokens": 160222,
+      "lastTotalCacheCreationInputTokens": 665519,
+      "lastTotalCacheReadInputTokens": 12985192,
+      "lastTotalWebSearchRequests": 0,
+      "lastFpsAverage": 0.77,
+      "lastFpsLow1Pct": 132.55,
+      "lastModelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 1172,
+          "outputTokens": 32,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0,
+          "webSearchRequests": 0,
+          "costUSD": 0.001332
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 1584,
+          "outputTokens": 160190,
+          "cacheReadInputTokens": 12985192,
+          "cacheCreationInputTokens": 665519,
+          "webSearchRequests": 0,
+          "costUSD": 8.798855849999997
+        }
+      },
+      "lastSessionId": "3a768e0d-739d-4b2d-a6a4-6a65c815b9a7",
+      "lastSessionMetrics": {
+        "frame_duration_ms_count": 48260,
+        "frame_duration_ms_min": 0.09054900000046473,
+        "frame_duration_ms_max": 116.21663400001125,
+        "frame_duration_ms_avg": 3.8820395994812644,
+        "frame_duration_ms_p50": 4.3706985004246235,
+        "frame_duration_ms_p95": 5.94489914990263,
+        "frame_duration_ms_p99": 7.165680140170733,
+        "hook_duration_ms_count": 151,
+        "hook_duration_ms_min": 0,
+        "hook_duration_ms_max": 101,
+        "hook_duration_ms_avg": 2.1456953642384105,
+        "hook_duration_ms_p50": 0,
+        "hook_duration_ms_p95": 15,
+        "hook_duration_ms_p99": 28,
+        "pre_tool_hook_duration_ms_count": 332,
+        "pre_tool_hook_duration_ms_min": 0,
+        "pre_tool_hook_duration_ms_max": 1,
+        "pre_tool_hook_duration_ms_avg": 0.0572289156626506,
+        "pre_tool_hook_duration_ms_p50": 0,
+        "pre_tool_hook_duration_ms_p95": 1,
+        "pre_tool_hook_duration_ms_p99": 1
+      }
+    },
+    "/home/apolo/Documents": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "projectOnboardingSeenCount": 0,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "lastCost": 14.049209900000008,
+      "lastAPIDuration": 4002353,
+      "lastAPIDurationWithoutRetries": 4001630,
+      "lastToolDuration": 7787074,
+      "lastDuration": 65640897,
+      "lastLinesAdded": 2090,
+      "lastLinesRemoved": 141,
+      "lastTotalInputTokens": 7053,
+      "lastTotalOutputTokens": 222927,
+      "lastTotalCacheCreationInputTokens": 825362,
+      "lastTotalCacheReadInputTokens": 25307308,
+      "lastTotalWebSearchRequests": 0,
+      "lastFpsAverage": 3.46,
+      "lastFpsLow1Pct": 792.7,
+      "lastModelUsage": {
+        "claude-sonnet-4-6": {
+          "inputTokens": 5721,
+          "outputTokens": 222878,
+          "cacheReadInputTokens": 25307308,
+          "cacheCreationInputTokens": 825362,
+          "webSearchRequests": 0,
+          "costUSD": 14.047632900000007
+        },
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 1332,
+          "outputTokens": 49,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0,
+          "webSearchRequests": 0,
+          "costUSD": 0.001577
+        }
+      },
+      "lastSessionId": "74d61db2-4914-46e8-b9ba-0013853c301a",
+      "lastSessionMetrics": {
+        "frame_duration_ms_count": 226912,
+        "frame_duration_ms_min": 0.028001997619867325,
+        "frame_duration_ms_max": 44.26555100083351,
+        "frame_duration_ms_avg": 1.7573478762474728,
+        "frame_duration_ms_p50": 1.424156000779476,
+        "frame_duration_ms_p95": 3.824751399969682,
+        "frame_duration_ms_p99": 5.218190979883074,
+        "hook_duration_ms_count": 436,
+        "hook_duration_ms_min": 21,
+        "hook_duration_ms_max": 424,
+        "hook_duration_ms_avg": 65.8302752293578,
+        "hook_duration_ms_p50": 29,
+        "hook_duration_ms_p95": 390,
+        "hook_duration_ms_p99": 417.2499999999999,
+        "pre_tool_hook_duration_ms_count": 358,
+        "pre_tool_hook_duration_ms_min": 0,
+        "pre_tool_hook_duration_ms_max": 8,
+        "pre_tool_hook_duration_ms_avg": 0.17597765363128492,
+        "pre_tool_hook_duration_ms_p50": 0,
+        "pre_tool_hook_duration_ms_p95": 1,
+        "pre_tool_hook_duration_ms_p99": 4
+      },
+      "hasCompletedProjectOnboarding": true,
+      "disabledMcpServers": [
+        "openspace",
+        "claude.ai Gmail",
+        "claude.ai Google Calendar",
+        "claude.ai Google Drive"
+      ],
+      "lastGracefulShutdown": false
+    }
+  },
+  "groveConfigCache": {
+    "ebead26b-f061-41d1-847b-bdaad40ed103": {
+      "grove_enabled": true,
+      "timestamp": 1777303521021
+    }
+  },
+  "lastReleaseNotesSeen": "2.1.119",
+  "officialMarketplaceAutoInstallAttempted": true,
+  "officialMarketplaceAutoInstalled": true,
+  "officialMarketplaceAutoInstallFailReason": "git_unavailable",
+  "officialMarketplaceAutoInstallRetryCount": 1,
+  "officialMarketplaceAutoInstallLastAttemptTime": 1773896482361,
+  "officialMarketplaceAutoInstallNextRetryTime": 1773903682361,
+  "clientDataCache": null,
+  "penguinModeOrgEnabled": false,
+  "cachedExtraUsageDisabledReason": "org_level_disabled",
+  "claudeAiMcpEverConnected": [
+    "claude.ai Google Calendar",
+    "claude.ai Gmail"
+  ],
+  "voiceLangHintShownCount": 2,
+  "voiceLangHintLastLanguage": "es",
+  "skillUsage": {
+    "superpowers:brainstorming": {
+      "usageCount": 18,
+      "lastUsedAt": 1775629734781
+    },
+    "ppt-creator:ppt-creator": {
+      "usageCount": 1,
+      "lastUsedAt": 1773899018740
+    },
+    "superpowers:writing-skills": {
+      "usageCount": 2,
+      "lastUsedAt": 1775345807625
+    },
+    "semgrep-plugin:setup_semgrep_plugin": {
+      "usageCount": 2,
+      "lastUsedAt": 1773940606346
+    },
+    "update-config": {
+      "usageCount": 5,
+      "lastUsedAt": 1777308413255
+    },
+    "commit-commands:commit-push-pr": {
+      "usageCount": 2,
+      "lastUsedAt": 1775758018694
+    },
+    "superpowers:writing-plans": {
+      "usageCount": 16,
+      "lastUsedAt": 1776309989743
+    },
+    "market-proposal": {
+      "usageCount": 1,
+      "lastUsedAt": 1773987524269
+    },
+    "pdf-creator": {
+      "usageCount": 3,
+      "lastUsedAt": 1775590385728
+    },
+    "superpowers:executing-plans": {
+      "usageCount": 1,
+      "lastUsedAt": 1773988544801
+    },
+    "mcp-integration": {
+      "usageCount": 2,
+      "lastUsedAt": 1774815124110
+    },
+    "supabase-stack": {
+      "usageCount": 1,
+      "lastUsedAt": 1774031428562
+    },
+    "superpowers:test-driven-development": {
+      "usageCount": 1,
+      "lastUsedAt": 1774048234746
+    },
+    "init": {
+      "usageCount": 3,
+      "lastUsedAt": 1774762868753
+    },
+    "superpowers:subagent-driven-development": {
+      "usageCount": 13,
+      "lastUsedAt": 1776310398568
+    },
+    "superpowers:systematic-debugging": {
+      "usageCount": 3,
+      "lastUsedAt": 1775846054054
+    },
+    "web-animations": {
+      "usageCount": 1,
+      "lastUsedAt": 1774373302712
+    },
+    "playground:playground": {
+      "usageCount": 1,
+      "lastUsedAt": 1774373335524
+    },
+    "chatbot-widget": {
+      "usageCount": 2,
+      "lastUsedAt": 1774589648716
+    },
+    "market-audit": {
+      "usageCount": 1,
+      "lastUsedAt": 1774541074980
+    },
+    "pro-presentations": {
+      "usageCount": 4,
+      "lastUsedAt": 1775858995354
+    },
+    "feature-dev:feature-dev": {
+      "usageCount": 1,
+      "lastUsedAt": 1774666053300
+    },
+    "skills-search": {
+      "usageCount": 3,
+      "lastUsedAt": 1775345422050
+    },
+    "seo-assets": {
+      "usageCount": 3,
+      "lastUsedAt": 1774733752077
+    },
+    "resume": {
+      "usageCount": 38,
+      "lastUsedAt": 1777304348703
+    },
+    "deep-research": {
+      "usageCount": 2,
+      "lastUsedAt": 1776150517840
+    },
+    "compress": {
+      "usageCount": 66,
+      "lastUsedAt": 1776452808428
+    },
+    "superpowers:dispatching-parallel-agents": {
+      "usageCount": 1,
+      "lastUsedAt": 1774850094848
+    },
+    "commit-commands:commit": {
+      "usageCount": 1,
+      "lastUsedAt": 1774932962484
+    },
+    "statusline": {
+      "usageCount": 3,
+      "lastUsedAt": 1775228832262
+    },
+    "claude-code-history-files-finder": {
+      "usageCount": 1,
+      "lastUsedAt": 1775234081556
+    },
+    "codex:setup": {
+      "usageCount": 2,
+      "lastUsedAt": 1775252583166
+    },
+    "codex:rescue": {
+      "usageCount": 1,
+      "lastUsedAt": 1775252749543
+    },
+    "skill-reviewer": {
+      "usageCount": 1,
+      "lastUsedAt": 1775339365532
+    },
+    "skills": {
+      "usageCount": 2,
+      "lastUsedAt": 1776135230622
+    },
+    "skill-reviewer:skill-reviewer": {
+      "usageCount": 2,
+      "lastUsedAt": 1776135670601
+    },
+    "superpowers:requesting-code-review": {
+      "usageCount": 1,
+      "lastUsedAt": 1775415077690
+    },
+    "playground": {
+      "usageCount": 2,
+      "lastUsedAt": 1775592963076
+    },
+    "ppt-creator": {
+      "usageCount": 1,
+      "lastUsedAt": 1775589111494
+    },
+    "superpowers:using-superpowers": {
+      "usageCount": 1,
+      "lastUsedAt": 1775592676869
+    },
+    "plugin-dev:skill-development": {
+      "usageCount": 1,
+      "lastUsedAt": 1775865663229
+    },
+    "using-superpowers": {
+      "usageCount": 1,
+      "lastUsedAt": 1776114258059
+    },
+    "brainstorming": {
+      "usageCount": 1,
+      "lastUsedAt": 1776114561883
+    },
+    "writing-plans": {
+      "usageCount": 1,
+      "lastUsedAt": 1776117287429
+    },
+    "subagent-driven-development": {
+      "usageCount": 1,
+      "lastUsedAt": 1776117749608
+    },
+    "market-visual-identity": {
+      "usageCount": 1,
+      "lastUsedAt": 1776132382927
+    },
+    "deep-research:deep-research": {
+      "usageCount": 1,
+      "lastUsedAt": 1776309276600
+    }
+  },
+  "showSpinnerTree": false,
+  "effortCalloutV2Dismissed": true,
+  "feedbackSurveyState": {
+    "lastShownTime": 1776430407164
+  },
+  "githubRepoPaths": {
+    "apolo-81/ainco_learning": [
+      "/home/apolo/Documents/44. Web Apps/AULA - UC LOGOS"
+    ],
+    "apolo-81/amplifica.site": [
+      "/home/apolo/Documents/33. WebSites Design/Amplifica Site"
+    ],
+    "apolo-81/uclogos.mx": [
+      "/home/apolo/Documents/33. WebSites Design/Universidad Cristiana Logos"
+    ]
+  },
+  "mcpServers": {
+    "github": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-github"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "REPLACE_WITH_YOUR_TOKEN"
+      }
+    },
+    "jcodemunch": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": [
+        "jcodemunch-mcp"
+      ],
+      "env": {}
+    },
+    "obsidian": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-obsidian",
+        "/home/apolo/Documents/ClaudeCode_Projects/vault"
+      ],
+      "env": {}
+    }
+  },
+  "lastPlanModeUse": 1776308851719,
+  "voiceFooterHintSeenCount": 3,
+  "additionalModelOptionsCache": [],
+  "remoteDialogSeen": true,
+  "overageCreditGrantCache": {
+    "c7caa976-1850-41dd-b961-7ed7c983cfd7": {
+      "info": {
+        "available": false,
+        "eligible": false,
+        "granted": false,
+        "amount_minor_units": null,
+        "currency": null
+      },
+      "timestamp": 1777303521738
+    }
+  },
+  "migrationVersion": 12,
+  "companion": {
+    "name": "Fickle",
+    "personality": "A chaotic mushroom that thrives on unpredictable code paths and will excitedly point out your bugs right before crashing your terminal and laughing about it.",
+    "hatchedAt": 1775160384536
+  },
+  "powerupsUnlocked": [
+    "at-mentions",
+    "modes",
+    "undo",
+    "background",
+    "memory",
+    "mcp",
+    "automate",
+    "subagents",
+    "cross-device",
+    "model-dial"
+  ],
+  "subscriptionNoticeCount": 0,
+  "hasAvailableSubscription": false,
+  "additionalModelCostsCache": {},
+  "hasSeenUltraplanTerms": true,
+  "agentPushNotifEnabled": true,
+  "opus47LaunchSeenCount": 12,
+  "oauthAccount": {
+    "accountUuid": "ebead26b-f061-41d1-847b-bdaad40ed103",
+    "emailAddress": "arcuja2025@gmail.com",
+    "organizationUuid": "c7caa976-1850-41dd-b961-7ed7c983cfd7",
+    "hasExtraUsageEnabled": false,
+    "billingType": "stripe_subscription",
+    "accountCreatedAt": "2025-06-12T19:18:26.357908Z",
+    "subscriptionCreatedAt": "2025-06-12T19:21:51.898361Z",
+    "displayName": "Mario",
+    "organizationRole": "admin",
+    "workspaceRole": null,
+    "organizationName": "arcuja2025@gmail.com's Organization",
+    "ccOnboardingFlags": {},
+    "claudeCodeTrialEndsAt": null,
+    "claudeCodeTrialDurationDays": null
+  },
+  "closedIssuesLastChecked": 1777304291967,
+  "remoteControlUpsellSeenCount": 1
+}
