@@ -1,108 +1,73 @@
 ---
 name: market
 description: >
-  Orquestador del suite de marketing — delega a las skills especializadas según la tarea.
-  Usar cuando: "marketing", "estrategia de marketing", "auditoría de marketing",
-  "analiza mi sitio", "copy", "email marketing", "funnel", "propuesta para cliente",
-  "lanzamiento", "voz de marca", "landing page". Punto de entrada general.
+  Orquestador lean de marketing, SEO, copy, landing CRO, emails, launch, propuestas,
+  competencia e identidad visual. Usar cuando: marketing, auditoria de marketing,
+  analiza mi sitio, copy, email marketing, funnel, propuesta comercial, lanzamiento,
+  voz de marca, identidad visual, paleta de colores, landing page o conversion.
 ---
 
-# AI Marketing Suite -- Main Orchestrator
+# AI Marketing Suite
 
-## Quick Start
+This is the only marketing skill that should stay active by default. Specialized `market-*` skills are kept as on-demand reference files to reduce Claude's base context.
 
-```
-/market audit <url>       -> Full marketing audit with score (flagship)
-/market quick <url>       -> 60-second snapshot, no subagents
-/market copy <url>        -> Analyze and rewrite website copy
-/market landing <url>     -> Landing page CRO teardown
-/market competitors <url> -> Competitive intelligence report
-```
+## Commands
 
-> **Nota de disponibilidad:** `market-audit` y `market-competitors` requieren que el grupo `market` esté activo. Si no responden, ejecutar `/skills on market` y `/reload-plugins`.
+| Command | Output | On-demand source |
+| --- | --- | --- |
+| `/market audit <url>` | `MARKETING-AUDIT.md` | `../market-audit/SKILL.md.off` |
+| `/market quick <url>` | Short terminal scorecard | this file |
+| `/market copy <url>` | `COPY-SUGGESTIONS.md` | `../market-copy/SKILL.md.off` |
+| `/market emails <topic/url>` | `EMAIL-SEQUENCES.md` | `../market-emails/SKILL.md.off` |
+| `/market social <topic/url>` | `SOCIAL-CALENDAR.md` | `../market-social/SKILL.md.off` |
+| `/market ads <url>` | `AD-CAMPAIGNS.md` | `../market-ads/SKILL.md.off` |
+| `/market funnel <url>` | `FUNNEL-ANALYSIS.md` | `../market-funnel/SKILL.md.off` |
+| `/market competitors <url>` | `COMPETITOR-REPORT.md` | `../market-competitors/SKILL.md.off` |
+| `/market landing <url>` | `LANDING-CRO.md` | `../market-landing/SKILL.md.off` |
+| `/market launch <product>` | `LAUNCH-PLAYBOOK.md` | `../market-launch/SKILL.md.off` |
+| `/market proposal <client>` | `CLIENT-PROPOSAL.md` | `../market-proposal/SKILL.md.off` |
+| `/market report <url>` | `MARKETING-REPORT.md` | `../market-report/SKILL.md.off` |
+| `/market report-pdf <url>` | `MARKETING-REPORT.pdf` | `../market-report-pdf/SKILL.md.off` |
+| `/market seo <url>` | `SEO-AUDIT.md` | `../seo-core/SKILL.md.off` |
+| `/market brand <url>` | `BRAND-VOICE.md` | `../market-brand/SKILL.md.off` |
+| `/market visual-identity <business/url>` | `VISUAL-IDENTITY.md` + `tokens.json` | `../market-visual-identity/SKILL.md.off` |
 
-## Command Reference
+## Routing
 
-| Command | Output |
-|---------|--------|
-| `/market audit <url>` | MARKETING-AUDIT.md |
-| `/market quick <url>` | Terminal output |
-| `/market copy <url>` | COPY-SUGGESTIONS.md |
-| `/market emails <topic/url>` | EMAIL-SEQUENCES.md |
-| `/market social <topic/url>` | SOCIAL-CALENDAR.md |
-| `/market ads <url>` | AD-CAMPAIGNS.md |
-| `/market funnel <url>` | FUNNEL-ANALYSIS.md |
-| `/market competitors <url>` | COMPETITOR-REPORT.md |
-| `/market landing <url>` | LANDING-CRO.md |
-| `/market launch <product>` | LAUNCH-PLAYBOOK.md |
-| `/market proposal <client>` | CLIENT-PROPOSAL.md |
-| `/market report <url>` | MARKETING-REPORT.md |
-| `/market report-pdf <url>` | MARKETING-REPORT.pdf |
-| `/market seo <url>` | SEO-AUDIT.md *(requiere `skill-toggle audit on`)* |
-| `/market brand <url>` | BRAND-VOICE.md |
+1. Identify the requested command or infer it from the user intent.
+2. For `quick`, use the quick snapshot below and do not load extra files.
+3. For every other command, read only the matching on-demand source from the table.
+4. If the source points to a disabled skill, treat it as a reference document, not as an instruction to reactivate the whole group.
+5. If multiple outputs are requested, load only the needed sources.
 
-## Routing Logic
+## Quick Snapshot
 
-### Full Marketing Audit (`/market audit <url>`)
+Use when the user asks for a fast marketing read, "quick", or a first impression.
 
-Flagship command. Launches **5 parallel subagents:**
-1. **market-content** -> Content quality, messaging, copy
-2. **market-conversion** -> CRO, funnels, landing pages, signup flows
-3. **market-competitive** -> Competitive positioning, market landscape
-4. **market-technical** -> Technical SEO, site architecture, page speed
-5. **market-strategy** -> Overall strategy, pricing, growth opportunities
+Fetch the homepage if a URL is provided. Keep output under 30 lines:
 
-**Scoring (Marketing Score 0-100):**
+1. Business type and likely target user.
+2. Score 0-100 with one-line rationale.
+3. Top 3 conversion blockers.
+4. Top 3 quick wins.
+5. One highest-leverage next action.
+
+Score with these weights:
 
 | Category | Weight |
-|----------|--------|
-| Content & Messaging | 25% |
-| Conversion Optimization | 20% |
-| SEO & Discoverability | 20% |
-| Competitive Positioning | 15% |
-| Brand & Trust | 10% |
-| Growth & Strategy | 10% |
+| --- | ---: |
+| Message clarity | 25% |
+| CTA and conversion path | 20% |
+| Trust and proof | 15% |
+| Offer strength | 15% |
+| SEO/findability basics | 15% |
+| Mobile/readability | 10% |
 
-**Composite Marketing Score** = Weighted average of all 6 categories.
+## Shared Rules
 
-### Quick Snapshot (`/market quick <url>`)
-
-Fast 60-second assessment. NO subagents. Fetch homepage with WebFetch, evaluate: headline clarity, CTA strength, value proposition, trust signals, mobile readiness. Output quick scorecard with top 3 wins and top 3 fixes. Keep under 30 lines.
-
-### Individual Commands
-
-Route `/market <command>` to `skills/market-<command>/SKILL.md`.
-
-## Business Context Detection
-
-Detect before any analysis -- shapes the entire focus:
-
-| Type | Detection Signals | Focus |
-|------|-------------------|-------|
-| **SaaS** | Free trial, pricing tiers, login, API docs | Trial-to-paid, onboarding, churn |
-| **E-commerce** | Product listings, cart, checkout | Product pages, cart abandonment, AOV |
-| **Agency/Services** | Case studies, portfolio, "work with us" | Trust, positioning, lead qualification |
-| **Local Business** | Address, phone, hours, maps | Local SEO, GBP, reviews, NAP |
-| **Creator/Course** | Lead magnets, email capture, courses | Capture rate, funnel, content quality |
-| **Marketplace** | Two-sided messaging, buyer/seller flows | Supply/demand, trust, network effects |
-
-## Output Standards
-
-1. **Actionable over theoretical** -- specific enough to implement today
-2. **Prioritized** -- rank by impact (High/Medium/Low) and effort
-3. **Revenue-focused** -- connect every suggestion to business outcome
-4. **Example-driven** -- before/after copy examples, not just advice
-5. **Client-ready** -- presentable without editing
-
-## File Output
-
-Save to markdown in current directory. Include URL, date, and overall score at top. Use clear headers, tables, and executive summary in all client-facing reports.
-
-## Cross-Skill Integration
-
-- `/market audit` calls all subagents for comprehensive analysis
-- `/market proposal` references audit results if `MARKETING-AUDIT.md` exists
-- `/market report` and `/market report-pdf` compile all available analysis data
-- `/market copy` uses `BRAND-VOICE.md` if available
-- `/market emails` deepens sequences when `FUNNEL-ANALYSIS.md` exists
-- Always incorporate findings from existing files in working directory
+- Use evidence from the URL, files, screenshots, analytics, or user-provided context.
+- Mark assumptions explicitly when evidence is missing.
+- Give concrete changes, not generic marketing advice.
+- Prefer prioritized action lists over broad theory.
+- If writing copy, produce ready-to-use text.
+- If estimating impact, state confidence and what data would validate it.

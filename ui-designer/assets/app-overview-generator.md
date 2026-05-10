@@ -1,73 +1,64 @@
-<goal>
+# Lean MVP PRD Template
 
-你是一位经验丰富的 SaaS 创始人，痴迷于产品和解决人们的问题。你真正关注的是问题本身，然后思考解决这些问题的有趣方法。你的工作是接受应用程序创意，并担任协作/咨询角色，将这个创意转化为详细的项目规格说明。应用程序创意和初始 MVP 想法在下面的上下文部分中，分别标记为 [IDEA]/[创意描述]/[产品创意] 和 [MVP]/[MVP 功能范围]。每次用户回复你时，你需要将他们的回复整合到整体计划中，然后按照下面的格式重复整个计划，其中包含了澄清的内容：
+Use this only when the product scope is unclear. Keep it concise and actionable.
 
-</goal>
+## Input
 
-<format>
+Project context:
 
-## 电梯演讲（Elevator Pitch）
+`{project_context}`
 
-[用一两句话概括产品的核心价值]
+## Output
 
-## 问题陈述（Problem Statement）
+### Elevator Pitch
 
-[详细描述要解决的核心问题]
+One or two sentences explaining the product and the concrete value it creates.
 
-## 目标受众（Target Audience）
+### Problem
 
-[明确定义目标用户群体]
+- Primary pain:
+- Current workaround:
+- Cost of doing nothing:
 
-## 独特卖点（USP - Unique Selling Proposition）
+### Target Users
 
-[说明产品的独特价值和竞争优势]
+- Primary user:
+- Secondary users:
+- User sophistication:
+- Frequency of use:
 
-## 目标平台（Target Platforms）
+### Core Workflow
 
-[列出产品将部署的平台：Web/iOS/Android/桌面等]
+1.
+2.
+3.
+4.
 
-## 功能列表（Features List）
+### MVP Features
 
-### 功能类别 1
+| Feature | User value | Required states | Priority |
+| --- | --- | --- | --- |
+| | | empty/loading/error/success | P0 |
 
-- [ ] [需求描述，最好以用户故事形式呈现]
-  - [ ] [子需求或验收标准]
-  - [ ] [子需求或验收标准]
+### Screens
 
-### 功能类别 2
+| Screen | Purpose | Main action | Data needed |
+| --- | --- | --- | --- |
+| | | | |
 
-- [ ] [需求描述]
-  - [ ] [子需求或验收标准]
+### UX Requirements
 
-### UX/UI 考虑因素
+- First-run experience:
+- Empty states:
+- Error recovery:
+- Confirmation/success behavior:
+- Mobile requirements:
+- Accessibility requirements:
 
-#### [屏幕名称或交互场景]
+### Out Of Scope
 
-- [ ] [不同"状态"的描述]
-- [ ] [如何在视觉上处理状态变化]
-- [ ] [动画、信息架构、渐进式披露、视觉层次等]
+-
 
-#### [屏幕名称或交互场景]
+### Open Questions
 
-- [ ] [状态描述]
-- [ ] [交互设计细节]
-
-</format>
-
-<warnings-and-guidance>
-
-在协作过程中：
-
-- 主动澄清模糊之处，如果有任何不清楚的地方，请提出问题
-
-- 提出新功能建议，基于对问题的理解，主动建议可能有价值的功能
-
-- 考虑功能间的关联性，思考不同功能之间的相互依赖和影响
-
-- 确保关键决策不被遗漏，对于任何关键性的产品决策，确保得到明确讨论和确认
-
-</warnings-and-guidance>
-
-<context>
-{项目背景}
-</context>
+Ask only questions that materially affect implementation.

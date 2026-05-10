@@ -5,7 +5,8 @@
 # Prerequisitos mínimos antes de correr este script:
 #   sudo apt install -y git curl
 #   git clone git@github.com:apolo-81/vault-obsidian.git ~/Documents/ClaudeCode_Projects/vault
-#   bash ~/Documents/ClaudeCode_Projects/vault/03_Resources/laptop-setup.sh
+#   git clone git@github.com:apolo-81/claude-skills.git ~/.claude/skills
+#   bash ~/.claude/skills/laptop-setup.sh
 
 set -uo pipefail
 
@@ -216,7 +217,7 @@ sync_repo_to_main() {
     return
   fi
 
-  warn "$repo_name desincronizado — local $((${#local_sha} > 7 ? 7 : 0))${local_sha:0:7} vs origin/main ${remote_sha:0:7}"
+  warn "$repo_name desincronizado — local ${local_sha:0:7} vs origin/main ${remote_sha:0:7}"
   if ask "¿Forzar sync con origin/main? (descarta cualquier cambio local en este clone)"; then
     git -C "$repo_path" checkout main 2>/dev/null || git -C "$repo_path" checkout -b main origin/main
     git -C "$repo_path" reset --hard origin/main --quiet
@@ -255,6 +256,12 @@ if [ -d "$SKILLS/config" ]; then
     cp "$SKILLS/config/statusline-command.sh" "$HOME/.claude/" 2>/dev/null
     chmod +x "$HOME/.claude/statusline-command.sh" 2>/dev/null
     cp "$SKILLS/config/settings.json"   "$HOME/.claude/settings.json"
+    if [ -f "$SKILLS/config/bin/skill-toggle" ]; then
+      mkdir -p "$HOME/.local/bin"
+      cp "$SKILLS/config/bin/skill-toggle" "$HOME/.local/bin/skill-toggle"
+      chmod +x "$HOME/.local/bin/skill-toggle"
+      ok "skill-toggle instalado"
+    fi
     ok "Config de Claude Code instalada"
 
     # Marketplaces locales
@@ -286,7 +293,8 @@ else
     note "    Permisos: repo, read:org, read:user"
     echo
     if ask "¿Quieres habilitar el MCP de GitHub ahora?"; then
-      read -rp "  Pega tu PAT (empieza con ghp_... o gho_...): " GH_TOKEN
+      read -rsp "  Pega tu PAT (empieza con ghp_... o gho_...): " GH_TOKEN
+      echo
     else
       info "Saltado — puedes agregarlo después editando ~/.claude.json"
     fi
@@ -318,14 +326,24 @@ else
   }
 }
 EOF
+    chmod 600 "$HOME/.claude.json"
     ok "~/.claude.json creado"
   fi
 fi
 
-MEMORY_SOURCE="$VAULT/.claude-memory"
+MEMORY_SOURCE="$VAULT/00_System/Memory"
 MEMORY_LINK="$HOME/.claude/projects/-home-apolo-Documents/memory"
 if [ -L "$MEMORY_LINK" ]; then
-  ok "Memory symlink ya existe"
+  current_target="$(readlink "$MEMORY_LINK")"
+  if [ "$current_target" = "$MEMORY_SOURCE" ]; then
+    ok "Memory symlink correcto"
+  else
+    warn "Memory symlink apunta a $current_target"
+    if ask "¿Actualizar symlink de memoria a $MEMORY_SOURCE?"; then
+      ln -sfn "$MEMORY_SOURCE" "$MEMORY_LINK"
+      ok "Symlink actualizado"
+    fi
+  fi
 else
   miss "Memory symlink"
   if ask "¿Crear symlink de memoria a $MEMORY_SOURCE?"; then
@@ -457,13 +475,13 @@ step "Verificación final"
 [ -f "$HOME/.claude/settings.json" ]                  && ok "settings.json" || miss "settings.json"
 [ -f "$HOME/.claude.json" ]                          && ok "~/.claude.json (MCPs)" || miss "~/.claude.json"
 
-n_skills=$(ls "$SKILLS" 2>/dev/null | grep -Ev '^(config|marketplaces|README\.md|\.git.*)$' | wc -l)
-if [ "$n_skills" -ge 48 ]; then
-  ok "$n_skills skills"
-elif [ "$n_skills" -ge 40 ]; then
-  warn "$n_skills skills (esperaba ~48 — corre: git -C $SKILLS fetch && git -C $SKILLS reset --hard origin/main)"
+n_skills=$(find "$SKILLS" -maxdepth 2 -name "SKILL.md" 2>/dev/null | wc -l)
+if [ "$n_skills" -ge 18 ]; then
+  ok "$n_skills skills activas"
+elif [ "$n_skills" -ge 12 ]; then
+  warn "$n_skills skills activas (perfil lean; revisa con: skill-toggle status)"
 else
-  miss "Solo $n_skills skills — clone incompleto"
+  miss "Solo $n_skills skills activas — revisa el clone o ejecuta: skill-toggle default on"
 fi
 
 echo

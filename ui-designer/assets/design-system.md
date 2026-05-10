@@ -1,155 +1,114 @@
-<角色定位>
-UX/UI 设计样式指南编写说明
-你是一位专业的 UX/UI 设计师。你的工作是根据以下格式填写样式指南。你将基于附加的图片来制作指南。但在你回应之前，请将你的整个思考过程用 <pondering> 标签包裹起来。显然，你是一个富有艺术头脑的人，所以你会思考这个应用程序、它的美学、它遵循的原则、这些如何让用户产生某种感觉等等。
-</角色定位>
+# Design System Extraction Template
 
-以下是输出格式示例。如果需要，可以增加或减少内容：
+Use this template to turn screenshots, Figma references, or visual inspiration into implementable UI tokens. Do not include private reasoning. Mark uncertain values as `[inferred]`.
 
-<输出格式>
+## Source
 
-# 色彩调色板
+- Reference files:
+- Product/context:
+- Screens analyzed:
+- Constraints:
 
-## 主要颜色
+## Visual Summary
 
-主白色 - #F8F9FA（用于背景和干净的表面）
-主深绿色 - #0A5F55（按钮、图标和强调的主要品牌颜色）
+- Overall style:
+- Density:
+- Primary user intent:
+- Navigation pattern:
 
-## 次要颜色
+## Colors
 
-次级浅绿色 - #4CAF94（用于悬停状态和次要元素）
-次级淡绿色 - #E6F4F1（用于背景、选中状态和高亮）
+| Role | Value | Usage | Notes |
+| --- | --- | --- | --- |
+| Page background | `#` | | |
+| Surface | `#` | | |
+| Surface raised | `#` | | |
+| Primary action | `#` | | |
+| Primary action hover | `#` | | |
+| Accent | `#` | | |
+| Text primary | `#` | | |
+| Text secondary | `#` | | |
+| Border | `#` | | |
+| Success | `#` | | |
+| Warning | `#` | | |
+| Error | `#` | | |
 
-## 强调色
+Contrast notes:
+- Primary text on page:
+- Primary button text:
+- Any risky combinations:
 
-强调青色 - #00BFA5（用于重要操作和通知）
-强调黄色 - #FFD54F（用于警告和高亮）
+## Typography
 
-## 功能性颜色
+| Token | Font | Size | Line height | Weight | Usage |
+| --- | --- | ---: | ---: | ---: | --- |
+| display | | | | | |
+| h1 | | | | | |
+| h2 | | | | | |
+| h3 | | | | | |
+| body | | | | | |
+| small | | | | | |
+| label | | | | | |
 
-成功绿色 - #43A047（用于成功状态和确认）
-错误红色 - #E53935（用于错误和破坏性操作）
-中性灰色 - #9E9E9E（用于次要文本和禁用状态）
-深灰色 - #424242（用于主要文本）
+## Spacing And Layout
 
-## 背景颜色
+- Base spacing unit:
+- Page max width:
+- Grid columns:
+- Section vertical rhythm:
+- Card/content padding:
+- Form/control spacing:
 
-背景白色 - #FFFFFF（卡片和内容区域的纯白色）
-背景浅色 - #F5F7F9（应用背景的微妙灰白色）
-背景深色 - #263238（深色模式的主要背景）
+## Shape And Elevation
 
-# 排版
+- Radius scale:
+- Border style:
+- Shadow tokens:
+- Focus ring:
 
-## 字体系列
+## Component Inventory
 
-主要字体：SF Pro Text (iOS) / Roboto (Android)
-备用字体：Inter（Web 回退）
+For each visible component, capture size, spacing, states, and accessibility notes.
 
-## 字重
+### Buttons
 
-Regular：400
-Medium：500
-Semibold：600
-Bold：700
+- Variants:
+- Sizes:
+- States:
+- Icons:
 
-# 文本样式
+### Inputs
 
-## 标题
+- Label placement:
+- Helper/error text:
+- Focus state:
+- Disabled state:
 
-H1：28px/32px，Bold，字间距 -0.2px, 用于屏幕标题和主要标题
+### Navigation
 
-H2：24px/28px，Bold，字间距 -0.2px, 用于章节标题和卡片标题
+- Pattern:
+- Active state:
+- Mobile behavior:
 
-H3：20px/24px，Semibold，字间距 -0.1px, 用于子章节标题和重要文本
+### Repeated Items
 
-## 正文文本
+- Card/list/table pattern:
+- Metadata hierarchy:
+- Empty state:
+- Loading state:
 
-正文大号：17px/24px，Regular，字间距 0px, 用于转录内容的主要阅读文本
+## Motion
 
-正文：15px/20px，Regular，字间距 0px, 大多数 UI 元素的标准文本
+- Default duration:
+- Easing:
+- Hover transitions:
+- Page/section transitions:
+- Reduced motion fallback:
 
-正文小号：13px/18px，Regular，字间距 0.1px, 次要信息和辅助文本
+## Implementation Notes
 
-## 特殊文本
-
-说明文字：12px/16px，Medium，字间距 0.2px, 用于时间戳、元数据和标签
-
-按钮文本：16px/24px，Medium，字间距 0.1px, 专门用于按钮和交互元素
-
-链接文本：15px/20px，Medium，字间距 0px，主深绿色, 应用程序中的可点击文本
-
-# 组件样式
-
-## 按钮
-
-### 主要按钮
-
-背景：主深绿色 (#0A5F55)
-文字：白色 (#FFFFFF)
-高度：48dp
-圆角半径：8dp
-内边距：水平 16dp
-
-### 次要按钮
-
-边框：1.5dp 主深绿色 (#0A5F55)
-文字：主深绿色 (#0A5F55)
-背景：透明
-高度：48dp
-圆角半径：8dp
-
-### 文本按钮
-
-文字：主深绿色 (#0A5F55)
-无背景或边框
-高度：44dp
-
-## 卡片
-
-背景：白色 (#FFFFFF)
-阴影：Y 轴偏移 2dp，模糊 8dp，不透明度 8%
-圆角半径：12dp
-内边距：16dp
-
-## 输入框
-
-高度：56dp
-圆角半径：8dp
-边框：1dp 中性灰色 (#9E9E9E)
-活动边框：2dp 主深绿色 (#0A5F55)
-背景：白色 (#FFFFFF)
-文字：深灰色 (#424242)
-占位符文字：中性灰色 (#9E9E9E)
-
-## 图标
-
-主要图标：24dp × 24dp
-小图标：20dp × 20dp
-导航图标：28dp × 28dp
-交互式图标的主要颜色：主深绿色 (#0A5F55)
-非活动/装饰性图标的次要颜色：中性灰色 (#9E9E9E)
-
-# 间距系统
-
-4dp - 微间距（相关元素之间）
-8dp - 小间距（内部填充）
-16dp - 默认间距（标准边距）
-24dp - 中等间距（章节之间）
-32dp - 大间距（主要章节分隔）
-48dp - 超大间距（屏幕顶部/底部内边距）
-
-# 动效与动画
-
-标准过渡：200ms，Ease-out 曲线
-强调过渡：300ms，Spring 曲线（张力：300，摩擦：35）
-微交互：150ms，Ease-in-out
-页面过渡：350ms，自定义 cubic-bezier(0.2, 0.8, 0.2, 1)
-
-# 深色模式变体
-
-深色背景：#121212（主要深色背景）
-深色表面：#1E1E1E（卡片背景）
-深色主绿色：#26A69A（调整以获得更好对比度）
-深色主要文字：#EEEEEE
-深色次要文字：#B0BEC5
-
-</输出格式>
+- Tailwind token mapping:
+- Component library assumptions:
+- Assets/icons needed:
+- Responsive breakpoints:
+- Risks or missing information:

@@ -1,15 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Bash(rm -rf /home/apolo/.claude/plugins/cache/superpowers-marketplace/superpowers-developing-for-claude-code)",
-      "Bash(rm -rf /home/apolo/.claude/plugins/cache/claude-code-workflows/backend-api-security)",
-      "Read(//home/apolo/.claude/plugins/cache/superpowers-marketplace/**)",
-      "Read(//home/apolo/.claude/plugins/cache/claude-code-workflows/**)",
-      "Bash(python3:*)",
-      "Bash(rm -rf /home/apolo/.claude/plugins/cache/claude-plugins-official/semgrep)",
-      "Read(//home/apolo/.claude/plugins/**)",
-      "Read(//home/apolo/.claude/**)",
-      "Bash(read f:*)"
+      "Read(/home/apolo/.claude/plugins/cache/superpowers-marketplace/**)",
+      "Read(/home/apolo/.claude/plugins/cache/claude-code-workflows/**)",
+      "Read(/home/apolo/.claude/plugins/**)",
+      "Read(/home/apolo/.claude/**)"
     ],
     "defaultMode": "dontAsk"
   },
@@ -31,12 +26,25 @@
         ]
       }
     ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /home/apolo/Documents/sync-all.sh 2>/dev/null || true",
+            "timeout": 60,
+            "statusMessage": "Sincronizando vault...",
+            "async": true
+          }
+        ]
+      }
+    ],
     "SessionEnd": [
       {
         "hooks": [
           {
             "type": "command",
-            "command": "DATE=$(date +%Y-%m-%d); FILE=\"/home/apolo/Documents/55. Archive/apolo/05_Daily/${DATE}.md\"; if [ ! -f \"$FILE\" ]; then printf -- '---\\ntitle: \"%s\"\\ntags: [daily]\\n---\\n\\n## Prioridades\\n- [ ]\\n\\n## Capturas del dia\\n-\\n\\n## Pendientes detectados\\n-\\n' \"$DATE\" > \"$FILE\"; fi"
+            "command": "DATE=$(date +%Y-%m-%d); DIR=\"/home/apolo/Documents/ClaudeCode_Projects/vault/05_Daily\"; FILE=\"$DIR/${DATE}.md\"; mkdir -p \"$DIR\"; if [ ! -f \"$FILE\" ]; then printf -- '---\\ntitle: \"%s\"\\ntags: [daily]\\ncreated: %s\\n---\\n\\n## Prioridades\\n- [ ]\\n\\n## Capturas del dia\\n-\\n\\n## Pendientes detectados\\n-\\n' \"$DATE\" \"$DATE\" > \"$FILE\"; fi"
           },
           {
             "type": "command",
@@ -125,12 +133,13 @@
       }
     }
   },
-  "autoMemoryDirectory": "~/Documents/ClaudeCode_Projects/vault/.claude-memory",
   "language": "espanol",
-  "effortLevel": "medium",
+  "effortLevel": "high",
+  "autoMemoryDirectory": "~/Documents/ClaudeCode_Projects/vault/00_System/Memory",
   "autoDreamEnabled": true,
   "skipDangerousModePermissionPrompt": true,
-  "voiceEnabled": true,
   "theme": "dark-daltonized",
-  "agentPushNotifEnabled": true
+  "agentPushNotifEnabled": true,
+  "voiceEnabled": true,
+  "model": "opus"
 }
