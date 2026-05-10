@@ -44,10 +44,6 @@
         "hooks": [
           {
             "type": "command",
-            "command": "DATE=$(date +%Y-%m-%d); DIR=\"/home/apolo/Documents/ClaudeCode_Projects/vault/05_Daily\"; FILE=\"$DIR/${DATE}.md\"; mkdir -p \"$DIR\"; if [ ! -f \"$FILE\" ]; then printf -- '---\\ntitle: \"%s\"\\ntags: [daily]\\ncreated: %s\\n---\\n\\n## Prioridades\\n- [ ]\\n\\n## Capturas del dia\\n-\\n\\n## Pendientes detectados\\n-\\n' \"$DATE\" \"$DATE\" > \"$FILE\"; fi"
-          },
-          {
-            "type": "command",
             "command": "bash /home/apolo/Documents/sync-all.sh 2>/dev/null || true",
             "timeout": 60,
             "statusMessage": "Sincronizando vault y proyectos..."
@@ -134,12 +130,11 @@
     }
   },
   "language": "espanol",
-  "effortLevel": "high",
+  "effortLevel": "medium",
   "autoMemoryDirectory": "~/Documents/ClaudeCode_Projects/vault/00_System/Memory",
   "autoDreamEnabled": true,
   "skipDangerousModePermissionPrompt": true,
   "theme": "dark-daltonized",
   "agentPushNotifEnabled": true,
-  "voiceEnabled": true,
-  "model": "opus"
+  "voiceEnabled": true
 }

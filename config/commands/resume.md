@@ -21,14 +21,14 @@ Retoma el contexto desde el vault de Obsidian usando la memoria canonica nueva.
    - `00_System/Memory/References/`
    - `00_System/Memory/People/`
 4. Lee el estado operativo visible:
-   - nota diaria reciente en `05_Daily/`
+   - nota diaria reciente en `05_Daily/` solo si existe y contiene contenido util; ignora placeholders vacios con solo encabezados (`Prioridades`, `Capturas del dia`, `Pendientes detectados`) sin items reales
    - proyectos no-session en `01_Projects/` con `status: active` y `domain: project`
    - tareas pendientes reales con `todo/prio1` o `todo/prio2`, excluyendo archivos `Session...` salvo que una nota canonica los cite
 5. Presenta resumen ejecutivo:
    - prioridades activas
    - pendientes concretos
    - ultima actividad registrada
-   - riesgos de contexto o contradicciones detectadas
+   - riesgos de contexto o contradicciones detectadas; no reportes un daily vacio como riesgo si no contradice la memoria canonica
 6. Propone siguiente accion concreta basada en prioridades.
 
 Vault: `/home/apolo/Documents/ClaudeCode_Projects/vault/` — usa Read, Glob/Grep y comandos que no modifiquen archivos del vault.
