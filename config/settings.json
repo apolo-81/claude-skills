@@ -136,5 +136,6 @@
   "skipDangerousModePermissionPrompt": true,
   "theme": "dark-daltonized",
   "agentPushNotifEnabled": true,
-  "voiceEnabled": true
+  "voiceEnabled": true,
+  "model": "opus"
 }

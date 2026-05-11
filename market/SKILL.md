@@ -11,6 +11,16 @@ description: >
 
 This is the only marketing skill that should stay active by default. Specialized `market-*` skills are kept as on-demand reference files to reduce Claude's base context.
 
+**IMPORTANTE**: las sub-skills `market-*` están OFF por defecto. Antes de ejecutar `/market <subcomando>`, activar el grupo con:
+
+```bash
+skill-toggle on market   # activa todas las market-*
+# o solo una:
+skill-toggle on market-emails
+```
+
+Tras activar, ejecutar `/reload-plugins` para que Claude recargue el registry. Al terminar, `skill-toggle off market` para volver al perfil lean.
+
 ## Commands
 
 | Command | Output | On-demand source |

@@ -1,8 +1,12 @@
 ---
 name: pinokio
 description: >
-  Discover, launch, use, and when explicitly requested create/debug Pinokio apps
-  and launchers with pterm-first runtime control.
+  Descubre, lanza, usa y (cuando se pide explícito) crea/depura apps Pinokio y
+  launchers con control de runtime via pterm. Discover, launch, use, and create/debug
+  Pinokio apps and launchers with pterm-first runtime control.
+  Usar cuando: "Pinokio", "lanzar app Pinokio", "instalar app Pinokio", "launcher Pinokio",
+  "pterm", "Pinokio script", "ComfyUI Pinokio", "Pinokio.js", "Pinokio API",
+  "depurar launcher".
 ---
 
 # Pinokio

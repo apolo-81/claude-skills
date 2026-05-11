@@ -318,3 +318,55 @@ JWT_REFRESH_SECRET=min-32-chars-diferente
 | OAuth no redirige | `AUTH_URL` incorrecto en prod | Configurar `AUTH_URL` exacto |
 | JWT expirado en cliente | Access token vence rápido | Implementar refresh token rotation |
 | Middleware bloquea assets | `matcher` muy amplio | Excluir `_next/static`, `images/` |
+
+---
+
+## 10. JWT custom legacy (SPA Vite + Express backend)
+
+Patrón confirmado en AULA UC LOGOS LMS. Usar cuando frontend Vite/React SPA está separado del backend Express y NO se usa NextAuth.
+
+### Convenciones críticas (rotas si cambias, sesiones legacy se rompen)
+
+| Convención | Valor obligatorio | Razón |
+|---|---|---|
+| Storage key en navegador | `auth_token` (no `token`) | Sesiones existentes asumen este nombre |
+| Claim de user en payload | `userId` (no `id`, no `sub`) | Backend espera `req.user.userId` |
+| Invalidación de sesiones | `tokenVersion` en payload + DB | Bump `users.token_version` invalida tokens emitidos antes |
+
+### Payload + emisión
+
+```js
+const token = jwt.sign(
+  { userId: user.id, tokenVersion: user.token_version, role: user.role },
+  process.env.JWT_SECRET,
+  { expiresIn: '30d' }
+);
+```
+
+### Middleware Express con `tokenVersion`
+
+```js
+function authRequired(req, res, next) {
+  const token = req.headers.authorization?.replace('Bearer ', '');
+  if (!token) return res.status(401).json({ error: 'no_token' });
+
+  try {
+    const payload = jwt.verify(token, process.env.JWT_SECRET);
+    const user = db.prepare('SELECT token_version FROM users WHERE id = ?').get(payload.userId);
+    if (!user || user.token_version !== payload.tokenVersion) {
+      return res.status(401).json({ error: 'token_revoked' });
+    }
+    req.user = payload;
+    next();
+  } catch {
+    return res.status(401).json({ error: 'invalid_token' });
+  }
+}
+```
+
+### Reglas de oro
+
+- **NUNCA** poner `JWT_SECRET` en `VITE_*` o `NEXT_PUBLIC_*` — termina en bundle público.
+- **NUNCA** servir assets privados directamente — frontend pide URL firmada al backend (ver `bunny-cdn`).
+- Logout server-side: incrementar `users.token_version` invalida todos los tokens previos sin tocar al cliente.
+- Frontend lee `localStorage.getItem('auth_token')` — mantener clave exacta o tendrás logouts masivos.
