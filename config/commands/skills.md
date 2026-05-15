@@ -6,7 +6,7 @@ Gestiona grupos de skills con `skill-toggle`. El argumento determina la accion:
 - `off <grupo|skill>` -> ejecuta `skill-toggle <grupo|skill> off`; informa cuantas quedaron activas y cuantas inactivas.
 - `lean` -> ejecuta `skill-toggle profile lean`; deja activo el perfil recomendado de bajo contexto y recuerda hacer `/reload-plugins`.
 
-Grupos disponibles: `default`, `maintenance`, `market`, `dev`, `design`, `content`, `ai`, `n8n`, `seo`, `all`.
+Grupos disponibles: `default`, `maintenance`, `market`, `dev`, `design`, `content`, `n8n`, `seo`, `all`.
 
 Notas:
 - `default` es el perfil recomendado de bajo contexto.
