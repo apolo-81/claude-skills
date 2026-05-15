@@ -51,7 +51,7 @@ export const pool = mysql.createPool({
 })
 ```
 
-Use `pool.execute()` (prepared) — never `pool.query()` with string concat:
+Always use `?` placeholders — **never concatenate user input into the SQL string**. Both `pool.execute()` and `pool.query()` accept parameters; `execute()` is preferred because it caches the prepared statement:
 ```ts
 const [rows] = await pool.execute(
   'SELECT id, email FROM users WHERE tenant_id = ? AND active = ?',
@@ -241,4 +241,4 @@ New table / column:
 - `supabase-stack` — PostgreSQL with RLS via Supabase
 - `multi-tenant-patterns` — `tenant_id` scoping for MySQL/SQLite
 - `express-api` — Express + mysql2 + Zod pattern
-- `deployment` / `render-deployment` — host MySQL (PlanetScale, Railway, Render add-on)
+- `deployment` / `render-deployment` — host MySQL (PlanetScale, Railway, Render add-on). Note: Render Managed Postgres uses `pg`, not `mysql2`.

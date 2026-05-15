@@ -180,7 +180,7 @@ Order of operations (battle-tested in `lms-core` Fase 1):
 - **Background jobs** lose request context. Pass `tenantId` explicitly into the job payload and call `runWithTenant()` inside the worker.
 - **Caching by ID alone** (e.g. `course:${id}`) leaks across tenants. Always namespace: `course:${tenantId}:${id}`.
 - **Public assets** (logos, blog posts) marked "public" still need `tenant_id` to render correctly per subdomain.
-- **GHL specifically:** every sub-account install carries its own `location_id` and `access_token`. Store them per tenant. The `businesses` deuda técnica documented in memoria fue exactamente esto sin migrar.
+- **GHL specifically:** every sub-account install carries its own `location_id` and `access_token`. Store them per tenant. A common pitfall is having a legacy `businesses` table that was never given a `location_id` (or equivalent tenant scope) — backfilling it retroactively while production is running requires a downtime window or a NULL-tolerant scoping layer.
 - **CSP en multi-tenant:** un solo header CSP debe cubrir todos los subdominios o usar reporting + `script-src 'self' https://*.tudominio.mx`.
 
 ## Workflow Checklist

@@ -145,7 +145,7 @@ Free Web Services sleep after **15 minutes** of inactivity. Next request takes ~
 **Mitigations:**
 1. **Upgrade to Starter ($7)** — no sleep.
 2. **External ping** (UptimeRobot every 10 min) — keeps it warm but uses your 750h/month free quota.
-3. **Move to Background Worker** — workers don't sleep on free? Yes they do.
+3. **Background Workers also sleep on free.** Switching to a worker is not an escape from the sleep policy.
 4. **Accept the cold start** for low-traffic apps; show a "warming up..." UI.
 
 For paying apps: starter plan minimum, period.
@@ -177,7 +177,7 @@ services:
     maxmemoryPolicy: allkeys-lru
 ```
 
-Connection strings are auto-injected via `fromDatabase` / `fromService`. **Free Postgres deleted after 90 days unless upgraded** — set a calendar reminder.
+Connection strings are auto-injected via `fromDatabase` / `fromService`. **Free Postgres has an expiration window** (historically 90 days unless upgraded; verify current policy at https://render.com/docs/free) — set a calendar reminder when provisioning.
 
 ## Cron Jobs
 

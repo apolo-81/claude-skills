@@ -20,7 +20,7 @@ description: >
 
 # Infoproduct Funnel
 
-End-to-end funnel for digital infoproducts where low-ticket front-end pays for ads and high-ticket back-end produces profit. Pattern proven in AstroLectura tarot app (4 upsells stacked $199/$127/$99/$79) and aligned with the LOW2HIGH methodology archived in `Ventas de Impacto/LOW2HIGH/REPORTE_LOW2HIGH.md`.
+End-to-end funnel for digital infoproducts where low-ticket front-end pays for ads and high-ticket back-end produces profit. Pattern proven in AstroLectura tarot app (4 upsells stacked $199/$127/$99/$79) and aligned with the LOW2HIGH methodology archived in `[[REPORTE_LOW2HIGH]]` (user's internal vault — see `Ventas de Impacto/LOW2HIGH/REPORTE_LOW2HIGH.md`).
 
 ## Stack
 
@@ -101,6 +101,23 @@ export async function POST(req: Request) {
 ```
 
 `setup_future_usage: 'off_session'` is the magic that enables one-click upsells without re-entering the card.
+
+**Connecting the two snippets:** Stripe Checkout in `mode: 'payment'` auto-creates a Customer per session. Listen to the `checkout.session.completed` webhook, then persist `session.customer` (customer ID) and `session.payment_intent` (to retrieve the `payment_method`). The upsell endpoint below reuses both.
+
+```ts
+// app/api/webhook/stripe/route.ts (snippet)
+if (event.type === 'checkout.session.completed') {
+  const session = event.data.object as Stripe.Checkout.Session
+  const pi = await stripe.paymentIntents.retrieve(session.payment_intent as string)
+  await db.users.update({
+    where: { email: session.customer_details!.email! },
+    data: {
+      stripeCustomerId: session.customer as string,
+      stripePaymentMethodId: pi.payment_method as string,
+    },
+  })
+}
+```
 
 ## Post-Purchase Upsell — One-Click
 
