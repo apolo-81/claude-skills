@@ -1,10 +1,12 @@
 ---
 name: claude-config-maintenance
 description: >
-  Mantenimiento de Claude Code local: skills, comandos custom, hooks, settings,
-  memoria Obsidian, /resume, /compress, skill-toggle y restauracion desde repo.
+  Maintains local Claude Code setup: skills, custom commands, hooks, settings,
+  Obsidian memory, /resume, /compress, skill-toggle and restore-from-repo.
   Usar cuando: auditar skills de Claude, reducir contexto, revisar vault/memoria,
   comandos resume/compress, restauracion, laptop-setup o configuracion de Claude.
+  Triggers in English: "audit Claude skills", "reduce context", "skill-toggle",
+  "restore from repo", "laptop setup", "Claude Code config", "vault memory".
 ---
 
 # Claude Config Maintenance

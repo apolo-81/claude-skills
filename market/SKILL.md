@@ -1,10 +1,12 @@
 ---
 name: market
 description: >
-  Orquestador lean de marketing, SEO, copy, landing CRO, emails, launch, propuestas,
-  competencia e identidad visual. Usar cuando: marketing, auditoria de marketing,
-  analiza mi sitio, copy, email marketing, funnel, propuesta comercial, lanzamiento,
-  voz de marca, identidad visual, paleta de colores, landing page o conversion.
+  Lean orchestrator for marketing, SEO, copy, landing CRO, emails, launch, proposals,
+  competition and visual identity. Sub-skills market-* are toggled off by default;
+  activate with `skill-toggle on market` (or a single sub-skill) before running
+  `/market <subcommand>`. Usar cuando: marketing, auditoria de marketing, analiza mi sitio,
+  copy, email marketing, funnel, propuesta comercial, lanzamiento, voz de marca,
+  identidad visual, paleta de colores, landing page o conversion.
 ---
 
 # AI Marketing Suite

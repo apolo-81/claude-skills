@@ -1,19 +1,13 @@
 ---
 name: seo-strategy
 description: >
-  Estrategia SEO, roadmap de contenido, SEO programático a escala y páginas comparativas.
-  Genera planes con arquitectura, análisis competitivo e implementación por fases.
+  Generates SEO strategy, content roadmap, programmatic SEO at scale and comparison pages.
+  Produces plans with architecture, competitive analysis and phased implementation.
   Usar cuando: "estrategia SEO", "plan SEO", "keyword research", "roadmap de contenido",
   "arquitectura del sitio", "SEO programático", "páginas a escala", "quick wins SEO",
-  "aumentar tráfico orgánico", "página X vs Y", "alternativas a X".
-  "alternative to X", "comparison page", "vs page", "alternatives page",
-  "feature matrix", "challenger brand content", "content calendar", "link building plan".
-allowed-tools:
-  - Read
-  - Grep
-  - Glob
-  - Bash
-  - WebFetch
+  "aumentar tráfico orgánico", "página X vs Y", "alternativas a X". Triggers in English:
+  "alternative to X", "comparison page", "vs page", "alternatives page", "feature matrix",
+  "challenger brand content", "content calendar", "link building plan".
 ---
 
 # SEO Strategy, Programmatic SEO & Competitor Pages

@@ -1,10 +1,14 @@
 ---
 name: ui-designer
 description: >
-  Extrae design systems de imagenes de referencia y los convierte en especificaciones
-  implementables para React/Next.js. Usar cuando: diseno de UI, design system,
+  Extracts design systems from reference images and converts them into implementable
+  specifications for React/Next.js. Usar cuando: diseno de UI, design system,
   design tokens, mockup, UI kit, reproducir este diseno, Figma, wireframe,
-  paleta de colores, tipografia o redisenar una interfaz.
+  paleta de colores, tipografia o redisenar una interfaz. Triggers in English:
+  "UI design", "design system", "design tokens", "mockup", "reproduce this design",
+  "Figma to code", "wireframe", "redesign interface".
+  Do NOT use for: psychologically-justified corporate color palettes by sector
+  (use market-visual-identity).
 ---
 
 # UI Designer

@@ -1,21 +1,14 @@
 ---
 name: seo-assets
 description: >
-  Schema.org (JSON-LD), sitemaps XML e imágenes SEO. Rich results, rich snippets,
-  knowledge panels, WebP/AVIF, alt text, LCP de imagen, CLS, srcset.
-  Usar cuando: "schema", "datos estructurados", "JSON-LD", "rich results", "sitemap XML",
-  "optimizar imágenes", "alt text", "WebP", "AVIF", "LCP imagen", "image SEO",
-  "srcset", "lazy loading", "errores schema GSC".
-  "Google Images", "image compression", "fetchpriority", "CLS images",
-  "Product schema", "Article schema", "LocalBusiness schema", "BreadcrumbList",
-  "sitemap not found", "pages not indexed", "crawl coverage", or asks about
-  rich result appearance, schema errors, sitemap generation, or image performance.
-allowed-tools:
-  - Read
-  - Grep
-  - Glob
-  - Bash
-  - WebFetch
+  Implements Schema.org (JSON-LD), XML sitemaps and SEO image optimization. Rich results,
+  rich snippets, knowledge panels, WebP/AVIF, alt text, image LCP, CLS, srcset. Usar cuando:
+  "schema", "datos estructurados", "JSON-LD", "rich results", "sitemap XML",
+  "optimizar imágenes", "alt text", "WebP", "AVIF", "LCP imagen", "image SEO", "srcset",
+  "lazy loading", "errores schema GSC". Triggers in English: "Google Images",
+  "image compression", "fetchpriority", "CLS images", "Product schema", "Article schema",
+  "LocalBusiness schema", "BreadcrumbList", "sitemap not found", "pages not indexed",
+  "crawl coverage", "rich result appearance", "schema errors", "sitemap generation".
 ---
 
 # SEO Assets — Schema, Sitemaps & Images

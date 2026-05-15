@@ -1,18 +1,13 @@
 ---
 name: seo-core
 description: >
-  Auditoría técnica SEO completa: crawlabilidad, indexación, Core Web Vitals, JS rendering,
-  robots.txt, canonical, redirects, seguridad, IndexNow. Motor principal que orquesta
-  subagentes para análisis paralelo. Usar cuando: "SEO", "auditoría SEO", "technical SEO",
-  "Core Web Vitals", "LCP", "INP", "CLS", "page speed", "Googlebot", "no aparezco en Google",
-  "robots.txt", "canonical tags", "crawl budget", "reporte SEO", "diagnóstico del sitio".
-  "noindex problems", "mobile-first indexing", or shares a URL for general analysis.
-allowed-tools:
-  - Read
-  - Grep
-  - Glob
-  - Bash
-  - WebFetch
+  Performs complete technical SEO audits: crawlability, indexation, Core Web Vitals,
+  JS rendering, robots.txt, canonical, redirects, security, IndexNow. Main engine that
+  orchestrates subagents for parallel analysis. Usar cuando: "SEO", "auditoría SEO",
+  "technical SEO", "Core Web Vitals", "LCP", "INP", "CLS", "page speed", "Googlebot",
+  "no aparezco en Google", "robots.txt", "canonical tags", "crawl budget", "reporte SEO",
+  "diagnóstico del sitio". Triggers in English: "noindex problems", "mobile-first indexing",
+  "Googlebot rendering", "site not indexed", or sharing a URL for general SEO analysis.
 ---
 
 # SEO Core — Audit & Technical Analysis

@@ -1,10 +1,12 @@
 ---
 name: app-audit
 description: >
-  Auditoria integral de aplicaciones: bugs de codigo, logica, datos, seguridad basica,
-  consistencia funcional, pruebas faltantes y oportunidades de producto. Usar cuando:
+  Audits applications broadly: code bugs, logic flaws, data issues, basic security,
+  functional consistency, missing tests and product opportunities. Usar cuando:
   audita esta app, revisa errores de logica, busca inconsistencias, code review profundo,
-  hallazgos, mejoras funcionales o oportunidades de implementacion.
+  hallazgos, mejoras funcionales, oportunidades de implementacion. Triggers in English:
+  "audit this app", "deep code review", "find bugs", "logic errors", "code quality".
+  Do NOT use for: pure UX/flow/accessibility reviews (use ux-audit).
 ---
 
 # App Audit

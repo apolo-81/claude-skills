@@ -1,8 +1,8 @@
 ---
 name: landing-page-builder
 description: >
-  Construye landing pages desde cero o implementa diseños en código Next.js + Tailwind.
-  Para análisis CRO de una landing existente usar `market-landing`.
+  Builds landing pages from scratch or implements designs in code. Stack: Next.js 15
+  + Tailwind v4 + shadcn/ui. Para análisis CRO de una landing existente usar `market-landing`.
   Usar cuando: "construir landing page", "página de ventas", "hero section", "pricing page",
   "testimonials", "implementar diseño", "Figma a Next.js", "waitlist page", "homepage".
 ---

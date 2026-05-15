@@ -1,10 +1,12 @@
 ---
 name: ux-audit
 description: >
-  Auditoria profunda de experiencia de usuario, flujos, accesibilidad, estados,
-  microcopy, navegacion y oportunidades de producto. Usar cuando: revisar UX,
-  mejorar experiencia, ronda profunda de UX, fricciones, onboarding, formularios,
-  calendario, sesiones en vivo, foros, dashboards o flujos de cursos.
+  Audits user experience deeply: flows, accessibility, states, microcopy, navigation
+  and product opportunities. Usar cuando: revisar UX, mejorar experiencia, ronda profunda
+  de UX, fricciones, onboarding, formularios, calendario, sesiones en vivo, foros,
+  dashboards o flujos de cursos. Triggers in English: "UX review", "improve experience",
+  "user flow", "accessibility audit", "onboarding friction", "microcopy".
+  Do NOT use for: code-quality, logic bugs or security review (use app-audit).
 ---
 
 # UX Audit
