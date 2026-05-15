@@ -39,7 +39,6 @@ The default active profile is:
 - `ghl-integration`
 - `landing-page-builder`
 - `performance-next`
-- `pinokio`
 - `prisma-orm`
 - `saas-boilerplate`
 - `supabase-stack`
@@ -73,14 +72,6 @@ Specialized marketing skills are disabled and loaded as on-demand references by 
 - and the remaining `market-*` command references
 
 Do not activate the whole `market` group unless the user is doing an extended marketing sprint and accepts the context cost.
-
-## Pinokio
-
-`pinokio/SKILL.md` is active. `gepeto/SKILL.md.off` is disabled because it duplicated Pinokio launcher rules and carried a large context cost.
-
-For launcher creation or debugging, load:
-
-`pinokio/references/launcher-development.md`
 
 ## Memory And Resume
 
