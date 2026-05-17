@@ -9,10 +9,10 @@ SKILLS_DIR="${CLAUDE_SKILLS_DIR:-$HOME/.claude/skills}"
 unset GROUPS
 declare -A GROUPS
 
-GROUPS[default]="app-audit ux-audit claude-config-maintenance market auth-patterns background-jobs brevo-marketing bunny-cdn deployment error-monitoring express-api form-handling ghl-integration landing-page-builder llm-streaming-app ollama-local performance-next prisma-orm saas-boilerplate supabase-stack testing-patterns ui-designer wa-baileys web-animations webhook-integration"
+GROUPS[default]="app-audit ux-audit claude-config-maintenance market auth-patterns background-jobs brevo-marketing bunny-cdn deployment error-monitoring express-api form-handling ghl-integration landing-page-builder llm-streaming-app ollama-local performance-next prisma-orm saas-boilerplate supabase-stack testing-patterns wa-baileys web-animations webhook-integration"
 GROUPS[market]="market market-ads market-audit market-brand market-competitors market-copy market-emails market-funnel market-landing market-launch market-proposal market-report market-report-pdf market-social"
 GROUPS[dev]="auth-patterns background-jobs brevo-marketing bunny-cdn deployment render-deployment error-monitoring express-api form-handling ghl-integration llm-streaming-app multi-tenant-patterns mysql-better-sqlite ollama-local performance-next prisma-orm saas-boilerplate supabase-stack testing-patterns wa-baileys webhook-integration infoproduct-funnel tracking-analytics stripe-checkout-onetime"
-GROUPS[design]="landing-page-builder ui-designer web-animations market-visual-identity pro-presentations data-viz-dashboard"
+GROUPS[design]="landing-page-builder web-animations market-visual-identity pro-presentations data-viz-dashboard calendar-master"
 GROUPS[content]="chatbot-widget cms-integration email-templates-builder pdf-generation pwa-patterns"
 GROUPS[n8n]="n8n-ai-agents n8n-to-api"
 GROUPS[seo]="seo-core seo-content-onpage seo-international seo-strategy seo-assets"

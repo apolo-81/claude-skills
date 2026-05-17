@@ -43,7 +43,6 @@ The default active profile is:
 - `saas-boilerplate`
 - `supabase-stack`
 - `testing-patterns`
-- `ui-designer`
 - `wa-baileys`
 - `web-animations`
 - `webhook-integration`

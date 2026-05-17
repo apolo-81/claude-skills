@@ -12,12 +12,28 @@ description: >
 
 # SEO Core — Audit & Technical Analysis
 
+This is the only SEO skill that should stay active by default. Specialized `seo-*` skills are kept as on-demand reference files to reduce Claude's base context.
+
+**IMPORTANTE**: las sub-skills `seo-content-onpage`, `seo-strategy`, `seo-international` y `seo-assets` están OFF por defecto. Antes de ejecutar workflows que las necesiten, activar:
+
+```bash
+skill-toggle on seo            # activa todas las seo-*
+# o solo una:
+skill-toggle on seo-strategy
+```
+
+Tras activar, ejecutar `/reload-plugins` para que Claude recargue el registry. Al terminar, `skill-toggle off seo` para volver al perfil lean.
+
 ## Quick Reference
 
-| Command | Action |
-|---------|--------|
-| `/seo audit <url>` | Full audit with parallel subagent delegation |
-| `/seo technical <url>` | Technical SEO audit (9 categories) |
+| Command | Action | On-demand source |
+|---------|--------|------------------|
+| `/seo audit <url>` | Full audit with parallel subagent delegation | this file + sub-skills |
+| `/seo technical <url>` | Technical SEO audit (9 categories) | this file |
+| `/seo content <url>` | On-page + content quality review | `../seo-content-onpage/SKILL.md.off` |
+| `/seo strategy <url>` | Roadmap, keyword clusters, topical authority | `../seo-strategy/SKILL.md.off` |
+| `/seo international <url>` | hreflang, geo-targeting, multi-region | `../seo-international/SKILL.md.off` |
+| `/seo assets <url>` | Images, fonts, CWV-related assets | `../seo-assets/SKILL.md.off` |
 
 ## Industry Detection
 

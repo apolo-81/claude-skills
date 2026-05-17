@@ -8,7 +8,7 @@ description: >
   "design system", "tipografía corporativa", "imagen de marca", "design tokens",
   "brand identity", "corporate branding", "visual identity", "branding visual",
   "colores corporativos".
-  Do NOT use for: single-color picks, mood boards, or pure logo design (use ui-designer instead).
+  Do NOT use for: single-color picks, mood boards, or pure logo design (use frontend-design plugin instead).
   Output language: match the user's input language.
   Command: /market visual-identity
 ---
@@ -211,7 +211,7 @@ Fill both templates completely using all values generated in Steps 3–7. Replac
 After completing the output, suggest:
 - **`/market brand`** — Define brand voice and tone (messaging, copywriting guidelines)
 - **`/market copy`** — Write copy using the defined visual identity as context
-- **`/ui-designer`** — Implement UI components using the generated design tokens
+- **`landing-page-builder` / `frontend-design`** — Implement UI components using the generated design tokens
 - **`/pro-presentations`** — Downstream skill for pitch decks / keynotes. Once `tokens.json` exists, pro-presentations consumes the palette and typography automatically (see its Step 4 integration).
 - **`/market competitors`** — Deep competitive analysis if only basic research was done in Step 2
 

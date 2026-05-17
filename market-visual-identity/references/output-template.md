@@ -199,7 +199,7 @@ No placeholder must remain in the final output delivered to the user.
 
 - **Voz de marca:** `/market brand` — tono, mensajes clave, guía de escritura para [NOMBRE].
 - **Copy:** `/market copy` — headlines, taglines y copy de conversión alineados a esta identidad.
-- **Implementación UI:** `/ui-designer` — componentes, layouts y sistema de diseño completo.
+- **Implementación UI:** `landing-page-builder` o el plugin `frontend-design` — componentes, layouts y sistema de diseño completo.
 ```
 
 ---
