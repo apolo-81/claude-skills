@@ -103,6 +103,15 @@ skill-toggle n8n off
 
 2 skills: `n8n-ai-agents`, `n8n-to-api`
 
+### Vercel group (ON por defecto)
+
+```bash
+skill-toggle vercel on
+skill-toggle vercel off
+```
+
+1 skill: `vercel-essentials` — condensado del plugin oficial de Vercel (43 skills) a lo esencial: CLI avanzado, CI/CD, env vars y patrones Next.js App Router (Next 16). Creado para reemplazar al plugin oficial, que se deshabilitó por inflar el presupuesto de contexto con 43 descripciones por sesión. Complementa a `deployment` (deploy básico). Contenido profundo en `vercel-essentials/references/`.
+
 ---
 
 ## Plugins del marketplace
@@ -141,6 +150,7 @@ skill-toggle n8n on/off    # N8N/Automatización (2 skills)
 skill-toggle dev on/off    # Desarrollo (7 skills)
 skill-toggle design on/off # Diseño/UI (8 skills)
 skill-toggle web on/off    # CMS/PWA (2 skills)
+skill-toggle vercel on/off # Vercel a profundidad (1 skill)
 skill-toggle list          # Listar grupos
 ```
 

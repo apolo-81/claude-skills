@@ -19,7 +19,8 @@ GROUPS[dev]="form-handling performance-next error-monitoring testing-patterns su
 GROUPS[n8n]="n8n-ai-agents n8n-to-api"
 GROUPS[design]="ui-designer web-animations pro-presentations landing-page-builder data-viz-dashboard email-templates-builder"
 GROUPS[web]="cms-integration pwa-patterns"
-GROUPS[all]="${GROUPS[audit]} ${GROUPS[dev]} ${GROUPS[n8n]} ${GROUPS[design]} ${GROUPS[web]}"
+GROUPS[vercel]="vercel-essentials"
+GROUPS[all]="${GROUPS[audit]} ${GROUPS[dev]} ${GROUPS[n8n]} ${GROUPS[design]} ${GROUPS[web]} ${GROUPS[vercel]}"
 
 # ─── Colores ────────────────────────────────────────────────────────────────
 GREEN='\033[0;32m'
@@ -44,7 +45,8 @@ show_help() {
   n8n      — 2 skills de N8N/Automatización"
     echo "  design   — 5 skills de Diseño/UI"
     echo "  web      — 2 skills de CMS/PWA"
-    echo "  all      — Todas las skills (33)"
+    echo "  vercel   — 1 skill Vercel a profundidad (reemplaza plugin oficial)"
+    echo "  all      — Todas las skills (34)"
     echo ""
     echo "Ejemplos:"
     echo "  skill-toggle seo off       Desactivar SEO"
