@@ -33,7 +33,7 @@ claude-skills/
 
 ---
 
-## Skills incluidas (44 total)
+## Skills incluidas (45 total)
 
 ### Siempre activas (sin grupo)
 
@@ -47,6 +47,7 @@ claude-skills/
 | `ghl-integration` | GoHighLevel OAuth2, webhooks, iFrame SSO |
 | `pdf-generation` | Puppeteer, @sparticuz/chromium, @react-pdf |
 | `prisma-orm` | Prisma 5+, PostgreSQL, Neon, transactions |
+| `remotion` | Remotion 4.x, videos programáticos con React, Studio, rendering |
 
 ### Dev group (ON por defecto)
 

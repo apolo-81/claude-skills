@@ -1,0 +1,45 @@
+# Este repo se auto-commitea y pushea desde el hook Stop de Claude Code
+# (sync-all.sh → EXTERNAL_REPOS). Sin este .gitignore, cualquier archivo que
+# aparezca aquí acaba publicado en GitHub sin revisión. Ver feedback_env_files_safety.
+
+# Secretos y entorno
+.env
+.env.*
+*.pem
+*.key
+credentials.json
+**/secrets/
+
+# Dependencias y build (ninguna skill debería instalar aquí, pero por si acaso)
+node_modules/
+dist/
+build/
+__pycache__/
+*.pyc
+
+# Ruido del sistema y editores
+.DS_Store
+*.log
+*.swp
+.idea/
+.vscode/
+
+# Scratch
+tmp/
+*.tmp
+*.bak
+
+# Symlinks a skills que viven fuera del repo, en ~/.agents/skills/ (las instaló
+# otra herramienta el 2026-07-14: la suite remotion-*, find-skills, mediabunny).
+# Commitearlos guardaría punteros rotos: en otra máquina ~/.agents/skills/ no
+# existe. El destino real no es de este repo, así que no se versiona ninguno.
+# La skill `remotion/` de este repo SÍ es propia y sí se versiona.
+/find-skills
+/mediabunny
+/remotion-best-practices
+/remotion-captions
+/remotion-create
+/remotion-interactivity
+/remotion-markup
+/remotion-render
+/remotion-saas
