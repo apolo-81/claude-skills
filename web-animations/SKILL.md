@@ -228,3 +228,5 @@ CSS animations, View Transitions API, and scroll-driven animations require no in
 | ARIA, types, error boundary, ESLint | [accessibility-code.md](references/accessibility-code.md) |
 | Decision tree (standalone) | [decision-tree.md](references/decision-tree.md) |
 | Production examples | [examples.md](references/examples.md) |
+| Video controlado por scroll (scrub), encode, iOS | [scroll-scrub-video.md](references/scroll-scrub-video.md) · `scripts/encode-scrub.sh` · [scrub-device-diag.html](references/scrub-device-diag.html) |
+| Sitio scrollytelling completo (opcional, OFF) | skill `scroll-craft` (`skill-toggle scroll on`) |

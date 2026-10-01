@@ -166,3 +166,7 @@ tests/e2e/                   ← Playwright E2E
 tests/mocks/server.ts        ← MSW handlers
 __mocks__/@supabase/         ← Global Supabase mock
 ```
+
+## Páginas con scroll (sticky, scrub de video, scrollytelling)
+
+Ver `references/scroll-page-verify.md`: scroll muerto, clip congelado, contraste sobre la página compuesta, reduced-motion alcanzable, teclado en sticky, móvil/iOS.

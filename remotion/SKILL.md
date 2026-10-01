@@ -168,3 +168,4 @@ Skills disponibles: `remotion-best-practices`, `remotion-markup`, `remotion-crea
 ## 10. Referencias
 
 - `references/*.md` — patrones avanzados, Code Hike, captions, efectos, rendering en Lambda, Player
+- Video que se va a scrubbear con la rueda en una web: renderiza aquí y pasa el MP4 por `web-animations/scripts/encode-scrub.sh` (GOP denso); ver `web-animations/references/scroll-scrub-video.md`
