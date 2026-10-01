@@ -23,6 +23,7 @@ import { execFileSync } from "node:child_process";
 import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 import { paths } from "./workspace.mjs";
+import { findBrowser } from "./lib/browser.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const rows = [];
@@ -101,25 +102,9 @@ try {
 add("verify", "playwright-core", pw, pwWhere,
   "Run `npm i playwright-core` inside the build folder. Only needed for the verification pass.");
 
-const chrome = [
-  process.env.SCROLLCRAFT_CHROME,
-  // Windows
-  "C:/Program Files/Google/Chrome/Application/chrome.exe",
-  "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
-  "C:/Program Files/Microsoft/Edge/Application/msedge.exe",
-  // macOS
-  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-  "/Applications/Chromium.app/Contents/MacOS/Chromium",
-  "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge",
-  // Linux
-  "/usr/bin/google-chrome",
-  "/usr/bin/google-chrome-stable",
-  "/usr/bin/chromium",
-  "/usr/bin/chromium-browser",
-  "/snap/bin/chromium",
-].find((p) => p && fs.existsSync(p));
+const chrome = findBrowser();
 add("verify", "Chrome", Boolean(chrome), chrome || "not found",
-  "Install Chrome, or set SCROLLCRAFT_CHROME to an executable.");
+  "Install Chrome or Brave, or set SCROLLCRAFT_CHROME to an executable.");
 
 // ------------------------------------------------------------- kie key ----
 function findKey() {

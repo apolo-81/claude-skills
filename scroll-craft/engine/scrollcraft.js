@@ -139,7 +139,17 @@
 (function (global) {
   'use strict';
 
-  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Motion can be forced off from inside the page: ?motion=off for testing, or the visitor's own
+  // choice stored by ScrollCraft.setMotion(false). It behaves exactly like prefers-reduced-motion.
+  var forcedOff = (function () {
+    try {
+      return /[?&]motion=off\b/.test(location.search) ||
+             localStorage.getItem('sc-motion') === 'off' ||
+             document.documentElement.getAttribute('data-sc-motion') === 'off';
+    } catch (e) { return false; }
+  })();
+  if (forcedOff) document.documentElement.setAttribute('data-sc-motion', 'off');
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches || forcedOff;
   var fineMQ = matchMedia('(hover: hover) and (pointer: fine)');
   var smallMQ = matchMedia('(max-width: 860px)');
   var coarse = matchMedia('(hover: none) and (pointer: coarse)').matches;
@@ -709,6 +719,8 @@
       var w = img.naturalWidth * scale, h = img.naturalHeight * scale;
       S.ctx.drawImage(img, (cw - w) / 2, (ch - h) / 2, w, h);
       S.drawn = idx;
+      // Tell the verification harness which frame is painted: a sequence is state it cannot otherwise see.
+      S.el.setAttribute('data-sc-verify-state', 'seq:' + idx);
     }
 
     // ---- worldflight ------------------------------------------------------
@@ -1207,5 +1219,11 @@
   // harness reads the real playhead records: a screenshot taken mid-lerp is a
   // frame the page never actually holds, so the harness has to be able to ask
   // whether the playhead has arrived rather than guess with a timeout.
-  global.ScrollCraft = { mount: mount, reduce: reduce, instances: [] };
+  // setMotion(false) turns motion off for this visitor and reloads (the engine reads the flag once, at load);
+  // setMotion(true) restores it. The OS preference still wins when it asks for reduced motion.
+  function setMotion(on) {
+    try { on ? localStorage.removeItem('sc-motion') : localStorage.setItem('sc-motion', 'off'); } catch (e) {}
+    location.reload();
+  }
+  global.ScrollCraft = { mount: mount, reduce: reduce, forcedOff: forcedOff, setMotion: setMotion, instances: [] };
 })(window);

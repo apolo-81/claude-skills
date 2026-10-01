@@ -1,12 +1,12 @@
 ---
 name: seo-core
 description: >
-  Auditoría técnica SEO completa: crawlabilidad, indexación, Core Web Vitals, JS rendering,
-  robots.txt, canonical, redirects, seguridad, IndexNow. Motor principal que orquesta
-  subagentes para análisis paralelo. Usar cuando: "SEO", "auditoría SEO", "technical SEO",
-  "Core Web Vitals", "LCP", "INP", "CLS", "page speed", "Googlebot", "no aparezco en Google",
-  "robots.txt", "canonical tags", "crawl budget", "reporte SEO", "diagnóstico del sitio".
-  "noindex problems", "mobile-first indexing", or shares a URL for general analysis.
+  SEO completo: auditoría técnica (crawlabilidad, indexación, Core Web Vitals, JS rendering, robots.txt, canonical,
+  redirects, IndexNow), contenido y E-E-A-T, schema JSON-LD y sitemaps, hreflang e internacional, GEO/AI search
+  (llms.txt), estrategia y SEO programático. Orquesta módulos en references/.
+  Usar cuando: "SEO", "auditoría SEO", "Core Web Vitals", "LCP", "INP", "no aparezco en Google", "robots.txt",
+  "canonical", "schema", "datos estructurados", "rich results", "sitemap", "hreflang", "E-E-A-T", "title y meta",
+  "keyword research", "plan SEO", "SEO programático", "página X vs Y", "aparecer en ChatGPT/Perplexity", o un URL para analizar.
 allowed-tools:
   - Read
   - Grep
@@ -67,6 +67,17 @@ See `references/quality-gates.md` for thin content thresholds.
 - `references/quality-gates.md` — Content length minimums, uniqueness thresholds
 - `pdf/google-seo-reference.md` — Google SEO quick reference
 
+## Modules (merged 2026-10-01 from the former `seo-*` skills; same content)
+
+| Topic | Read |
+|---|---|
+| Content quality, E-E-A-T, titles, metas, headings, internal links | `references/content-onpage.md` |
+| Schema.org / JSON-LD, sitemap XML, image SEO | `references/assets.md` |
+| Hreflang, multi-language/region, local SEO, GEO and `llms.txt` | `references/international.md` |
+| SEO strategy, content roadmap, programmatic SEO, comparison and alternative pages (industry templates in `references/strategy/assets/`) | `references/strategy.md` |
+
+Load only the module the task needs.
+
 ---
 
 ## Full Audit Workflow
@@ -86,10 +97,10 @@ For SPAs: fetch raw HTML first to see what Googlebot sees without JS.
 
 | Subagent | Scope |
 |----------|-------|
-| `seo-core` (technical) | robots.txt, sitemaps, canonicals, CWV, security headers |
-| `seo-content-onpage` | E-E-A-T, readability, thin content, on-page elements |
-| `seo-assets` | Schema detection/validation, sitemap analysis, image optimization |
-| `seo-international` | Hreflang validation (if multi-language detected) |
+| Technical (this file) | robots.txt, sitemaps, canonicals, CWV, security headers |
+| `references/content-onpage.md` | E-E-A-T, readability, thin content, on-page elements |
+| `references/assets.md` | Schema detection/validation, sitemap analysis, image optimization |
+| `references/international.md` | Hreflang validation (if multi-language detected), GEO / AI search |
 | Performance | LCP, INP, CLS via PageSpeed Insights |
 | Visual | Screenshots, mobile rendering, above-fold analysis |
 
@@ -149,7 +160,7 @@ Mobile-first indexing 100% complete (July 2024). Mobile IS your site.
 INP replaced FID March 12, 2024. See `references/cwv-thresholds.md` for subparts and bottlenecks.
 
 ### 7. Structured Data
-JSON-LD preferred. See `seo-assets` skill and `references/schema-types.md`.
+JSON-LD preferred. See `references/assets.md` and `references/schema-types.md`.
 
 ### 8. JavaScript Rendering (Dec 2025 Google clarifications)
 1. Raw HTML vs JS-injected canonical: Google may use either — must match

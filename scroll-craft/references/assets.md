@@ -1,5 +1,17 @@
 # Assets
 
+**Route A, footage first (no key, no spend).** Check the client's site, social and drive for video before you generate anything.
+`bash scripts/prep-footage.sh master.mp4 --cuts 0,4.4,11.8 --out assets` turns it into numbered, scrub-ready acts with phone
+variants and posters; see [recipes.md §3](recipes.md#3-footage-you-already-have). Footage that is flat or log-ish needs the grade
+below ("Real footage the client already has"). Everything after this paragraph is **Route B, generation**.
+
+**Route B, generation.** kie.ai is what the scripts drive, because it has a stable HTTP API. Any image or video tool you are
+authorised to use works as long as you keep the rules: one style preamble reused verbatim, a poster that is the clip's own first
+frame, encode for scrubbing, read every asset before using it. A coding agent with a native image generator (for example Codex
+`imagegen`) can produce the stills; then pass them through `encode.sh` and `prep-footage.sh` exactly like footage. Camera-move
+clips from stills still need a video model; if you have none, build the page from stills with `parallax`/`reveal`/`pan` or a
+short image sequence ([recipes.md §5](recipes.md#5-image-sequence-instead-of-a-video)) rather than faking a scrub.
+
 Generation through kie.ai, then encoding for scrubbing. All of it via
 `scripts/kie.mjs` and `scripts/encode.sh`.
 
@@ -57,6 +69,9 @@ video paints.
 ffmpeg -y -i out/01.mp4 -frames:v 1 -q:v 2 assets/01-poster.png
 ```
 
+**Numbered image sequences need `-f image2`.** `ffmpeg -i in.mp4 f%03d.webp` picks the animated-WebP muxer from the extension and writes
+ONE file; add `-f image2 -c:v libwebp`.
+
 **Use the same ffmpeg `encode.sh` resolved, not bare `ffmpeg`.** `encode.sh`
 goes looking for a full build precisely because the one on PATH may be stripped,
 but this poster line and the PSNR seam check below both call `ffmpeg` directly.
@@ -66,7 +81,9 @@ missing encoder, and `-lavfi psnr` fails with `No such filter: 'psnr'`. Resolve
 it once and reuse it:
 
 ```bash
+# Windows: the WinGet full build. macOS/Linux: whichever `ffmpeg -hide_banner -filters | wc -l` reports more than 200 filters for.
 FF=$(ls -d "$HOME"/AppData/Local/Microsoft/WinGet/Packages/Gyan.FFmpeg_*/ffmpeg-*-full_build/bin/ffmpeg.exe 2>/dev/null | head -1)
+[ -z "$FF" ] && FF=$(command -v ffmpeg)
 "$FF" -y -i assets/01.mp4 -frames:v 1 -vf scale=1600:-2 -c:v libwebp -quality 82 assets/p01.webp
 ```
 

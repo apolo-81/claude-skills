@@ -1,15 +1,11 @@
 ---
 name: vercel-essentials
 description: >
-  Vercel a profundidad — CLI avanzado, CI/CD, env vars y patrones Next.js App Router (Next 16).
-  Reemplaza al plugin oficial de Vercel (43 skills) condensado a lo esencial. Complementa a `deployment`
-  (que cubre el deploy básico). Usar cuando: "vercel link", "monorepo vercel", "vercel build --prebuilt",
-  "vercel promote", "vercel rollback", "CI/CD vercel", "GitHub Actions vercel", "VERCEL_TOKEN",
-  "vercel env pull", "OIDC token", "VERCEL_OIDC_TOKEN", "project.json vs repo.json", "App Router",
-  "server component async", "cookies() headers() params async", "middleware proxy.ts", "revalidateTag",
-  "next/router next/navigation", "getServerSideProps migrar", "next 16 breaking changes".
-  Do NOT use for: deploy básico a Vercel (usar `deployment`), Railway, Express puro, ni AI SDK/Workflow/shadcn
-  del plugin (esos quedaron fuera del recorte — reactivar el plugin oficial si se necesitan).
+  Vercel a profundidad: CLI avanzado, CI/CD, env vars (OIDC) y cambios de Next.js 16 / App Router.
+  Usar cuando: "vercel link", "monorepo vercel", "vercel build --prebuilt", "vercel promote/rollback",
+  "GitHub Actions vercel", "VERCEL_TOKEN", "vercel env pull", "VERCEL_OIDC_TOKEN", "params y cookies async",
+  "middleware proxy.ts", "revalidateTag", "migrar getServerSideProps", "next 16 breaking changes".
+  Do NOT use for: deploy básico (deployment), Express, ni AI SDK/shadcn del plugin oficial (desactivado).
 ---
 
 # Vercel Essentials

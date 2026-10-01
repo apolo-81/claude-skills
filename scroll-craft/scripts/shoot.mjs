@@ -19,6 +19,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { createRequire } from "node:module";
+import { findBrowser, h264Supported } from "./lib/browser.mjs";
 
 // The skill lives outside the project it is building, so resolve playwright
 // from the BUILD project's node_modules (cwd), not from next to this file.
@@ -42,23 +43,7 @@ const W = parseInt(arg("--width", "1440"), 10);
 const H = parseInt(arg("--height", "900"), 10);
 const REDUCED = has("--reduced-motion");
 
-const CHROME = [
-  process.env.SCROLLCRAFT_CHROME,
-  // Windows
-  "C:/Program Files/Google/Chrome/Application/chrome.exe",
-  "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
-  "C:/Program Files/Microsoft/Edge/Application/msedge.exe",
-  // macOS
-  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-  "/Applications/Chromium.app/Contents/MacOS/Chromium",
-  "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge",
-  // Linux
-  "/usr/bin/google-chrome",
-  "/usr/bin/google-chrome-stable",
-  "/usr/bin/chromium",
-  "/usr/bin/chromium-browser",
-  "/snap/bin/chromium",
-].find((p) => p && fs.existsSync(p));
+const CHROME = findBrowser();
 
 if (!CHROME) {
   console.error("No installed Chrome found. Set SCROLLCRAFT_CHROME to its path.");
@@ -68,6 +53,10 @@ if (!CHROME) {
 fs.mkdirSync(OUT, { recursive: true });
 
 const browser = await chromium.launch({ executablePath: CHROME, headless: true });
+if (!(await h264Supported(browser))) {
+  console.error("WARNING: this browser cannot decode h264. Every scrub clip will stay on its poster and the run will\n" +
+    "'pass' without testing the film. Use Chrome, Brave or Edge (SCROLLCRAFT_CHROME), not Playwright's bundled Chromium.");
+}
 const page = await browser.newPage({
   viewport: { width: W, height: H },
   deviceScaleFactor: 2,
@@ -299,8 +288,14 @@ for (let i = 0; i < positions.length; i++) {
     // point the stage slides up the screen while its progress is still clamped
     // to 0, so the clip and cues are frozen and yet the view is very much
     // moving. Without this the run-up to every pinned act reads as dead scroll.
+    // Only stages the reader can actually see. A stage below the fold that is
+    // sliding toward the viewport is not a visible change, and counting it let a
+    // pinned act with nothing on it read as healthy for years (found in the
+    // apolo-tek pilot: the NEXT act's stage moving off-screen masked the empty pin).
     const stages = [...document.querySelectorAll("[data-sc-stage]")]
-      .map((s) => Math.round(s.getBoundingClientRect().top));
+      .map((s) => s.getBoundingClientRect())
+      .filter((r) => r.bottom > 0 && r.top < innerHeight)
+      .map((r) => Math.round(r.top));
     // Worldflight legs. Opacity IS the crossfade, so it is state, not styling:
     // two samples with the same clip times but different leg opacities are a
     // dissolve in progress, not dead scroll.
@@ -509,20 +504,39 @@ if (WORLD) {
     }
   }
 } else {
+  // Runs, not pairs. A pair of neighbouring samples that match is normal; a RUN of
+  // matching samples is the reader turning the wheel for a long stretch and getting
+  // nothing. A fully visible cue is an authored reading hold, so it earns up to one
+  // viewport of stillness; anything else (an empty pin, static markup with no cue)
+  // is flagged from a quarter of a viewport.
+  const holdOf = (s) => s.cues.length > 0 && s.cues.every((c) => c.o >= 0.95);
+  let run = null;
+  const flush = () => {
+    if (!run) return;
+    // Under reduced motion a pan rail is a native scroll region: its travel belongs to the reader's own hand,
+    // so the page itself holds still by design.
+    if (REDUCED && run.from.act === "pan") { run = null; return; }
+    const len = run.to.y - run.from.y;
+    // Under reduced motion a held cue over a poster is the design: nothing is meant to play, only to be read.
+    const limit = run.hold ? (REDUCED ? Infinity : 1.0) : 0.25;
+    if (len >= doc.vh * limit) dead.push(`${run.from.pct}% -> ${run.to.pct}% (${run.from.act} > ${run.to.act})`);
+    run = null;
+  };
   for (let i = 1; i < report.length; i++) {
     const a = report[i - 1], b = report[i];
     const hasCustomState = (a.custom?.length || 0) > 0 || (b.custom?.length || 0) > 0;
-    if (!PINNED.has(a.act) && !PINNED.has(b.act) && !hasCustomState) continue;
+    if (!PINNED.has(a.act) && !PINNED.has(b.act) && !hasCustomState) { flush(); continue; }
     // A page may explicitly declare an authored hold, such as a resolved close
     // or the stable accessibility frame under reduced motion. It has to be
     // declared by the visible stage; ordinary flow content stays exempt as it
     // was before this custom-state path existed.
-    if (a.customHold && b.customHold) continue;
-    // Two samples a few dozen pixels apart SHOULD look the same. Only flag a gap
-    // wide enough that a reader would notice nothing happening in it.
-    if (b.y - a.y < doc.vh * 0.25) continue;
-    if (sig(a) === sig(b)) dead.push(`${a.pct}% -> ${b.pct}% (${a.act} > ${b.act})`);
+    if (a.customHold && b.customHold) { flush(); continue; }
+    if (sig(a) === sig(b)) {
+      if (!run) run = { from: a, to: b, hold: holdOf(a) && holdOf(b) };
+      else { run.to = b; run.hold = run.hold && holdOf(b); }
+    } else flush();
   }
+  flush();
 }
 console.log(dead.length ? `\nDEAD SCROLL between: ${dead.join(", ")}`
   : WORLD && REDUCED ? "\ndead-scroll check skipped: reduced motion holds each leg on one still frame by design"

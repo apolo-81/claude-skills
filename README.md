@@ -74,26 +74,35 @@ claude-skills/
 | `cms-integration` | Contentful, Sanity, Strapi con Next.js |
 | `pwa-patterns` | Service workers, offline-first, instalable |
 
-### Market suite (ON por defecto)
+### Market suite (1 skill, 13 módulos)
+
+`market` es el orquestador; desde 2026-10-01 sus 13 módulos (`audit`, `copy`, `landing`, `funnel`, `competitors`, `ads`, `emails`, `social`, `brand`,
+`launch`, `proposal`, `report`, `report-pdf`) viven en `market/references/` en lugar de ser skills separadas. Mismos comandos `/market <módulo>`.
+
+### SEO (1 skill, 4 módulos)
+
+`seo-core` incluye `content-onpage`, `assets` (schema/sitemap/imágenes), `international` (hreflang/GEO) y `strategy` en `references/`.
+
+### Skills nuevas (2026-10-01)
 
 | Skill | Descripción |
 |-------|-------------|
-| `market` | Orquestador del suite de marketing |
-| `market-copy` | Copywriting web, análisis y reescritura |
-| `market-landing` | CRO, análisis de landing pages |
-| `market-proposal` | Propuestas de servicios profesionales |
-| `market-brand` | Voz de marca, tono e identidad |
-| `market-launch` | Playbook de lanzamiento semana a semana |
-| `market-emails` | Secuencias de email marketing |
+| `wa-baileys` | Baileys 7: sesión, JID México, recibos, anti-bloqueo (destilado de incidentes reales) |
+| `vue-sites` | Sitios Vue 3 + Vite + SCSS para clientes: estructura, prerender, Hostinger |
+| `deployment` | Ahora enrutador por plataforma (Vercel, Hostinger, Render, VPS+Coolify); Railway en `references/` |
+| `scroll-craft` | Sitios scrollytelling premium (terceros, **OFF** por defecto: `skill-toggle scroll on`) |
 
-### Audit group (OFF por defecto — bajo demanda)
+### Parked group (OFF por defecto — sin uso en proyectos actuales)
 
 ```bash
-skill-toggle audit on   # Activar
-skill-toggle audit off  # Desactivar
+skill-toggle parked on   # cms-integration pwa-patterns ghl-integration n8n-ai-agents n8n-to-api ui-designer
 ```
 
-12 skills: seo-core, seo-content-onpage, seo-international, seo-strategy, seo-assets, market-audit, market-competitors, market-funnel, market-social, market-ads, market-report, market-report-pdf
+### Audit group (`seo-core` + `market`)
+
+```bash
+skill-toggle audit on/off
+```
 
 ### N8N group (OFF por defecto — bajo demanda)
 

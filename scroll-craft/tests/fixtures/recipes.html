@@ -1,0 +1,39 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prueba recetas</title><link rel="stylesheet" href="scrollcraft.css">
+<style>
+:root{--sc-canvas:#08090b;--sc-ink:#f4f2ef;--sc-accent:#ff7a1a}
+/* RECIPE: SVG line that draws itself from the act's progress */
+.draw svg{width:min(70vw,720px);height:auto;overflow:visible}
+.draw path{fill:none;stroke:var(--sc-accent);stroke-width:3;stroke-linecap:round;
+  stroke-dasharray:var(--len);stroke-dashoffset:calc(var(--len) * (1 - var(--sc-p, 0)))}
+.stage-c{display:grid;place-items:center}
+/* RECIPE: trace rail, a persistent record of the journey that doubles as navigation */
+.trace{position:fixed;left:0;right:0;bottom:0;height:14px;z-index:60;background:#17181c}
+.trace__fill{position:absolute;inset:0;transform-origin:left;transform:scaleX(0);background:var(--sc-accent)}
+.trace a{position:absolute;top:0;bottom:0;width:14px;margin-left:-7px;opacity:.55}
+.trace a::after{content:"";position:absolute;left:6px;top:0;bottom:0;width:2px;background:#f4f2ef}
+.trace a.on{opacity:1}
+</style></head>
+<body><main>
+<section id="a1" data-sc-act="pin" data-sc-span="2"><div data-sc-stage class="stage-c"><p data-sc-cue="0.05 0.9">Uno</p></div></section>
+<section id="a2" class="draw" data-sc-act="pin" data-sc-span="3"><div data-sc-stage class="stage-c">
+  <svg viewBox="0 0 600 200" aria-hidden="true"><path id="route" d="M10 170 C 120 10, 220 10, 300 100 S 480 190, 590 30"/></svg></div></section>
+<section id="a3" data-sc-act="pin" data-sc-span="1.5"><div data-sc-stage class="stage-c"><p data-sc-cue="0.05">Fin</p></div></section>
+</main>
+<nav class="trace" id="trace" aria-label="Progreso de la página"><div class="trace__fill" id="fill"></div></nav>
+<script src="scrollcraft.js"></script>
+<script>
+ScrollCraft.mount(document.body);
+// path length -> --len, once
+var route = document.getElementById('route'); route.parentNode.parentNode.parentNode.style.setProperty('--len', Math.ceil(route.getTotalLength()) + 'px');
+// trace rail: markers at each act's start, fill = page progress
+(function () {
+  var rail = document.getElementById('trace'), fill = document.getElementById('fill');
+  var acts = Array.prototype.slice.call(document.querySelectorAll('[data-sc-act]'));
+  var marks = acts.map(function (a, i) { var m = document.createElement('a'); m.href = '#' + a.id; m.setAttribute('aria-label', 'Ir al acto ' + (i + 1)); rail.appendChild(m); return { el: m, act: a }; });
+  function span() { return Math.max(1, document.documentElement.scrollHeight - innerHeight); }
+  function place() { var s = span(); marks.forEach(function (m) { m.p = (m.act.getBoundingClientRect().top + scrollY) / s; m.el.style.left = m.p * 100 + '%'; }); }
+  function tick() { var p = Math.min(1, scrollY / span()); fill.style.transform = 'scaleX(' + p.toFixed(4) + ')'; marks.forEach(function (m) { m.el.classList.toggle('on', p >= m.p - 0.001); }); requestAnimationFrame(tick); }
+  place(); addEventListener('resize', place); addEventListener('load', place); requestAnimationFrame(tick);
+})();
+</script></body></html>

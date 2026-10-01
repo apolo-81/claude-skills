@@ -42,7 +42,7 @@
     "playground@claude-plugins-official": true,
     "superpowers@claude-plugins-official": true,
     "playwright@claude-plugins-official": true,
-    "plugin-dev@claude-plugins-official": true,
+    "plugin-dev@claude-plugins-official": false,
     "code-review@claude-plugins-official": true,
     "claude-code-history-files-finder@daymade-skills": true,
     "competitors-analysis@daymade-skills": true,

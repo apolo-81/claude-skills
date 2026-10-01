@@ -1,10 +1,12 @@
 ---
 name: market
 description: >
-  Orquestador del suite de marketing — delega a las skills especializadas según la tarea.
-  Usar cuando: "marketing", "estrategia de marketing", "auditoría de marketing",
-  "analiza mi sitio", "copy", "email marketing", "funnel", "propuesta para cliente",
-  "lanzamiento", "voz de marca", "landing page". Punto de entrada general.
+  Suite de marketing: orquestador y 13 módulos (auditoría, copy, landing CRO, funnel, competidores, anuncios,
+  emails, redes sociales, voz de marca, lanzamiento, propuesta para cliente, reporte MD y PDF).
+  Usar cuando: "marketing", "estrategia de marketing", "auditoría de marketing", "analiza mi sitio", "copy",
+  "reescribe mi homepage", "email marketing", "secuencia de emails", "funnel", "por qué no convierte",
+  "anuncios Google/Meta", "calendario de redes", "voz de marca", "propuesta para cliente", "presupuesto",
+  "plan de lanzamiento", "analiza a mi competencia", "reporte PDF para cliente".
 ---
 
 # AI Marketing Suite -- Main Orchestrator
@@ -36,7 +38,7 @@ description: >
 | `/market proposal <client>` | CLIENT-PROPOSAL.md |
 | `/market report <url>` | MARKETING-REPORT.md |
 | `/market report-pdf <url>` | MARKETING-REPORT.pdf |
-| `/market seo <url>` | SEO-AUDIT.md *(requiere `skill-toggle audit on`)* |
+| `/market seo <url>` | SEO-AUDIT.md *(usa la skill `seo-core`)* |
 | `/market brand <url>` | BRAND-VOICE.md |
 
 ## Routing Logic
@@ -69,7 +71,26 @@ Fast 60-second assessment. NO subagents. Fetch homepage with WebFetch, evaluate:
 
 ### Individual Commands
 
-Route `/market <command>` to `skills/market-<command>/SKILL.md`.
+Route `/market <command>` to `references/<command>.md` inside this skill (`/market cro` = `landing`). Read that file fully before
+running the command; the detail files it cites live in `references/<command>/`. Since 2026-10-01 each former `market-*` skill is
+one of these references (same content, one entry in the skill list instead of 14).
+
+| Command | Reference | What it does |
+|---|---|---|
+| `/market ads` | `references/ads.md` | Genera campañas de anuncios para Google, Meta, LinkedIn y TikTok. |
+| `/market audit` | `references/audit.md` | Auditoría completa de marketing con 5 subagentes paralelos. |
+| `/market brand` | `references/brand.md` | Análisis y generación de voz de marca, tono e identidad comunicacional. |
+| `/market competitors` | `references/competitors.md` | Inteligencia competitiva: mensajería, precios, features y SEO vs competidores. |
+| `/market copy` | `references/copy.md` | Análisis y generación de copy para sitios web. |
+| `/market emails` | `references/emails.md` | Secuencias de email marketing listas para enviar: bienvenida, onboarding, nurture, retención. |
+| `/market funnel` | `references/funnel.md` | Análisis y optimización del embudo de ventas de visita a compra. |
+| `/market landing` | `references/landing.md` | Análisis CRO de landing pages — identifica por qué no convierten y cómo mejorarlas. |
+| `/market launch` | `references/launch.md` | Playbook de lanzamiento semana a semana para productos o servicios. |
+| `/market proposal` | `references/proposal.md` | Genera propuestas de servicios profesionales para clientes. |
+| `/market report` | `references/report.md` | Reporte de marketing en Markdown para uso interno con scorecard y resumen ejecutivo. |
+| `/market report-pdf` | `references/report-pdf.md` | Reporte de marketing en PDF con gráficos, gauges y tablas visuales para entregar a clientes. |
+| `/market social` | `references/social.md` | Calendario de contenido 30 días para redes sociales, listo para publicar. |
+| `/market seo <url>` | skill `seo-core` | Technical and on-page SEO audit |
 
 ## Business Context Detection
 

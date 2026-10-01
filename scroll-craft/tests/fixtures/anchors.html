@@ -1,0 +1,24 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prueba anclas</title><link rel="stylesheet" href="scrollcraft.css">
+<style>:root{--sc-canvas:#08090b;--sc-ink:#f4f2ef;--sc-gutter:24px}
+.callouts{position:absolute;inset:0;pointer-events:none;z-index:3}.callouts svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.callouts line{stroke:#ff7a1a;stroke-width:1.5}.callouts circle{fill:#ff7a1a}
+.callout{position:absolute;left:24px;top:18%;width:14rem;padding:.8rem;background:#0b0c0e;color:#f4f2ef;border:1px solid #333;opacity:0}</style></head>
+<body><main>
+<section data-sc-act="scrub" data-sc-span="3" id="act"><div data-sc-stage id="stage">
+ <img class="sc-stage__poster" id="poster" src="assets/dark.webp" alt="" width="1920" height="1080">
+ <video id="clip" data-sc-scrub data-sc-src="assets/dark.mp4" muted playsinline></video>
+ <div class="callouts" id="layer"><svg id="lines" aria-hidden="true"></svg>
+  <div class="callout" data-id="box"><h3>Cuadro azul</h3><p>Sigue al cuadro.</p></div></div>
+</div></section>
+<section class="sc-section" data-sc-act="flow"><p class="sc-body">Fin.</p></section>
+</main>
+<script src="scrollcraft.js"></script><script src="scrollcraft-anchors.js"></script>
+<script>
+ScrollCraft.mount(document.body);
+// el cuadro azul del clip sintético: x = mod(t*300,1700), y = 380, 300x300 en 1920x1080
+var kf = []; for (var t = 0; t <= 5; t++) kf.push([t, (t * 300 + 150) / 1920, 530 / 1080]);
+window.__anch = ScrollCraftAnchors.mount({ stage: '#stage', video: '#clip', poster: '#poster', layer: '#layer', svg: '#lines',
+  size: [1920, 1080], clipStart: 0, staticAt: 2.5, posterStatic: 'assets/dark.webp',
+  parts: { box: { on: [0.1, 0.3, 5.2, 5.5], kf: kf } } });
+</script></body></html>

@@ -13,13 +13,16 @@
   a row, at most two scrub acts, and the closing act is the last element on the
   page.
 -->
-<html lang="en">
+<html lang="en"> <!-- set to the page language, e.g. es-MX -->
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>BRAND · the one-line promise</title>
 <meta name="description" content="One sentence a search result would show.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230A0807'/></svg>">
+<!-- Fonts: self-host. `node scripts/fonts.mjs --out assets/fonts --family "Archivo:700"` writes assets/fonts/fonts.css.
+     Never link fonts.googleapis.com: it blocks first paint. -->
+<link rel="stylesheet" href="assets/fonts/fonts.css">
 <link rel="stylesheet" href="scrollcraft.css">
 <style>
   /* The whole rebrand: six colours and two faces. Everything else in
@@ -132,6 +135,8 @@
 
 </main>
 
+<!-- Optional but recommended: in-page motion switch (recipes.md section 4) and anchored callouts (recipes.md section 1):
+     <script src="scrollcraft-anchors.js"></script> -->
 <script src="scrollcraft.js"></script>
 <script>ScrollCraft.mount(document.body);</script>
 </body>

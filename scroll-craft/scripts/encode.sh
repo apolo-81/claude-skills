@@ -53,11 +53,15 @@ IN="${1:?usage: encode.sh <in> <out> [mobile|desktop] [crf]}"
 OUT="${2:?usage: encode.sh <in> <out> [mobile|desktop] [crf]}"
 MODE="${3:-desktop}"
 
+# Never upscale. A 720p master stretched to 1080p costs ~2x the bytes for no extra detail
+# (measured on the apolo-tek pilot: 2.4 MB at native 720p vs 5+ MB upscaled).
+# GOP can be forced with SCROLLCRAFT_GOP (1 = all-intra: the smoothest scrub, 3-5x the bytes).
 if [ "$MODE" = "mobile" ]; then
-  SCALE="scale=-2:720"; GOP=4; CRF=24
+  SCALE="scale=-2:min(ih\,720)"; GOP=4; CRF=24
 else
-  SCALE="scale=-2:1080"; GOP=8; CRF=20
+  SCALE="scale=-2:min(ih\,1080)"; GOP=8; CRF=20
 fi
+GOP="${SCROLLCRAFT_GOP:-$GOP}"
 
 # Positional beats env var beats the mode default.
 CRF="${4:-${SCROLLCRAFT_CRF:-$CRF}}"

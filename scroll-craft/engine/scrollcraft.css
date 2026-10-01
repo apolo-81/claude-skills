@@ -383,6 +383,15 @@ video[data-sc-scrub].sc-has-clip { opacity: 1; }
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/></filter><rect width='140' height='140' filter='url(%23n)'/></svg>");
 }
 
+/* ----------------------------------------------------------------- cloak -- */
+/* Until the engine mounts, pinned acts have their natural heights; the moment it sets
+   span * 100vh the whole page jumps. In the self-test fixture that was a CLS of 0.47 at
+   load. Hide the body (visibility, so layout shifts are not reported) until html.sc-ready.
+   The animation is the escape hatch: if the script never runs, the page appears after 1.5 s
+   rather than never. */
+html:not(.sc-ready) body { visibility: hidden; animation: sc-uncloak 0s linear 1.5s forwards; }
+@keyframes sc-uncloak { to { visibility: visible; } }
+
 /* -------------------------------------------------------- reduced motion -- */
 @media (prefers-reduced-motion: reduce) {
   /* Fewer and gentler, not zero. Opacity still carries the reveal so the page
@@ -412,6 +421,41 @@ video[data-sc-scrub].sc-has-clip { opacity: 1; }
      are the only things that go. */
   .sc-world__poster, [data-sc-copy] { transform: none !important; }
 }
+
+/* The same floor, forced by the page itself. WCAG 2.3.3 asks for a way to turn
+   non-essential motion off from inside the page, not only through the OS. The engine
+   sets data-sc-motion="off" on <html> when the visitor chose it (see ScrollCraft.setMotion
+   and recipes.md), and this block mirrors the media query above rule for rule. */
+  /* Fewer and gentler, not zero. Opacity still carries the reveal so the page
+     is comprehensible; every position change is dropped. */
+  html[data-sc-motion="off"] [data-sc-in],
+  html[data-sc-motion="off"] [data-sc-stagger] > * { transform: none; transition-duration: 220ms; }
+  html[data-sc-motion="off"] [data-sc-parallax],
+  html[data-sc-motion="off"] [data-sc-pan],
+  html[data-sc-motion="off"] .sc-split__i { transform: none !important; }
+  /* A wipe is a position change too. Show reveal content settled. */
+  html[data-sc-motion="off"] [data-sc-reveal] { clip-path: none !important; }
+  /* A rail's transform IS its navigation, not decoration. Zeroing it the way
+     parallax and kinetic type are zeroed parks the act on its first screenful
+     and makes everything past the fold unreachable: a device degrading into
+     missing content. Hand the travel back to the reader as an ordinary scroll
+     region instead, so the same items are all still gettable without motion.
+     A build that would rather re-lay the rail out as a grid can still do that;
+     this is the floor, not the ceiling. */
+  html[data-sc-motion="off"] [data-sc-act="pan"] .sc-stage,
+  html[data-sc-motion="off"] [data-sc-act="pan"] [data-sc-stage] {
+    overflow-x: auto; overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+  }
+  html[data-sc-motion="off"] [data-sc-pan] > * { scroll-snap-align: center; }
+  html[data-sc-motion="off"] [data-sc-spotlight]::after { display: none; }
+  /* A worldflight keeps its whole story here. No clip is ever fetched, so the
+     posters are the film, and they cross-dissolve through exactly the same
+     seams at exactly the same scroll positions. The push-in and the copy drift
+     are the only things that go. */
+  html[data-sc-motion="off"] .sc-world__poster,
+  html[data-sc-motion="off"] [data-sc-copy] { transform: none !important; }
 
 /* --------------------------------------------------------------- mobile -- */
 @media (max-width: 860px) {

@@ -1,5 +1,13 @@
 # Verify
 
+Two commands before this procedure, because they take seconds and catch what a visual pass cannot:
+`node <skill>/scripts/doctor.mjs` (is the toolchain real: full ffmpeg, a browser that decodes h264) and, when you finish,
+`node <skill>/scripts/budget.mjs --phone --net slow4g` ([performance.md](performance.md)). `node tests/run.mjs` proves the
+toolchain itself works on your machine (48 checks, no network).
+
+**Browser.** `shoot.mjs` finds Chrome, Brave, Edge or Chromium (override with `SCROLLCRAFT_CHROME`) and warns loudly if the
+browser cannot decode h264: a run against Playwright's bundled Chromium "passes" while only ever showing posters.
+
 For the approved collection’s functional, fallback, and deployment acceptance
 procedure, also read [approved-collection.md §7](approved-collection.md#7-require-visual-and-functional-evidence-before-delivery). Test the final files, preserve
 failed evidence, and identify the rerun that resolves each finding.
@@ -357,6 +365,16 @@ until it was measured.
 | The hero clip frozen on a real iPhone, later clips fine, every probe green | iOS never paints an unplayed muted video, and the one-shot gesture prime was spent while the hero was still downloading. The engine now primes per clip at `loadedmetadata` and retries on every gesture, including `touchend` |
 | A phone clip soft and stuttering while the same file is smooth on desktop | A landscape mobile encode in a portrait viewport: cover-fit decoded the full frame and threw three quarters of it away. Cut the phone clips portrait from the masters (see assets.md) |
 | Four rounds of mobile fixes verified green, phone still broken | Headless Chrome cannot reproduce the iOS decoder, Low Power Mode, or touch. Deploy `references/device-diag.html` beside the site on the first mobile report and let the phone answer |
+
+| A pinned act's copy sat far below the fold, half its lines never visible | A page rule `height: 100%` on `[data-sc-stage]` overrode the engine's `100svh`: the sticky stage became the whole section. Size content inside the stage, never the stage |
+| The page opened in 8 seconds | A `<link>` to Google Fonts blocked first paint (slow IPv6 route), and the engine waits for fonts. Self-host with `scripts/fonts.mjs`; `budget.mjs` fails a render-blocking third party |
+| The page jumped on load (CLS 0.47) | Pinned acts changed height when the engine mounted. The stylesheet now cloaks the body until `html.sc-ready` |
+| A phone hero failed contrast at 1.44:1 and showed a corner of the product | A 16:9 clip full-bleed on a portrait screen shows ~25% of its width. Use the phone band, [recipes.md §2](recipes.md#2-phone-band-a-169-clip-on-a-portrait-screen) |
+| Anchored labels sat on the wrong layer for a second of the clip | Keyframes were guessed. Verify on real frames with `scripts/anchors-sheet.mjs`, with times where the camera pulls back |
+| An empty pin act reported "no dead scroll" for years | The NEXT act's stage, sliding in below the fold, counted as visible change. Only stages in the viewport count now; runs, not pairs, are measured |
+| A numbered image sequence came out as one file | The `.webp` extension selects the animated muxer. Use `-f image2 -c:v libwebp` |
+| `drawbox` "moving" test square never moved | `t` inside `drawbox` is its thickness, not time. Use `overlay` (its `t` is time) |
+| A `pkill -f "port 4500"` closed the shell it was typed in | The pattern matched the command line itself. Stop servers by PID |
 
 The first three are invisible to every check except looking at rendered output.
 That is the argument for this whole pass.

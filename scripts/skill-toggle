@@ -13,8 +13,8 @@ SKILLS_DIR="$HOME/.claude/skills"
 # ─── Definición de grupos ──────────────────────────────────────────────────
 unset GROUPS
 declare -A GROUPS
-GROUPS[audit]="seo-core seo-content-onpage seo-international seo-strategy seo-assets market-audit market-competitors market-funnel market-social market-ads market-report market-report-pdf"
-GROUPS[market]="market market-ads market-audit market-brand market-competitors market-copy market-emails market-funnel market-landing market-launch market-proposal market-report market-report-pdf market-social"
+GROUPS[audit]="seo-core market"
+GROUPS[market]="market"
 GROUPS[dev]="form-handling performance-next error-monitoring testing-patterns supabase-stack saas-boilerplate webhook-integration"
 GROUPS[n8n]="n8n-ai-agents n8n-to-api"
 GROUPS[design]="ui-designer web-animations pro-presentations landing-page-builder data-viz-dashboard email-templates-builder"
@@ -22,6 +22,9 @@ GROUPS[web]="cms-integration pwa-patterns"
 GROUPS[vercel]="vercel-essentials"
 # scroll: sitios scrollytelling premium (3rd party, nateherk). A propósito FUERA de "all": solo se activa a demanda.
 GROUPS[scroll]="scroll-craft"
+# parked: sin uso en ningun proyecto actual (auditoria 2026-10-01). Fuera de "all". Reactivar: skill-toggle parked on
+GROUPS[parked]="cms-integration pwa-patterns ghl-integration n8n-ai-agents n8n-to-api ui-designer"
+GROUP_ORDER="audit market dev n8n design web vercel scroll parked"
 GROUPS[all]="${GROUPS[audit]} ${GROUPS[dev]} ${GROUPS[n8n]} ${GROUPS[design]} ${GROUPS[web]} ${GROUPS[vercel]}"
 
 # ─── Colores ────────────────────────────────────────────────────────────────
@@ -102,6 +105,13 @@ show_status() {
     echo ""
 }
 
+show_status_skill() {
+    local sk="$1"
+    if [ -f "$SKILLS_DIR/$sk/SKILL.md" ]; then echo -e "  ${GREEN}ON ${NC}  $sk"
+    elif [ -f "$SKILLS_DIR/$sk/SKILL.md.off" ]; then echo -e "  ${RED}OFF${NC}  $sk"
+    else echo -e "  ${YELLOW}??? ${NC} $sk (sin SKILL.md)"; fi
+}
+
 # ─── Main ───────────────────────────────────────────────────────────────────
 case "${1:-help}" in
     help|--help|-h)
@@ -109,14 +119,14 @@ case "${1:-help}" in
         ;;
     list)
         echo "Grupos disponibles:"
-        for group in audit dev n8n design web; do
+        for group in $GROUP_ORDER; do
             count=$(echo "${GROUPS[$group]}" | wc -w)
             echo "  $group ($count skills)"
         done
         ;;
     status)
         if [ -z "$2" ]; then
-            for group in audit dev n8n design web; do
+            for group in $GROUP_ORDER; do
                 show_status "$group"
             done
         else
@@ -126,6 +136,12 @@ case "${1:-help}" in
     *)
         group="$1"
         action="$2"
+
+        # Una skill suelta tambien vale: skill-toggle <skill> on|off
+        if [ -z "${GROUPS[$group]}" ] && [ -d "$SKILLS_DIR/$group" ]; then
+            if [ "$action" = "on" ] || [ "$action" = "off" ]; then toggle_skill "$group" "$action"; else show_status_skill "$group"; fi
+            exit 0
+        fi
 
         if [ -z "${GROUPS[$group]}" ]; then
             echo "Error: grupo '$group' no existe"

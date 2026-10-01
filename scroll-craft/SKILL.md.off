@@ -1,18 +1,16 @@
 ---
 name: scroll-craft
 description: >
-  Build premium scroll-driven landing pages for service, product, food, and
-  drink brands. Plan the visitor journey, page grammar, emotional peak, and
-  bespoke signature move. Create dimensional heroes with independent visual
-  planes, restrained motion, and separate mobile composition. Use supplied
-  photos and footage or generate photoreal assets through kie.ai, write semantic
-  HTML, and verify desktop, mobile, and reduced-motion scroll states visually.
-  Use for "scrollcraft", "scroll craft", "layered hero", "premium hero",
-  "cinematic hero", "scrollytelling", "scroll animation site", "a site where
-  scrolling plays a video", "Apple-style landing page", "3D scroll world",
-  "interactive landing page", "make my brand a scroll experience", "this looks
-  like a template", or requests for a distinctive website that feels like an
-  experience rather than a document.
+  Builds premium scroll-driven landing pages and one-pagers: scrubbed video, pinned scenes, layered heroes,
+  rails and callouts that follow the parts of a clip, on a real design standard with a verification harness
+  (contrast on the composited page, dead scroll, frozen clips, phone, reduced motion, performance budget).
+  Works from the client's own footage and photos (no key, no spend) or from generated assets.
+  Usar cuando: "sitio con scroll animado", "scrollytelling", "página cinematográfica", "hero con capas",
+  "un sitio donde el scroll reproduce un video", "landing premium", "esto se ve como plantilla".
+  Triggers: "scrollcraft", "scroll craft", "scroll-driven site", "layered hero", "cinematic hero",
+  "Apple-style landing", "3D scroll world", "interactive landing page", "make my brand a scroll experience".
+  Do NOT use for ordinary landing pages without scroll choreography (landing-page-builder), CRO audits
+  (market-landing), or small UI micro-interactions (web-animations).
 allowed-tools: Bash, Read, Write, Edit, Glob, Grep, AskUserQuestion
 ---
 
@@ -27,6 +25,19 @@ going to find out what the next one does.
 a feeling curve with one engineered peak, a scroll score, one signature move,
 generated assets, one real HTML page on a token-driven design floor, and a strip
 of screenshots proving it holds up at every scroll position.
+
+## Start here: pick the route
+
+| You have | Route | Spend |
+|---|---|---|
+| A clip the client or site already owns | **Footage first.** [recipes.md §3](references/recipes.md#3-footage-you-already-have): `scripts/prep-footage.sh`, then Step 2 with the clip's real beats | none |
+| Photos and product shots, no video | Layered heroes and `parallax`/`reveal`/`pan`, no scrub, or a short image sequence ([recipes.md §5](references/recipes.md#5-image-sequence-instead-of-a-video)) | none |
+| Nothing | Generate stills and two clips ([assets.md](references/assets.md)), kie.ai or any image tool you are authorised to use | cents to a few dollars |
+
+Read order for a build: this file, then [uniqueness.md](references/uniqueness.md) (grammar), [feel.md](references/feel.md) (curve and peak),
+[devices.md](references/devices.md), [taste.md](references/taste.md), [recipes.md](references/recipes.md). Before delivery:
+[verify.md](references/verify.md), [performance.md](references/performance.md), [accessibility.md](references/accessibility.md).
+Verify the toolchain itself any time with `node tests/run.mjs` (48 checks, no network, no key).
 
 ## What this is not
 
@@ -166,8 +177,8 @@ that reports a missing filter as a syntax error in your command:
 node <skill>/scripts/doctor.mjs
 ```
 
-It reports node, a full ffmpeg build, playwright and Chrome, the API key, and
-the resolved workspace. Required failures exit non-zero. Say plainly which items
+It reports node, a full ffmpeg build, playwright and a browser (Chrome, Brave, Edge or Chromium; it must decode h264, which
+Playwright's bundled Chromium does not), the API key, and the resolved workspace. Required failures exit non-zero. Say plainly which items
 are missing rather than working around them silently.
 
 ### The workspace
@@ -308,11 +319,18 @@ Checks before you build:
 - The act count and total length do not land in the 6-to-7 acts at 13.6-13.8vh
   band that all four prior builds hit. That band is a fingerprint dimension now.
 
-## Step 3: Generate the assets
+## Step 3: Get the assets
 
-Full pipeline, prompt scaffolds and model notes: [references/assets.md](references/assets.md).
+**Look for footage before you generate anything.** Open the client's site, their social, their drive. The apolo-tek pilot's
+best asset was an 11.8 s teardown clip already sitting in the site's own `public/videos/`; reusing it cost nothing and gave the
+page its peak. `bash <skill>/scripts/prep-footage.sh master.mp4 --cuts 0,4.4,11.8 --out assets` cuts it into scrub-ready acts
+(dense GOP, never upscaled, phone variants, posters that are the clip's own first frame). Cut at decisive camera moments:
+each interval is one beat of the feeling curve.
 
-Short version:
+Generating is the fallback, not the default. Full pipeline, prompt scaffolds and model notes:
+[references/assets.md](references/assets.md).
+
+Short version of the generated route:
 
 ```bash
 node <skill>/scripts/kie.mjs still "<style preamble>\n\n<scene>" out/01-hero.png --ar 16:9 [--ref brand-can.png]
@@ -347,6 +365,13 @@ Start from `references/template.html`. The device patterns are in
 [references/devices.md](references/devices.md); the spacing, type, depth and
 colour rules are in [references/taste.md](references/taste.md). Read taste.md
 before writing markup, not after, and build without announcing the checklist.
+
+**Self-host fonts. Never ship a `<link>` to Google Fonts.** It blocks first paint (7.8 s on one real machine, 0.2 s after) and the engine
+waits for fonts before it splits headlines. `node <skill>/scripts/fonts.mjs --out assets/fonts --family "Space Grotesk:500,700"`
+downloads the Latin subset (accents and inverted marks included) and writes `fonts.css`.
+
+The stylesheet hides the body until the engine has mounted (`html.sc-ready`), because pinned acts change height on mount and the
+page would otherwise jump (CLS 0.47 without it). Keep the engine `<script>` at the end of `<body>`.
 
 Theme by overriding tokens, six values and two fonts:
 
@@ -384,6 +409,15 @@ The harness walks each act at six positions, waits for the scrub video to
 actually settle, and reports **dead scroll**, **cues that never reach full
 opacity**, and **contrast measured on the composited page at the brightest
 frame under each line**. It writes a contact sheet.
+
+Then the two checks the visual harness does not make, both exit non-zero on a hard failure:
+
+```bash
+node <skill>/scripts/budget.mjs --url http://localhost:4500 --phone --net slow4g   # bytes, LCP, CLS, render-blocking third parties
+node <skill>/scripts/anchors-sheet.mjs ...                                         # only if you used anchored callouts: markers on real frames
+```
+Budgets and the video/all-intra/sequence trade-off: [performance.md](references/performance.md). The accessibility floor, including
+the in-page motion switch and `?motion=off`: [accessibility.md](references/accessibility.md).
 
 Then do the part the harness cannot: **read `sheet.png`.** It proves a clip
 advances; it cannot tell you the composition is good, the motion is smooth, or
@@ -438,6 +472,12 @@ machine-made.
 | `transition: all`, or animating width/height/top/left | `transform` and `opacity`; `clip-path` for wipes |
 | Gradient text, neon glow, zero-offset coloured halo shadows | Weight and size for emphasis; shadows with offset and blur |
 | Autoplaying audio, or any audio at all on a scrub clip | Strip the track. `encode.sh` already does |
+| A `<link>` to Google Fonts (or any render-blocking third party in `<head>`) | Self-host: `scripts/fonts.mjs`. `budget.mjs` fails the build otherwise |
+| A 16:9 clip full-bleed on a phone | Mount it as a feathered band with the copy below ([recipes.md §2](references/recipes.md#2-phone-band-a-169-clip-on-a-portrait-screen)) |
+| Anchor or overlay positions guessed by eye | Keyframes verified on real frames with `scripts/anchors-sheet.mjs` |
+| A page with large scrubbed or differential motion and no way to turn it off | The in-page motion switch ([recipes.md §4](references/recipes.md#4-in-page-motion-switch)) |
+| `height`/`inset` overrides on `[data-sc-stage]` from your own CSS | Size the content inside the stage; the engine owns the stage's height |
+| Upscaling a master to reach 1080p | Encode at native height; the scripts cap it |
 | Shipping without running Step 5 | Run Step 5 |
 
 ## Output
@@ -447,8 +487,8 @@ the other seven lost, the signature move, the fingerprint gate result against
 each existing row, the journey, the feeling curve and the peak, the feel-check
 diff (intended curve against felt curve, and what you changed), the score table
 (device per beat), what you
-generated, what you verified with screenshots, and anything you could not
-verify. Say if the brief was self-authored rather than interviewed. Give the
+generated or reused, what you verified with screenshots, the `budget.mjs` result (desktop and
+phone), and anything you could not verify (a real phone, always). Say if the brief was self-authored rather than interviewed. Give the
 local URL. Keep it brief; the page is the deliverable.
 
 Then append the build's row to `<workspace>/FINGERPRINTS.md`.

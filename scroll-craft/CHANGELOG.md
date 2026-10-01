@@ -4,6 +4,28 @@ Dated notes on what changed in the skill and which build's finding drove it.
 Builds live in `OtherWorlds/Ultimate Websites/builds/`; each carries a
 `BUILD-REPORT.md`.
 
+## 2026-10-01: local 0.4 (apolo-tek pilot, first build in this workspace)
+
+Findings from a real one-pager (Apolo Tek, reusing the client's own 11.8 s clip) and from reading the whole skill, with research
+on scroll-driven CSS, video scrubbing and WCAG 2.3.3. Engine behaviour that existed is unchanged; everything below is additive
+unless marked **fix**. `node tests/run.mjs` went from 28 to 48 checks.
+
+- **Fix, harness:** an empty pin act (no cues, static markup) was reported as healthy because the NEXT act's off-screen stage moving
+  counted as visible change. Only stages in the viewport count; dead scroll is now measured as runs, with a reading-hold
+  exemption (a fully visible cue may hold up to one viewport; unlimited under reduced motion, where a pan rail is the
+  reader's own scroll region).
+- **Fix, browsers:** `scripts/lib/browser.mjs` is the one resolver (Chrome, Brave, Edge, Chromium on Windows, macOS, Linux, then
+  `which`); `shoot.mjs` warns when the browser cannot decode h264. Brave-only Linux machines used to stop at "No installed Chrome found".
+- **Fix, CSS:** the body is cloaked until `html.sc-ready` (CLS 0.47 to 0.00 in the fixture), with a 1.5 s escape hatch.
+- **Fix, encode:** `encode.sh` never upscales; `SCROLLCRAFT_GOP` forces the GOP (1 = all-intra).
+- **New, engine:** in-page motion switch (`?motion=off`, `localStorage['sc-motion']`, `data-sc-motion="off"`, `ScrollCraft.setMotion()`),
+  with a CSS mirror of the reduced-motion floor. Image sequences publish their frame as `data-sc-verify-state`.
+- **New, module:** `engine/scrollcraft-anchors.js`, labels that follow the parts of a scrubbed clip (the pilot's signature move, generalised).
+- **New, scripts:** `budget.mjs` (bytes, LCP, CLS, render-blocking third parties, h264), `fonts.mjs` (self-host Google Fonts, IPv4),
+  `anchors-sheet.mjs` (verify keyframes on real frames), `prep-footage.sh` (cut existing footage into scrub-ready acts).
+- **New, references:** `recipes.md`, `performance.md` (measured GOP and sequence sizes), `accessibility.md`.
+- **Docs:** footage-first route, Spanish triggers, a shorter description, the pilot's seven defects added to the failure table.
+
 ## 2026-09-04: approved ten-site rebuild, public release 0.3.0
 
 Nate approved the rebuilt ten-site collection and requested that its process

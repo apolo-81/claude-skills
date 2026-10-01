@@ -25,14 +25,10 @@ SKILLS=(
   auth-patterns background-jobs chatbot-widget cms-integration
   data-viz-dashboard deployment email-templates-builder error-monitoring
   express-api form-handling ghl-integration landing-page-builder
-  market market-ads market-audit market-brand market-competitors
-  market-copy market-emails market-funnel market-landing market-launch
-  market-proposal market-report market-report-pdf market-social
-  n8n-ai-agents n8n-to-api pdf-generation performance-next prisma-orm remotion
-  pro-presentations pwa-patterns saas-boilerplate seo-assets
-  seo-content-onpage seo-core seo-international seo-strategy
-  supabase-stack testing-patterns ui-designer web-animations
-  webhook-integration
+  market n8n-ai-agents n8n-to-api pdf-generation performance-next prisma-orm remotion
+  pro-presentations pwa-patterns saas-boilerplate seo-core
+  supabase-stack testing-patterns ui-designer vue-sites wa-baileys web-animations
+  webhook-integration scroll-craft vercel-essentials archify genoffice
 )
 
 for skill in "${SKILLS[@]}"; do
@@ -123,6 +119,8 @@ echo ""
 echo -e "${YELLOW}Configurando grupos toggleables (audit y n8n → OFF por defecto)...${NC}"
 skill-toggle audit off 2>/dev/null || echo "  (ejecutar manualmente: skill-toggle audit off)"
 skill-toggle n8n off 2>/dev/null || echo "  (ejecutar manualmente: skill-toggle n8n off)"
+skill-toggle parked off 2>/dev/null || echo "  (ejecutar manualmente: skill-toggle parked off)"
+skill-toggle scroll off 2>/dev/null || echo "  (ejecutar manualmente: skill-toggle scroll off)"
 
 # ─── Resumen ─────────────────────────────────────────────────────────────
 echo ""

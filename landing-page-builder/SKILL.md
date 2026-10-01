@@ -2,7 +2,7 @@
 name: landing-page-builder
 description: >
   Construye landing pages desde cero o implementa diseños en código Next.js + Tailwind.
-  Para análisis CRO de una landing existente usar `market-landing`.
+  Para análisis CRO de una landing existente usar `market` (`/market landing`).
   Usar cuando: "construir landing page", "página de ventas", "hero section", "pricing page",
   "testimonials", "implementar diseño", "Figma a Next.js", "waitlist page", "homepage".
 ---
@@ -11,7 +11,8 @@ description: >
 
 ## Related Skills
 
-- **`market-landing`** — Auditoria CRO antes de implementar. Usa ese skill primero para diagnosticar.
+- **`scroll-craft`** (apagada por defecto, `skill-toggle scroll on`) — cuando el cliente tiene un video fuerte o presupuesto para un sitio cinematográfico con scroll (scrub, capas, etiquetas ancladas).
+- **`market`** (`/market landing <url>`) — Auditoria CRO antes de implementar. Úsala primero para diagnosticar.
 
 **Stack:** Next.js 15 App Router + Tailwind CSS v4 + shadcn/ui (opcional) + TypeScript estricto.
 

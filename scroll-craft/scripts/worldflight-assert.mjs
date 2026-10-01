@@ -8,29 +8,14 @@
 import fs from "node:fs";
 import path from "node:path";
 import { createRequire } from "node:module";
+import { findBrowser } from "./lib/browser.mjs";
 const { chromium } = createRequire(path.join(process.cwd(), "package.json"))("playwright-core");
 
 const argv = process.argv.slice(2);
 const arg = (n, d) => { const i = argv.indexOf(n); return i > -1 && argv[i + 1] ? argv[i + 1] : d; };
 const URL = arg("--url", "http://localhost:4520");
 
-const CHROME = [
-  process.env.SCROLLCRAFT_CHROME,
-  // Windows
-  "C:/Program Files/Google/Chrome/Application/chrome.exe",
-  "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
-  "C:/Program Files/Microsoft/Edge/Application/msedge.exe",
-  // macOS
-  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-  "/Applications/Chromium.app/Contents/MacOS/Chromium",
-  "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge",
-  // Linux
-  "/usr/bin/google-chrome",
-  "/usr/bin/google-chrome-stable",
-  "/usr/bin/chromium",
-  "/usr/bin/chromium-browser",
-  "/snap/bin/chromium",
-].find((p) => p && fs.existsSync(p));
+const CHROME = findBrowser();
 
 let pass = 0, fail = 0;
 const ok = (name, cond, note = "") => {
