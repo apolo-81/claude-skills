@@ -152,6 +152,7 @@ skill-toggle dev on/off    # Desarrollo (7 skills)
 skill-toggle design on/off # Diseño/UI (8 skills)
 skill-toggle web on/off    # CMS/PWA (2 skills)
 skill-toggle vercel on/off # Vercel a profundidad (1 skill)
+skill-toggle scroll on/off # scroll-craft: sitios scrollytelling premium (OFF por defecto, fuera de `all`)
 skill-toggle list          # Listar grupos
 ```
 

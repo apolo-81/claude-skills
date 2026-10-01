@@ -20,6 +20,8 @@ GROUPS[n8n]="n8n-ai-agents n8n-to-api"
 GROUPS[design]="ui-designer web-animations pro-presentations landing-page-builder data-viz-dashboard email-templates-builder"
 GROUPS[web]="cms-integration pwa-patterns"
 GROUPS[vercel]="vercel-essentials"
+# scroll: sitios scrollytelling premium (3rd party, nateherk). A propósito FUERA de "all": solo se activa a demanda.
+GROUPS[scroll]="scroll-craft"
 GROUPS[all]="${GROUPS[audit]} ${GROUPS[dev]} ${GROUPS[n8n]} ${GROUPS[design]} ${GROUPS[web]} ${GROUPS[vercel]}"
 
 # ─── Colores ────────────────────────────────────────────────────────────────
@@ -46,6 +48,7 @@ show_help() {
     echo "  design   — 5 skills de Diseño/UI"
     echo "  web      — 2 skills de CMS/PWA"
     echo "  vercel   — 1 skill Vercel a profundidad (reemplaza plugin oficial)"
+    echo "  scroll   — 1 skill scrollytelling premium (OFF por defecto, fuera de 'all')"
     echo "  all      — Todas las skills (34)"
     echo ""
     echo "Ejemplos:"
