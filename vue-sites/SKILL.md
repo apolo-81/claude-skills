@@ -40,6 +40,7 @@ en una landing de una página se puede omitir el router y navegar por scroll con
   que deja solo el poster. Para scroll con video a otro nivel ver la skill `scroll-craft` (apagada por defecto).
 - `content-visibility: auto` en secciones bajo el pliegue, `LazyMount` para componentes pesados, `defineAsyncComponent`.
 - `manualChunks` en Vite (vendor-vue / vendor-ui / vendor) y `cssCodeSplit: true`; imágenes con `sharp` en build.
+- **Fuentes autoalojadas** (`woff2` locales, `font-display: swap`); nunca un `<link>` a Google Fonts: bloquea el primer render y puede colgar la página por rutas de red rotas (7.8 s medidos). Script: `scroll-craft/scripts/fonts.mjs`.
 - Tap targets >= 44 px, `lang="es-MX"`, un solo `h1`.
 - Animaciones: patrones de `wordRevealItem`, `AnimatedSection` con `useInView` y parallax en hero (feedback `uclogos_animations`).
 
