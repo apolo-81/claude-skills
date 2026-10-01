@@ -1,0 +1,17 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Prueba motor</title>
+<link rel="stylesheet" href="scrollcraft.css">
+<style>
+:root{--sc-canvas:#08090b;--sc-surface:#101217;--sc-ink:#f4f2ef;--sc-ink-soft:#9a9ba1;--sc-accent:#d8ff3e;--sc-accent-ink:#08090b;
+--sc-font-display:system-ui,sans-serif;--sc-font-text:system-ui,sans-serif}
+.argument{display:grid;place-items:center;padding:0 8vw}.argument p{grid-area:1/1;font-size:clamp(1.6rem,4vw,3.4rem);max-width:20ch;text-align:center}
+.rail{display:flex;gap:4vw;align-items:center;height:100%;padding:0 8vw;width:max-content}.item{width:60vw;max-width:520px;flex:none}.item img{width:100%;height:auto}
+.close{display:grid;place-items:center;text-align:center}.cta{display:inline-block;padding:1rem 2rem;background:var(--sc-accent);color:var(--sc-accent-ink);border-radius:999px;margin-top:2rem}
+</style></head><body><span data-sc-progress></span><main>
+<section data-sc-act="scrub" data-sc-span="2.6" data-sc-dwell="0.34" data-sc-clip-map="travel"><div data-sc-stage>
+<img class="sc-stage__poster" src="assets/bright.webp" alt=""><video data-sc-scrub data-sc-src="assets/bright.mp4" data-sc-src-mobile="assets/bright-m.mp4" muted playsinline></video>
+<div class="sc-copy sc-copy--lead" data-sc-cue="0 0.78 0"><h1 class="sc-display sc-display--xl" style="color:#fff">Texto blanco sobre video claro sin scrim.</h1></div></div></section>
+<section data-sc-act="pin" data-sc-span="3" data-sc-drift="#101217"><div data-sc-stage class="argument"><p style="grid-area:1/1">Acto pin sin cues ni movimiento.</p></div></section>
+<section id="join" data-sc-act="pin" data-sc-span="1.4"><div data-sc-stage class="close"><div><h2 class="sc-display sc-display--lg" data-sc-cue="0.06">Cierre.</h2></div></div></section>
+</main><script src="scrollcraft.js"></script><script>ScrollCraft.mount(document.body);</script></body></html>

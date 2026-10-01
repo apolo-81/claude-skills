@@ -1,0 +1,25 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Prueba motor</title>
+<link rel="stylesheet" href="scrollcraft.css">
+<style>
+:root{--sc-canvas:#08090b;--sc-surface:#101217;--sc-ink:#f4f2ef;--sc-ink-soft:#9a9ba1;--sc-accent:#d8ff3e;--sc-accent-ink:#08090b;
+--sc-font-display:system-ui,sans-serif;--sc-font-text:system-ui,sans-serif}
+.argument{display:grid;place-items:center;padding:0 8vw}.argument p{grid-area:1/1;font-size:clamp(1.6rem,4vw,3.4rem);max-width:20ch;text-align:center}
+.rail{display:flex;gap:4vw;align-items:center;height:100%;padding:0 8vw;width:max-content}.item{width:60vw;max-width:520px;flex:none}.item img{width:100%;height:auto}
+.close{display:grid;place-items:center;text-align:center}.cta{display:inline-block;padding:1rem 2rem;background:var(--sc-accent);color:var(--sc-accent-ink);border-radius:999px;margin-top:2rem}
+</style></head><body><span data-sc-progress></span><main>
+<section data-sc-act="scrub" data-sc-span="2.6" data-sc-dwell="0.34" data-sc-drift="#08090b"><div data-sc-stage>
+<img class="sc-stage__poster" src="assets/dark.webp" alt=""><video data-sc-scrub data-sc-src="assets/dark.mp4" data-sc-src-mobile="assets/dark-m.mp4" muted playsinline></video>
+<div class="sc-scrim sc-scrim--lead" aria-hidden="true"></div>
+<div class="sc-copy sc-copy--lead" data-sc-cue="0 0.78 0"><h1 class="sc-display sc-display--xl" data-sc-kinetic="lines">La promesa en nueve palabras.</h1><p class="sc-body">Una frase simple de prueba.</p></div></div></section>
+<section data-sc-act="pin" data-sc-span="3.4" data-sc-drift="#101217"><div data-sc-stage class="argument">
+<p data-sc-cue="0 0.32 0">La situación que reconocen.</p><p data-sc-cue="0.26 0.60">Lo que les cuesta.</p><p data-sc-cue="0.54 0.88">Por qué sigue pasando.</p><p data-sc-cue="0.82">La línea que lo cambia.</p></div></section>
+<section class="sc-section" data-sc-act="flow" data-sc-drift="#0b0c0f"><div class="sc-wrap"><div class="sc-stack" data-sc-in data-sc-stagger="70"><h2 class="sc-display sc-display--lg">Qué cambia.</h2><p class="sc-body">Texto normal de documento.</p></div>
+<figure data-sc-reveal="left" data-sc-reveal-at="0.18 0.62"><img src="assets/img.webp" width="1600" height="900" alt="Bloque de color"></figure></div></section>
+<section data-sc-act="pan" data-sc-span="3.2" data-sc-drift="#0a0b0d"><div data-sc-stage><div class="rail" data-sc-pan="0.06">
+<article class="item"><div data-sc-tilt="6"><img src="assets/img.webp" alt=""></div><h3>Uno</h3></article><article class="item"><div data-sc-tilt="6"><img src="assets/img.webp" alt=""></div><h3>Dos</h3></article>
+<article class="item"><div data-sc-tilt="6"><img src="assets/img.webp" alt=""></div><h3>Tres</h3></article><article class="item"><div data-sc-tilt="6"><img src="assets/img.webp" alt=""></div><h3>Cuatro</h3></article></div></div></section>
+<section id="join" data-sc-act="pin" data-sc-span="1.4" data-sc-drift="#08090b"><div data-sc-stage class="close" data-sc-spotlight><div>
+<h2 class="sc-display sc-display--lg" data-sc-cue="0.06" data-sc-kinetic="lines">Lo último que deben sentir.</h2><a class="cta" href="#" data-sc-magnet="0.26" data-sc-cue="0.06" data-sc-rise="0">Contactar</a></div></div></section>
+</main><script src="scrollcraft.js"></script><script>ScrollCraft.mount(document.body);</script></body></html>
