@@ -1,125 +1,83 @@
 # /compress
 
-Comprime la sesión actual y persiste el conocimiento en el vault de Obsidian.
+Comprime la sesión actual y persiste en el vault lo que una sesión futura necesita para retomar.
+Vault: `/home/apolo/Documents/Projects/vault` (abajo, `$V`).
 
-## Fuente de verdad: el contrato del vault
+## 0. Contrato primero
 
-**Paso obligatorio antes de escribir nada**: leer `/home/apolo/Documents/Projects/vault/CLAUDE.md`.
-Ese archivo es el contrato del vault (orden de carga, precedencia en conflictos, tabla "dónde
-escribo qué", forma obligatoria de una canónica, vocabulario de `status`, dialectos de
-frontmatter) y **gana sobre cualquier cosa que diga este comando**. No se auto-carga cuando la
-sesión se abre desde un repo de proyecto, así que hay que leerlo explícitamente.
+Leer `$V/CLAUDE.md` (no se auto-carga fuera del vault). Ese archivo es la fuente de verdad: forma
+de la canónica y sus presupuestos (§4), dónde va cada cosa (§3), frontmatter y `status` (§5),
+dialectos (§6). **Este comando no repite esas reglas; si algo de aquí lo contradice, gana el
+contrato y este archivo tiene un bug: reportarlo.**
 
-Este comando NO repite esas reglas: solo aporta lo que es propio del acto de comprimir. Si algo
-de aquí contradice a `CLAUDE.md`, es un bug de este archivo — reportarlo.
+## 1. Situarse
 
-Después del contrato, leer `00_System/Memory/MEMORY.md` (índice; cada línea es un hook de recall)
-y solo las canónicas que la sesión realmente tocó.
+1. `git -C $V status --short --branch`. Cambios ajenos a esta sesión: trabajar alrededor, no
+   revertir. Behind/ahead: reportarlo; **no** `pull`/`merge`/`rebase`/`checkout`/`reset` sin permiso.
+2. **Detectar el proyecto**, en este orden:
+   - `CLAUDE.local.md` en la raíz del repo de trabajo (`git rev-parse --show-toplevel`): trae la
+     ruta de la canónica.
+   - Si no hay puente: buscar la ruta del repo relativa a `~/Documents/Projects/` entre los paths
+     en backticks de `$V/00_System/Memory/MEMORY.md`.
+   - Sesión de sistema/tooling sin proyecto: no hay canónica de proyecto (pasar al punto 3.1).
+3. Leer la canónica del proyecto y su nota operativa (`canonical_path` apunta de una a otra).
 
-## Antes de escribir
+## 2. Qué extraer de la conversación
 
-1. `git -C /home/apolo/Documents/Projects/vault status --short --branch`.
-2. Si hay cambios locales ajenos a esta sesión, trabajar alrededor de ellos: no revertir ni
-   sobrescribir.
-3. Si el vault está behind/ahead, reportarlo. **No** ejecutar `pull`, `merge`, `rebase`,
-   `checkout` ni `reset` sin permiso explícito del usuario.
+Solo lo que vale en una sesión futura: decisiones y **su porqué**, cambios reales (paths, commits,
+deploys **verificados en el repo**, no recordados), bugs y gotchas, pendientes reales con su
+bloqueo, y correcciones del usuario a cómo trabajo (→ `Memory/Feedback/`). Nada de transcripción
+ni razonamiento interno.
 
-## Qué extraer de la conversación
+**Seguridad:** el hook de sync publica el vault en GitHub al terminar el turno. Nunca escribir
+valores de API keys, tokens, passwords, cookies, JWT, private keys ni `.env`; solo **dónde** viven.
 
-Solo lo que tendrá valor en una sesión futura:
+## 3. Escribir, en orden
 
-- Decisiones tomadas y **por qué** (el porqué es lo que no se puede reconstruir del código).
-- Cambios implementados, con paths, commits o deploys reales.
-- Bugs, gotchas y patrones aprendidos.
-- Tareas abiertas reales, bloqueos y de quién dependen.
-- Correcciones del usuario a cómo trabajo → van a `Memory/Feedback/`.
+1. **Nota de sesión** — `01_Projects/_sessions/` (proyecto) o `02_Areas/_sessions/` (sistema),
+   `session_YYYY-MM-DD_<tema-kebab>.md`, `status: completed`, secciones `## Resumen`,
+   `## Cambios / decisiones`, `## Insights durables`, `## Links`. **Sin pendientes ni tags
+   `todo/prio*`**: los pendientes tienen un solo dueño (paso 2).
+2. **Nota operativa** (`01_Projects/<Proyecto>.md`) — pendientes nuevos y cerrados, `updated: <hoy>`.
+   Si el proyecto no tiene, crearla (contrato §5) en vez de dejar pendientes en la canónica.
+3. **Canónica** (`00_System/Memory/Projects/project_<slug>.md`):
+   - `## Retomar`: si falta, **crearla ahora** con lo verificado en el repo (`package.json`,
+     docs, remote). Si existe, actualizar lo que cambió (deploy, comandos, última sesión).
+   - `## Estado`: reescribir para que diga cómo está **hoy**, dentro del presupuesto. La narrativa
+     de lo hecho va a la bitácora o a la nota de sesión, no aquí.
+   - Gotchas nuevos a su sección (nunca se podan). Entrada nueva arriba en `## Bitácora`.
+   - **Rotación:** si la bitácora pasa de 5 entradas, mover las más viejas **tal cual** al final de
+     `Projects/_historial/historial_<slug>.md` (crearlo con el frontmatter de §4 si no existe).
+     Verificar que no se perdió texto (cada línea del original está en canónica o historial).
+   - `last_verified: <hoy>`, conteo del comentario-puntero contra el disco
+     (`ls <carpeta>/_sessions | grep -ic <término>`), sin aplanar frontmatter anidado ni nativo.
+4. **Memoria transversal** — feedback del usuario o referencia técnica nueva, en `Memory/Feedback/`
+   o `Memory/References/`, más **una línea** en `MEMORY.md` (≤150 caracteres, solo hook; nunca
+   estado de proyecto).
+5. **Puente del repo** — si el proyecto tiene canónica con `## Retomar` y su repo no tiene
+   `CLAUDE.local.md`: comprobar primero `git check-ignore -q CLAUDE.local.md` dentro del repo (si
+   NO está ignorado, no crearlo: el hook lo commitearía; avisar). Si está ignorado, crearlo con la
+   plantilla de `reference_vault_obsidian` § Puentes.
 
-No guardar transcripción, ruido conversacional ni razonamiento interno.
+## 4. Validar (mecánico, no de memoria)
 
-## Seguridad (crítico: el push es inmediato)
-
-El hook `Stop` de Claude Code ejecuta `sync-all.sh` al terminar cada turno, que hace
-**commit y push automáticos** del vault a GitHub. No hay ventana para "lo limpio después": lo que
-se escriba queda publicado. Antes de escribir, redactar API keys, tokens, passwords, cookies,
-JWTs, private keys, webhook secrets, `x-api-key`, bearer/access tokens y valores `.env`.
-
-En la nota va **solo la ubicación** del secreto (password manager, panel del proveedor, env var
-de la plataforma de deploy), nunca el valor.
-
-## Qué escribir, en orden
-
-### 1. Nota de sesión (siempre)
-
-En `01_Projects/_sessions/` (trabajo de proyecto) o `02_Areas/_sessions/` (tooling, Claude Code,
-vault, sistemas personales). Nombre: `session_YYYY-MM-DD_<tema-kebab>.md` — **convención única**,
-sin excepciones ni formatos tolerados.
-
-```yaml
----
-title: "Session - YYYY-MM-DD <Proyecto> <Tema>"
-tags: [<proyecto-o-area>, <tema>]
-created: YYYY-MM-DD
-status: completed
-domain: session
----
+```bash
+python3 -I $V/00_System/lint_vault.py --quiet
 ```
+Las notas tocadas en esta sesión deben quedar **sin hallazgos nuevos**: en particular 3 (wikilinks
+rotos), 7 (sesión con prio), 12–13 (índice) y 14–16 (presupuestos, `## Retomar`, tamaño de
+`MEMORY.md`). Los hallazgos viejos de otras notas no bloquean; mencionarlos si son pocos.
+Además: `grep` de patrones de secretos sobre los archivos escritos.
 
-- `status`: `completed` o `closed`. Nunca `active`.
-- **Sin tags `todo/prio*` ni checkboxes `#todo/prio*` en ninguna parte de la nota.** Los
-  pendientes tienen un dueño único: la nota operativa de `01_Projects/`, que es la que lee el
-  Dataview `TASK` del Dashboard. Duplicarlos aquí hace que las dos listas se separen.
-- Secciones: `## Resumen`, `## Cambios / decisiones`, `## Insights durables`, `## Links`.
-- Enlazar la canónica del proyecto y las sesiones hermanas con `[[wikilinks]]`.
+## 5. Commit con mensaje útil
 
-### 2. Nota operativa en `01_Projects/` (si la sesión tocó un proyecto)
+Hacer commit **solo de los archivos que tocó esta sesión** (`git -C $V add <archivos>`), con mensaje
+`vault: <título de la nota de sesión>`. Así el historial sirve para buscar; el hook de sync solo
+empuja (ya no encuentra cambios que commitear con `chore: sync sesión`).
 
-- Actualizar/añadir los pendientes reales aquí — es su único dueño.
-- `updated: <hoy>` en el frontmatter: alimenta las vistas "Última edición" y "Estancados" del
-  Dashboard. **No confiar en `file.mtime`** (un clone/restore/sync lo resetea en masa).
-- Si el proyecto quedó dormido: `status: dormido`, quitar los tags `todo/prio*`, y añadir
-  `review_date:` salvo que la nota declare explícitamente que no debe reclamar atención.
-- Vocabulario de `status`: el cerrado que define `CLAUDE.md` §5. `parked` y `latente` están
-  prohibidos.
+## 6. Responder
 
-### 3. Canónica en `00_System/Memory/` (solo si hay conocimiento durable)
-
-Respetar la forma del §4 del contrato — es donde más se rompen las canónicas:
-
-- `## Estado` **se reescribe**, no se acumula. Es la única sección que responde "¿cómo está esto hoy?".
-- Lo fechado se **anexa a `## Bitácora`** (`### YYYY-MM-DD — título`, más reciente arriba). Nunca
-  una sección nueva por encima del `---`.
-- Los gotchas suben a `## Gotchas vigentes`; lo que se poda es la narración, nunca un gotcha.
-- `## Pendientes` es **solo un puntero** a la nota operativa.
-- Un dato corregido se corrige en `## Estado` y se marca como histórico en la bitácora — no se
-  deja contradiciendo.
-- Actualizar el **conteo del comentario-puntero** de la canónica al añadir una sesión, y
-  verificarlo contra el disco (`ls <carpeta>/_sessions | grep -ic <término>`).
-- Mantener `source_of_truth: true` y refrescar `last_verified: <hoy>`.
-- **No aplanar el frontmatter anidado** (`name`/`description`/`metadata:`) de las notas que
-  genera la herramienta de memoria automática: lo reescribe así.
-
-Destinos: estado/arquitectura/gotchas de proyecto → `Memory/Projects/project_<slug>.md`;
-preferencias y correcciones del usuario → `Memory/Feedback/feedback_<slug>.md`; referencias
-técnicas y de sistema → `Memory/References/reference_<slug>.md`; proyecto nuevo o cambio de
-keywords → una línea en `MEMORY.md`.
-
-### Prohibido
-
-- Escribir memoria nueva en `.claude-memory/` (legacy, solo redirect).
-- Escribir bitácoras en `03_Resources/` (es para clippings, síntesis y referencias consultables).
-- Recrear `05_Daily/` (eliminada el 2026-07-26).
-- Antes de declarar algo "pendiente de commitear/desplegar", **verificarlo en el repo**.
-
-## Validación antes de responder
-
-1. Ningún secreto en lo escrito.
-2. Nada escrito en `.claude-memory/` ni en `03_Resources/`.
-3. La nota de sesión: nombre en convención, `status` terminal, sin `todo/prio*`.
-4. Si se tocó un proyecto: su nota operativa tiene `updated:` de hoy y es la única con pendientes.
-5. Si se tocó una canónica: `last_verified` de hoy y el conteo del comentario-puntero cuadra con
-   el disco.
-6. `git -C /home/apolo/Documents/Projects/vault status --short` y resumir los archivos tocados.
-
-Al terminar, mostrar esta línea exacta al final de la respuesta:
+Resumen breve: notas tocadas, tamaño de la canónica antes → después si cambió, hallazgos del
+linter que quedaron. Terminar con esta línea exacta:
 
 > Sesion guardada. Si terminaste de trabajar, ejecuta `/compact` para liberar contexto.

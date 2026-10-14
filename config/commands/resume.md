@@ -1,52 +1,52 @@
 # /resume
 
-Retoma el contexto de trabajo desde el vault de Obsidian.
+Retoma el contexto de trabajo desde el vault, cargando **lo mínimo**. Argumento opcional: un
+proyecto (`/resume jornada`). Vault: `/home/apolo/Documents/Projects/vault` (abajo, `$V`).
 
 ## Modo read-only
 
-- No crear, editar, mover, renombrar, archivar ni consolidar notas. Solo Read, Glob y Grep.
-- No ejecutar `/compress` ni ningún workflow de consolidación.
-- No escribir en `.claude-memory/` (legacy, solo redirect).
+Solo leer: no crear, editar, mover ni archivar notas, no ejecutar `/compress`, no escribir en
+`.claude-memory/`. Reglas de precedencia en `$V/CLAUDE.md` §2 (gana la canónica con
+`source_of_truth: true`; entre dos, la de `last_verified` más reciente).
 
-## Fuente de verdad
+## 1. Sincronizar sin tocar nada
 
-Leer `/home/apolo/Documents/Projects/vault/CLAUDE.md` primero: define el orden de carga (§1) y
-quién gana ante un conflicto (§2). Este comando no repite esas reglas; si algo aquí lo
-contradice, gana el contrato.
+`git -C $V fetch --quiet` y `git -C $V status --short --branch`. Si está behind/ahead o hay
+cambios locales, reportarlo. **No** `pull`/`merge`/`rebase`/`checkout`/`reset` sin permiso.
 
-En corto: gana la nota de `00_System/Memory/**` con `source_of_truth: true`, y entre dos
-canónicas que se contradicen, la de `last_verified` más reciente.
+## 2. Elegir el modo
 
-## Procedimiento
+- **Con proyecto** — si hay argumento, o si el directorio actual es un repo con `CLAUDE.local.md`
+  o con una ruta que aparece en `$V/00_System/Memory/MEMORY.md`.
+- **Panorama** — en cualquier otro caso.
 
-1. **Sincronizar sin tocar el working tree**: `git -C ~/Documents/Projects/vault fetch --quiet`
-   y luego `git -C ~/Documents/Projects/vault status --short --branch`. Si está behind/ahead o
-   hay cambios locales, reportarlo. **No** ejecutar `pull`, `merge`, `rebase`, `checkout` ni
-   `reset` sin permiso explícito del usuario.
-2. Leer `00_System/Memory/MEMORY.md` — el índice. Cada línea es un hook de recall; **no cargar
-   todo el vault**.
-3. Cargar solo las canónicas relevantes que el índice enlace: `Memory/Projects/`,
-   `Memory/Feedback/`, `Memory/References/`, `Memory/People/`.
-4. Leer el estado operativo:
-   - notas de `01_Projects/` (raíz, no `_sessions/`) con `status: active`;
-   - sus pendientes con `todo/prio1` / `todo/prio2` — la nota operativa es el **dueño único** de
-     los pendientes, así que no hace falta buscarlos en otro lado;
-   - proyectos `dormido` cuyo `review_date` ya venció (esos sí reclaman atención);
-   - notas de `_sessions/` **solo** si una canónica las cita o hace falta trazabilidad.
-5. Presentar el resumen ejecutivo: prioridades activas, pendientes concretos con su bloqueo,
-   última actividad registrada, y contradicciones o riesgos de contexto detectados.
-6. Proponer una siguiente acción concreta.
+## 3a. Modo proyecto
+
+1. De la canónica, leer **solo** `## Retomar` y `## Estado` (Read con offset/limit o extrayendo
+   las secciones). No cargar la nota entera.
+2. De la nota operativa, solo los pendientes abiertos: `grep -n '^- \[ \]'`.
+3. La última nota de sesión que cita `## Retomar`, solo si el Estado no basta para la tarea.
+4. **Verificar contra el repo** lo que se pueda en segundos: `git log -1`, rama, cambios sin
+   commitear. Si contradice a la canónica, gana el repo y se reporta como riesgo.
+5. Gotchas: solo si la siguiente acción toca deploy, migraciones, datos o integraciones.
+
+## 3b. Modo panorama
+
+Sin abrir notas completas:
+- `grep` del frontmatter de `$V/01_Projects/*.md` (`status`, `updated`, `review_date`) para listar
+  proyectos activos, los dormidos con `review_date` vencido y los activos sin tocar >30 días.
+- `grep -rn '#todo/prio1' $V/01_Projects/*.md` para las prioridades.
+- `python3 -I $V/00_System/lint_vault.py --quiet` solo para contar riesgos de contexto (no detallar).
+
+## 4. Presentar
+
+Resumen ejecutivo corto: dónde quedó, pendientes con su bloqueo, riesgos o contradicciones, y
+**una** siguiente acción concreta.
 
 ## Gotchas al leer
 
-- **Verificar en disco** cualquier path antes de usarlo en un comando. Los paths bajo
-  `/home/apolo/Documents/88. Proyectos`, `/44. Web Apps`, `/55. Archive`, `/77. Proyectos` y
-  `/33. WebSites` son históricos y ya no existen.
-- Las canónicas de `00_System/Memory/` pueden usar **frontmatter anidado**
-  (`metadata: {status, domain, …}`): al filtrar por campos, contemplar ambos dialectos o esas
-  notas quedan invisibles.
-- `05_Daily/` ya no existe (eliminada 2026-07-26); sus notas históricas están en `04_Archive/`.
-- El estado de un proyecto vive en su canónica + su nota operativa. Si una nota de sesión
-  contradice a la canónica, gana la canónica.
-
-Vault: `/home/apolo/Documents/Projects/vault/`
+- Verificar en disco cualquier path antes de usarlo. Paths bajo `88. Proyectos`, `44. Web Apps`,
+  `55. Archive`, `77. Proyectos`, `33. WebSites` son históricos.
+- Hay tres dialectos de frontmatter en `00_System/Memory/` (plano, anidado `metadata:`, nativo
+  `name`/`description`/`metadata.type`): al filtrar, contemplar los tres.
+- `Projects/_historial/` no es estado actual: solo para trazabilidad.
