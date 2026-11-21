@@ -25,6 +25,10 @@ Origen: 65 efectos del paquete VFX de AI Andy (creatorgrowth.com), analizados cu
 - **Zona segura** de WhatsApp Status: texto clave dentro de 120–960 px laterales y 250–1650 px verticales; centrar en el lienzo (no en la zona de TikTok).
 - **Audio**: música local (sintetizada) o del catálogo de HeyGen si hay sesión; ≥ 2 s de lectura en el cierre y el CTA con WhatsApp del cliente.
 
+## Implementación de referencia
+
+`clients/unicl/plan-ceneval-12-semanas/video-v2/` (17.4 s, 1080×1920): Stack + Splitflap + Glass-tasks + transición «objeto → mundo» + música/sfx sintetizados (`tools/build.py` genera HTML, escenas y audio). Copiar su estructura (root + 1 sub-composición por escena, fondo y marca persistentes en el root).
+
 ## Elegir por objetivo
 
 | Quiero… | Efecto (ficha) |

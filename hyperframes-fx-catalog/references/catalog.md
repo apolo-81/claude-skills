@@ -12,6 +12,7 @@ Todas las recetas asumen 1080×1920, 30 fps y el esqueleto de SKILL.md; añade s
 **Úsalo**: «12 SEMANAS → 7 ÁREAS → 180 REACTIVOS» (UNICL), «HORARIO / ENTRADA / SALIDA» (Jornada), días y horas de un curso.
 **Bloques**: `split-flap-board`.
 **Receta**: «Tablero split-flap oscuro centrado, 8 celdas. Beat 1 (0–2 s): voltea a "[12 SEMANAS]". Beat 2 (2–4 s): "[7 ÁREAS]". Beat 3 (4–6 s): "[180 PREGUNTAS]". Cada volteo pasa por letras intermedias y cae con un clic; contador 01/03. Debajo, una línea Inter pequeña: "[subtítulo]". Fondo navy con viñeta.»
+**Probado (UNICL, 2026-11-20)**: tablero propio de 2 filas × 9 celdas (72×104 px) en vertical, volteo con 4 mitades (rotateX) y letras por atributo `data-char` + `::before{content:attr()}`; 274 volteos con clic de sonido sincronizado. Trampas: GSAP convierte `" "` en `0` al animar `attr` (usar un marcador `~` y ocultarlo por CSS); incluir `Á` en el tambor si hay acentos; cada fase necesita ≥ 1.3 s de lectura tras asentarse (`line_unread`). Código de referencia: `clients/unicl/plan-ceneval-12-semanas/video-v2/tools/build.py`.
 **Ojo**: en 1080×1920 el bloque oficial (1920×1080 nativo, 12 celdas por defecto) se corta: probado, hay que reducir `cellCount` (≤ 6 por fila) y reescribir tamaños en `compositions/split-flap-board.html`, o apilar dos tableros; mayúsculas, sin acentos.
 
 ### Glass-tasks (checklist que se marca)
@@ -19,7 +20,8 @@ Todas las recetas asumen 1080×1920, 30 fps y el esqueleto de SKILL.md; añade s
 **Úsalo**: requisitos de registro (CURP, INE, certificado de secundaria, carta de autenticidad…), onboarding de Jornada, «qué incluye» de un paquete.
 **Bloques**: `marker-checklist-card`, `success-check`, `micro-transitions`, `conic-progress-ring`, `mk-progress-stat`.
 **Receta**: «Tarjeta glass centrada "[Título]" con [5] filas: [lista]. Cada fila pasa de gris a "en proceso" y a palomita [coral] a 0.9 s de la anterior, solapadas; barra segmentada arriba y contador [0/5→5/5]. Al terminar, píldora "[Listo]" y la tarjeta se queda quieta.»
-**Ojo**: los ítems son los reales del trámite; verifica contra la guía oficial antes de publicar.
+**Probado (UNICL)**: 4 filas con estados en cola → resaltada → palomita (back.out), barra segmentada y contador 0/4→4/4; al final la píldora «Todo listo» se vuelve la tarjeta dorada del cierre animando `clip-path: inset(...)` (no `left/top`: `check` lo marca como error `gsap_non_transform_motion`). Ritmo 0.65 s por fila con pop de sonido.
+**Ojo**: los ítems son los reales del trámite (guía ACREDITA-BACH, mayores de edad: CURP, INE o pasaporte, certificado de secundaria, carta de autenticidad); verifica contra la guía vigente antes de publicar.
 
 ### Rail (índice lateral que sigue el hilo)
 **Se ve**: panel oscuro a la derecha con 12 pasos; el activo se resalta mientras avanza el relato; botón de cierre.
@@ -108,6 +110,7 @@ Todas las recetas asumen 1080×1920, 30 fps y el esqueleto de SKILL.md; añade s
 **Se ve**: cada palabra llega de una dirección distinta, mezclando sans grueso blanco y serif cursiva coral, y se traba en un bloque apilado; el bloque entero sale al cambiar la frase.
 **Úsalo**: gancho de 2–3 frases («Prepara tu examen / CENEVAL / en 12 semanas»), subtítulos de narración.
 **Bloques**: `caption-kinetic-slam`, `kinetic-type-swap`, `kinetic-center-build`, `variable-axis-type`.
+**Probado (UNICL)**: 7 palabras desde 6 direcciones (±300 px, rotación ±7°, blur 14→0, 0.42 s, 0.11 s de desfase); la palabra héroe (CENEVAL) ya está en el cuadro 0 para la miniatura. Playfair itálica sí resuelve.
 **Receta**: «Titular en bloque centrado: palabras clave en Inter 800 mayúsculas blanco, conectores en Playfair cursiva [dorado]; entran desde 4 direcciones con blur de movimiento (6–12 px) y se alinean; hold 0.5 s + 0.3 s por palabra; salida de bloque en 0.2 s.»
 
 ### Shatter / Neon / Gravity / Glyph / Ink (titulares de impacto)
