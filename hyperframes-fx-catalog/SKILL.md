@@ -1,48 +1,59 @@
 ---
 name: hyperframes-fx-catalog
-description: Catálogo de efectos de video para HyperFrames adaptados al trabajo de Apolo (UNICL, Jornada, Apolo Tek, AMPLIFICA, clientes, WhatsApp Status). Usar cuando se pida un video con "efecto", "algo más vistoso/profesional", un tablero, checklist, ticket, chat de WhatsApp, titular cinético, transición, antes/después, mockup de teléfono, o al planear un video con /hyperframes y falten ideas visuales. No sustituye a /hyperframes: aporta la receta visual y los bloques del catálogo a fijar.
+description: Recetas de efectos para videos hechos con HyperFrames en el trabajo de Apolo (UNICL, Jornada, Apolo Tek, AMPLIFICA, clientes; WhatsApp Status 9:16), con el bloque del catálogo que de verdad sirve y las reglas de marca y de promesas. Usar cuando un video de HyperFrames necesite un tablero split-flap, checklist que se marca, ticket o cotización, chat tipo WhatsApp, titular cinético, transición con causa, antes/después o mockup de teléfono, o cuando se pida «más vistoso/profesional». Va encima de /hyperframes, no lo sustituye. No usar para animación web (React/CSS: web-animations) ni para Remotion.
 ---
 
 # Catálogo de efectos (HyperFrames)
 
-Origen: 65 efectos del paquete VFX de AI Andy (creatorgrowth.com), analizados cuadro por cuadro y reducidos a lo que sirve sin una persona hablando a cámara. Aquí van **recetas adaptadas**, no sus prompts. Esta skill va ENCIMA de `/hyperframes` (cárgala primero): sus reglas de movimiento, `check` y `snapshot --review` mandan.
+Recetas propias, escritas a partir de 65 efectos de un paquete de terceros (creatorgrowth.com/resource/vfx) observados cuadro por cuadro. No contiene sus prompts. Uso privado: no publicar ni compartir.
 
-## Cómo usarla
+**Manda `/hyperframes`.** Cárgalo primero: su contrato, `motion.md`, `story.md`, `spec.md`, `sound.md`, `review.md` y `types/vertical.md` son la regla. Aquí solo va lo que la oficial no cubre.
 
-1. Elige el efecto por objetivo en la tabla de abajo y lee su ficha en `references/catalog.md` (busca el nombre con grep; no cargues todo).
-2. Fija el bloque del catálogo que nombra la ficha (`npx hyperframes catalog --query "<nombre>" --json`; son puntos de partida, no piezas listas: se reescriben con el contenido real).
-3. Arma el prompt con el esqueleto: ruta · especificación (duración, 1080×1920 para WhatsApp Status) · beats con tiempos · copy entre comillas · técnica (bloque fijado) · negativos.
-4. Cierra con `check`, `snapshot --review` y revisa el cuadro 0 (miniatura) y el cierre (≥ 2 s de lectura).
+## En este equipo (comprobado el 2026-11-20)
+
+- CLI: `export HYPERFRAMES_NO_TELEMETRY=1` y `npx -y hyperframes@0.9.72 <cmd>`. El plugin pide la 0.9.74, que no existe en npm. No ejecutes `events` ni `auth`.
+- Proyecto nuevo: `cd ~ && npx -y hyperframes@0.9.72 init <ruta-absoluta> --skip-skills`.
+- GPU Radeon 680M: los bloques con etiqueta `webgl`, `webgpu` o `html-in-canvas` no están probados aquí. Haz un `snapshot` antes de diseñar alrededor de uno; si falla, usa CSS o SVG.
+
+## Flujo (orden obligatorio)
+
+1. **Una idea y su número**: qué debe recordar quien lo ve y el dato real que viaja por el video (`story.md` §1).
+2. **`SPEC.md`** con la plantilla de `spec.md`. Añade una **tabla de lectura**: cada línea de texto, su número de palabras y su tiempo mínimo (0.5 s + 0.3 s por palabra; el cierre, ≥ 2 s). Súmala antes de construir: si no cabe en la duración, recorta palabras; nunca reduzcas la letra.
+3. **Efecto**: elige en la tabla de abajo y lee **solo esa ficha** (`grep -n "### <Nombre>" references/catalog.md`). Usa un efecto protagonista por video, como mucho dos en 15 s.
+4. **Bloque**: `npx -y hyperframes@0.9.72 catalog --query "<n>" --json` y lee `type` y `dimensions`:
+   - `component` no trae tamaño y se adapta;
+   - `block` 1920×1080 se recompone para 9:16 (escalar el host no basta);
+   - hay bloques **9:16 nativos**: `message-thread-reveal`, `notification-cascade`, `ai-chat-reveal`, `share-sheet-carousel`, `notes-reveal` (1080×1920) y `flowchart-vertical` (1440×2560). Los que imitan una marca (`instagram-follow`, `spotify-card`…) no se usan.
+
+   `npx -y hyperframes@0.9.72 add <n>` copia el código fuente a `compositions/`, donde se reescribe con el contenido real. Si la ficha dice «a medida», no hay bloque que haga eso.
+5. **Construir**: root más una sub-composición por escena (referencia: `/home/apolo/Documents/Projects/clients/unicl/plan-ceneval-12-semanas/audit-opus/video-v3/`, generado por su `tools/build.py`).
+6. **Verificar**: `check`, `snapshot --review` y fotogramas del MP4 en el cuadro 0, en cada costura y en el cierre. Escribe `REVIEW.md`.
+   - **`check` no ve el texto que vive en `::before`/`attr()`** (split-flap): esas lecturas se comprueban con la tabla del paso 2.
+   - Audio con `npx -y hyperframes@0.9.72 audio <mp4> --json` y `ffmpeg -af ebur128`.
 
 ## Reglas de la casa
 
-- **Marca**: UNICL = azul #1A56DB, navy #0A1628/#0F2B5B, dorado #C8963E/#F0D478, coral #E8614A; Playfair Display (titulares) + Inter. Otras marcas: pedir/leer su paleta, no inventarla.
-- **Un efecto fuerte por video** (máx. 2 en 15 s); el resto sobrio. Más efectos = más barato, no más profesional.
-- **Datos reales**: cifras, reseñas, likes, noticias, avatares y precios salen del cliente. Nunca inventar testimonios, notas de prensa, métricas ni «likes».
-- **Promesas**: sin «garantizado», «aprobado» ni sellos de resultado en educación (CENEVAL/SEP). Usar «inscripciones abiertas», «asesoría», «pregunta por tu diagnóstico».
-- **No imitar** billetes, documentos oficiales ni marcas ajenas (WhatsApp, Google, Instagram) más allá de un mockup genérico.
-- **Los bloques del catálogo son 1920×1080 nativos** (verificado con `split-flap-board`: en un lienzo 1080×1920 las celdas se cortan y el panel no rellena). Para vertical hay que reescribir el tamaño del escenario/celdas en el archivo copiado a `compositions/` (es fuente editable) o recomponer; escalar el host no basta.
-- **Zona segura** de WhatsApp Status: texto clave dentro de 120–960 px laterales y 250–1650 px verticales; centrar en el lienzo (no en la zona de TikTok).
-- **Audio**: música local (sintetizada) o del catálogo de HeyGen si hay sesión; ≥ 2 s de lectura en el cierre y el CTA con WhatsApp del cliente.
-
-## Implementación de referencia
-
-`clients/unicl/plan-ceneval-12-semanas/video-v2/` (17.4 s, 1080×1920): Stack + Splitflap + Glass-tasks + transición «objeto → mundo» + música/sfx sintetizados (`tools/build.py` genera HTML, escenas y audio). Copiar su estructura (root + 1 sub-composición por escena, fondo y marca persistentes en el root).
+- **Marca UNICL**: azul #1A56DB, navy #0A1628/#0F2B5B, oro #C8963E/#F0D478, coral #E8614A; Playfair Display 700 e Inter 400/700/900 (pesos empaquetados; los demás se descargan). El oro se raciona (palabra clave, progreso, cierre) y el escudo aterriza una vez, en el cierre, nunca fijo en una esquina. Otras marcas: lee su paleta (`look.md`), no la inventes.
+- **Navy de marca sí; vacío oscuro, no**: el protagonista ocupa ≥ 40 % del ancho o del alto. Vidrio, mesh, neón, brillos y esferas están en la lista BANNED de `spec.md`: úsalos solo si la marca los usa, y dilo en `SPEC.md`.
+- **Datos reales con fuente**: cada cifra o documento lleva su fuente (página o línea de la guía, o el material del cliente) en `SPEC.md`. Nada de testimonios, likes, notas de prensa ni métricas inventadas.
+- **Promesas** (educación, CENEVAL/SEP): nunca «aprobado», «garantizado», sellos ni porcentajes de éxito. En videos de UNICL el cierre lleva siempre «UNICL no emite la acreditación ni garantiza resultados.».
+- **No imitar** documentos oficiales, billetes ni marcas ajenas (WhatsApp, Google, Instagram): mockup genérico, sin logotipos.
+- **WhatsApp Status**: aplica la zona segura de `types/vertical.md`. Status no tiene el carril derecho de TikTok, así que los avisos `outside_safe_zone` que solo citen «TikTok/Shorts (right edge)» se aceptan y se anotan en `REVIEW.md`. Cualquier otro aviso se corrige.
+- **Audio** (excepción local a `sound.md` §3: no hay sesión de HeyGen): SFX de `~/.claude/plugins/marketplaces/hyperframes/skills/media-use/audio/assets/sfx/` (licencia Pixabay), rotando 2–3 tomas. La cama puede sintetizarse con numpy, con filtro paso alto a 120 Hz, < 15 % de la energía bajo 150 Hz y sin tonos como SFX. Mezcla entre −18 y −20 LUFS para Status (−16/−14 para Reels o TikTok) y true peak ≤ −1 dBTP.
 
 ## Elegir por objetivo
 
-| Quiero… | Efecto (ficha) |
+| Quiero… | Ficha |
 |---|---|
-| Contar semanas / etapas / horarios | Splitflap · Rail · Clock |
-| Mostrar progreso o lo que incluye | Glass-tasks · Streak · Labels · Receipt |
-| Cotización / lista con total | Receipt · Tiers |
-| Mostrar mi canal (WhatsApp) | Peel · Memo · Call · Queue |
+| Contar semanas, etapas u horarios | Splitflap · Rail · Clock |
+| Progreso o lo que incluye | Checklist · Streak · Labels · Receipt |
+| Cotización o lista con total | Receipt · Tiers |
+| Mostrar mi canal (WhatsApp) | Chat · Memo · Call · Queue |
 | CTA «escribe X» | Comments · Search |
-| Titular que pega | Stack · Shatter · Neon · Gravity · Glyph · Ink |
-| Cambiar de sección con estilo | Iris · Match-cut · Doors · Rip · Zoom-through · Rabbit-hole |
-| Antes / después, elegir opciones | Before-After · Proofs · Purge |
-| Enseñar app / web / sistema | Phone · Interface · Layers · Editor · Crop · Dropzone |
-| Señalar un detalle en captura | Markup · Markup-doodle |
-| Look de marca / editorial | Collage · Double-exposure · Projector · Halftone · Swatch · Nightfall |
-| Tecnología / código | ASCII · Terminal (Prompt) · Keycaps |
-| Sólo si me grabo hablando | ver «Requiere persona» al final del catálogo |
+| Titular que pega | Stack · Impacto (Shatter/Neon/Gravity/Glyph/Ink) |
+| Cambiar de escena con causa | Carry (el número viaja) · Pill-to-card · Iris · Match-cut · Rip · Zoom-through |
+| Antes/después, elegir | Before-After · Proofs · Purge |
+| Enseñar app, web o sistema | Phone · Interface · Layers · Editor · Markup |
+| Look de marca o editorial | Collage · Editorial (Double-exposure/Projector/Halftone/Nightfall) · Swatch |
+| Tecnología o código | ASCII · Terminal · Keycaps |
+| Con persona a cámara | `references/catalog-persona.md` |
